@@ -1,0 +1,120 @@
+﻿@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Profile";
+}
+<div id="divSeparator"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-10">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <h2>Profile</h2>
+                        </div>
+                        <div class="col-md-2">
+                            <a href="~/Manage/ChangePassword" class="btn btn-success" style="margin-top:20px;">Change Password</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <img src="~/img/defaultimg.png" class="img-responsive"/>
+                            <button class="btn btn-default btn-block"><span class="fa fa-plus"></span> Profile Picture</button>   
+                        </div>
+                        <div class="col-md-10">
+                            <label>Email:</label>
+                            <p id="Email"></p>
+                            <br />
+                            <label>Full Name:</label>
+                            <p id="FullName"></p>
+                            <br />
+                            <label>Address:</label>
+                            <p id="Address"></p>
+                            <br />
+                            <label>Contact Number:</label>
+                            <p id="ContactNumber"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h1>ADS HEADER</h1>
+                </div>
+                <div class="panel-body">
+                    <h4>ADS BODY</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function getUser() {
+        var user = new wijmo.collections.ObservableArray;
+        $.ajax({
+            type: "GET",
+            url: '/api/list/userdetail',
+            contentType: "application/json;charset=utf-8",
+            success: function (userDetail) {
+                for (i = 0; i < userDetail.length; i++) {
+                    user.push({
+                        Id: userDetail[i]["Id"],
+                        Email: userDetail[i]["Email"],
+                        FullName: userDetail[i]["FullName"],
+                        ContactNumber: userDetail[i]["ContactNumber"],
+                        Address: userDetail[i]["Address"],
+
+                    });
+                    onSelectedIndexChanged: function userList() {
+                        document.getElementById("Email").value = userDetail[i]["Email"],
+                        document.getElementById("FullName").value = userDetail[i]["FullName"],
+                        document.getElementById("ContactNumber").value = userDetail[i]["ContactNumber"],
+                        document.getElementById("Address").value = userDetail[i]["Address"]
+                    }
+                    console.log(userDetail)
+                    return user;
+                }
+                //cboItemList.dispose();
+                //cboItemList = new wijmo.input.ComboBox("#cboItemList", {
+                //    itemsSource: items,
+                //    selectedValuePath: "ItemName",
+                //    displayMemberPath: "ItemName",
+                //    onSelectedIndexChanged: function () {
+                //        //var imageElement = document.createElement("images");
+                //        //var imageData = new Image();
+                //        //imageData.src = "data:image/jpeg;base64," + this.selectedItem["Photo"];
+                //        //imageData.className = "img-responsive";
+                //        //imageElement.appendChild(imageData);
+                //        //var photoDivElement = document.createElement("DIV");
+                //        //var photoDiv = document.getElementById("photoDiv").appendChild(imageElement);
+                //        //photoDiv.appendChild(photoDivElement);
+
+                //        var imageDataValue = "data:image/jpeg;base64," + this.selectedItem["Photo"];
+                //        document.getElementById("imageDisplay").src = imageDataValue;
+                //        document.getElementById("Specification").value = this.selectedItem["Specification"];
+                //        document.getElementById("Price").value = this.selectedItem["Price"].toLocaleString();
+                //    }
+                //});
+
+                //var imageDataValue = "data:image/jpeg;base64," + cboItemList.selectedItem["Photo"];
+                //document.getElementById("imageDisplay").src = imageDataValue;
+
+                //document.getElementById("Specification").value = cboItemList.selectedItem["Specification"];
+                //document.getElementById("Price").value = cboItemList.selectedItem["Price"].toLocaleString();
+            }
+        });
+    }
+
+    
+       
+
+
+    
+    window.onload = function () {
+        getUser();
+    }
+</script>
