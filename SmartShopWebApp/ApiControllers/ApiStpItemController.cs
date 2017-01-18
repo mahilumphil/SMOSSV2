@@ -5,6 +5,9 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Microsoft.AspNet.Identity;
+using System.Data.Linq;
+
 
 namespace SmartShopWebApp.ApiControllers
 {
@@ -17,18 +20,20 @@ namespace SmartShopWebApp.ApiControllers
         {
             try
             {
-                Data.StpItem newStpItem = new Data.StpItem();
+                var userId = User.Identity.GetUserId();
+                byte[] imageArray = add.Photo;
 
-                newStpItem.Id = add.Id;
-                newStpItem.Photo = add.Photo;
+                Data.StpItem newStpItem = new Data.StpItem();
+                newStpItem.Photo = new Binary(imageArray);
                 newStpItem.ItemName = add.ItemName;
                 newStpItem.Price = add.Price;
                 newStpItem.ItemCategoryId = add.ItemCategoryId;
                 newStpItem.Specification = add.Specification;
-                newStpItem.UserId = add.UserId;
-                newStpItem.CreatedDate = Convert.ToDateTime(add.CreatedDate);
-                newStpItem.UpdatedDate = Convert.ToDateTime(add.UpdatedDate);
-
+                newStpItem.UserId = userId;
+                newStpItem.CreatedDate = DateTime.Today;
+                newStpItem.UpdatedDate = DateTime.Today;
+                db.StpItems.InsertOnSubmit(newStpItem);
+                db.SubmitChanges();
 
                 return Request.CreateResponse(HttpStatusCode.OK);
             }
@@ -44,14 +49,17 @@ namespace SmartShopWebApp.ApiControllers
         [HttpGet, Route("api/list/stpitem")]
         public List<Entities.StpItem> listStpItem()
         {
+            var userId = User.Identity.GetUserId();
             var item = from d in db.StpItems
+                       where d.UserId == userId
                        select new Entities.StpItem
                        {
                            Id = d.Id,
-                           //Photo = d.Photo,
+                           Photo = d.Photo.ToArray(),
                            ItemName = d.ItemName,
                            Price = d.Price,
                            ItemCategoryId = d.ItemCategoryId,
+                           ItemCategory = d.SysItemCategory.ItemCategory,
                            Specification = d.Specification,
                            UserId = d.UserId,
                            CreatedDate = d.CreatedDate.ToShortDateString(),
@@ -86,7 +94,7 @@ namespace SmartShopWebApp.ApiControllers
             {
                 return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
-            
+
         }
 
 
@@ -95,22 +103,22 @@ namespace SmartShopWebApp.ApiControllers
         {
             try
             {
+                var userId = User.Identity.GetUserId();
                 var actStpItem = from d in db.StpItems
-                                  where d.Id == Convert.ToInt32(id)
-                                  select d;
+                                 where d.Id == Convert.ToInt32(id)
+                                 select d;
 
                 if (actStpItem.Any())
                 {
+                    byte[] imageArray = stpitem.Photo;
                     var updateStpItem = actStpItem.FirstOrDefault();
-                    updateStpItem.Id = stpitem.Id;
-                    updateStpItem.Photo = stpitem.Photo;
+                    updateStpItem.Photo = new Binary(imageArray);
                     updateStpItem.ItemName = stpitem.ItemName;
                     updateStpItem.Price = stpitem.Price;
                     updateStpItem.ItemCategoryId = stpitem.ItemCategoryId;
                     updateStpItem.Specification = stpitem.Specification;
-                    updateStpItem.UserId = stpitem.UserId;
-                    updateStpItem.CreatedDate = Convert.ToDateTime(stpitem.CreatedDate);
-                    updateStpItem.UpdatedDate = Convert.ToDateTime(stpitem.UpdatedDate);
+                    updateStpItem.UserId = userId;
+                    updateStpItem.UpdatedDate = DateTime.Today;
                     db.SubmitChanges();
 
                     return Request.CreateResponse(HttpStatusCode.OK);

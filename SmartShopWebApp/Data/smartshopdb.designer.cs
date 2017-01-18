@@ -63,6 +63,12 @@ namespace SmartShopWebApp.Data
     partial void InsertStpItem(StpItem instance);
     partial void UpdateStpItem(StpItem instance);
     partial void DeleteStpItem(StpItem instance);
+    partial void InsertStpUserForm(StpUserForm instance);
+    partial void UpdateStpUserForm(StpUserForm instance);
+    partial void DeleteStpUserForm(StpUserForm instance);
+    partial void InsertSysForm(SysForm instance);
+    partial void UpdateSysForm(SysForm instance);
+    partial void DeleteSysForm(SysForm instance);
     partial void InsertSysItemCategory(SysItemCategory instance);
     partial void UpdateSysItemCategory(SysItemCategory instance);
     partial void DeleteSysItemCategory(SysItemCategory instance);
@@ -186,6 +192,22 @@ namespace SmartShopWebApp.Data
 			get
 			{
 				return this.GetTable<StpItem>();
+			}
+		}
+		
+		public System.Data.Linq.Table<StpUserForm> StpUserForms
+		{
+			get
+			{
+				return this.GetTable<StpUserForm>();
+			}
+		}
+		
+		public System.Data.Linq.Table<SysForm> SysForms
+		{
+			get
+			{
+				return this.GetTable<SysForm>();
 			}
 		}
 		
@@ -898,6 +920,8 @@ namespace SmartShopWebApp.Data
 		
 		private int _StatusId;
 		
+		private string _Remarks;
+		
 		private EntitySet<ActBuy> _ActBuys;
 		
 		private EntitySet<ActPostItemComment> _ActPostItemComments;
@@ -905,6 +929,8 @@ namespace SmartShopWebApp.Data
 		private EntityRef<SysPostItemStatus> _SysPostItemStatus;
 		
 		private EntityRef<AspNetUser> _AspNetUser;
+		
+		private EntityRef<StpItem> _StpItem;
 		
 		private EntityRef<SysPayType> _SysPayType;
 		
@@ -932,6 +958,8 @@ namespace SmartShopWebApp.Data
     partial void OnPayTypeIdChanged();
     partial void OnStatusIdChanging(int value);
     partial void OnStatusIdChanged();
+    partial void OnRemarksChanging(string value);
+    partial void OnRemarksChanged();
     #endregion
 		
 		public ActPostItem()
@@ -940,6 +968,7 @@ namespace SmartShopWebApp.Data
 			this._ActPostItemComments = new EntitySet<ActPostItemComment>(new Action<ActPostItemComment>(this.attach_ActPostItemComments), new Action<ActPostItemComment>(this.detach_ActPostItemComments));
 			this._SysPostItemStatus = default(EntityRef<SysPostItemStatus>);
 			this._AspNetUser = default(EntityRef<AspNetUser>);
+			this._StpItem = default(EntityRef<StpItem>);
 			this._SysPayType = default(EntityRef<SysPayType>);
 			OnCreated();
 		}
@@ -975,6 +1004,10 @@ namespace SmartShopWebApp.Data
 			{
 				if ((this._ItemId != value))
 				{
+					if (this._StpItem.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnItemIdChanging(value);
 					this.SendPropertyChanging();
 					this._ItemId = value;
@@ -1156,6 +1189,26 @@ namespace SmartShopWebApp.Data
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Remarks", DbType="NVarChar(1000) NOT NULL", CanBeNull=false)]
+		public string Remarks
+		{
+			get
+			{
+				return this._Remarks;
+			}
+			set
+			{
+				if ((this._Remarks != value))
+				{
+					this.OnRemarksChanging(value);
+					this.SendPropertyChanging();
+					this._Remarks = value;
+					this.SendPropertyChanged("Remarks");
+					this.OnRemarksChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ActPostItem_ActBuy", Storage="_ActBuys", ThisKey="Id", OtherKey="PostId")]
 		public EntitySet<ActBuy> ActBuys
 		{
@@ -1246,6 +1299,40 @@ namespace SmartShopWebApp.Data
 						this._PostedByUserId = default(string);
 					}
 					this.SendPropertyChanged("AspNetUser");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="StpItem_ActPostItem", Storage="_StpItem", ThisKey="ItemId", OtherKey="Id", IsForeignKey=true)]
+		public StpItem StpItem
+		{
+			get
+			{
+				return this._StpItem.Entity;
+			}
+			set
+			{
+				StpItem previousValue = this._StpItem.Entity;
+				if (((previousValue != value) 
+							|| (this._StpItem.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._StpItem.Entity = null;
+						previousValue.ActPostItems.Remove(this);
+					}
+					this._StpItem.Entity = value;
+					if ((value != null))
+					{
+						value.ActPostItems.Add(this);
+						this._ItemId = value.Id;
+					}
+					else
+					{
+						this._ItemId = default(int);
+					}
+					this.SendPropertyChanged("StpItem");
 				}
 			}
 		}
@@ -2231,6 +2318,16 @@ namespace SmartShopWebApp.Data
 		
 		private string _UserName;
 		
+		private string _FullName;
+		
+		private string _Address;
+		
+		private string _ContactNumber;
+		
+		private string _Site;
+		
+		private System.Data.Linq.Binary _ProfilePhoto;
+		
 		private EntitySet<ActBuy> _ActBuys;
 		
 		private EntitySet<ActMessaging> _ActMessagings;
@@ -2248,6 +2345,8 @@ namespace SmartShopWebApp.Data
 		private EntitySet<AspNetUserRole> _AspNetUserRoles;
 		
 		private EntitySet<StpItem> _StpItems;
+		
+		private EntitySet<StpUserForm> _StpUserForms;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2277,6 +2376,16 @@ namespace SmartShopWebApp.Data
     partial void OnAccessFailedCountChanged();
     partial void OnUserNameChanging(string value);
     partial void OnUserNameChanged();
+    partial void OnFullNameChanging(string value);
+    partial void OnFullNameChanged();
+    partial void OnAddressChanging(string value);
+    partial void OnAddressChanged();
+    partial void OnContactNumberChanging(string value);
+    partial void OnContactNumberChanged();
+    partial void OnSiteChanging(string value);
+    partial void OnSiteChanged();
+    partial void OnProfilePhotoChanging(System.Data.Linq.Binary value);
+    partial void OnProfilePhotoChanged();
     #endregion
 		
 		public AspNetUser()
@@ -2290,6 +2399,7 @@ namespace SmartShopWebApp.Data
 			this._AspNetUserLogins = new EntitySet<AspNetUserLogin>(new Action<AspNetUserLogin>(this.attach_AspNetUserLogins), new Action<AspNetUserLogin>(this.detach_AspNetUserLogins));
 			this._AspNetUserRoles = new EntitySet<AspNetUserRole>(new Action<AspNetUserRole>(this.attach_AspNetUserRoles), new Action<AspNetUserRole>(this.detach_AspNetUserRoles));
 			this._StpItems = new EntitySet<StpItem>(new Action<StpItem>(this.attach_StpItems), new Action<StpItem>(this.detach_StpItems));
+			this._StpUserForms = new EntitySet<StpUserForm>(new Action<StpUserForm>(this.attach_StpUserForms), new Action<StpUserForm>(this.detach_StpUserForms));
 			OnCreated();
 		}
 		
@@ -2533,6 +2643,106 @@ namespace SmartShopWebApp.Data
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FullName", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string FullName
+		{
+			get
+			{
+				return this._FullName;
+			}
+			set
+			{
+				if ((this._FullName != value))
+				{
+					this.OnFullNameChanging(value);
+					this.SendPropertyChanging();
+					this._FullName = value;
+					this.SendPropertyChanged("FullName");
+					this.OnFullNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Address", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string Address
+		{
+			get
+			{
+				return this._Address;
+			}
+			set
+			{
+				if ((this._Address != value))
+				{
+					this.OnAddressChanging(value);
+					this.SendPropertyChanging();
+					this._Address = value;
+					this.SendPropertyChanged("Address");
+					this.OnAddressChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContactNumber", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string ContactNumber
+		{
+			get
+			{
+				return this._ContactNumber;
+			}
+			set
+			{
+				if ((this._ContactNumber != value))
+				{
+					this.OnContactNumberChanging(value);
+					this.SendPropertyChanging();
+					this._ContactNumber = value;
+					this.SendPropertyChanged("ContactNumber");
+					this.OnContactNumberChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Site", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string Site
+		{
+			get
+			{
+				return this._Site;
+			}
+			set
+			{
+				if ((this._Site != value))
+				{
+					this.OnSiteChanging(value);
+					this.SendPropertyChanging();
+					this._Site = value;
+					this.SendPropertyChanged("Site");
+					this.OnSiteChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProfilePhoto", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary ProfilePhoto
+		{
+			get
+			{
+				return this._ProfilePhoto;
+			}
+			set
+			{
+				if ((this._ProfilePhoto != value))
+				{
+					this.OnProfilePhotoChanging(value);
+					this.SendPropertyChanging();
+					this._ProfilePhoto = value;
+					this.SendPropertyChanged("ProfilePhoto");
+					this.OnProfilePhotoChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUser_ActBuy", Storage="_ActBuys", ThisKey="Id", OtherKey="BoughtByUserId")]
 		public EntitySet<ActBuy> ActBuys
 		{
@@ -2647,6 +2857,19 @@ namespace SmartShopWebApp.Data
 			set
 			{
 				this._StpItems.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUser_StpUserForm", Storage="_StpUserForms", ThisKey="Id", OtherKey="UserId")]
+		public EntitySet<StpUserForm> StpUserForms
+		{
+			get
+			{
+				return this._StpUserForms;
+			}
+			set
+			{
+				this._StpUserForms.Assign(value);
 			}
 		}
 		
@@ -2777,6 +3000,18 @@ namespace SmartShopWebApp.Data
 			this.SendPropertyChanging();
 			entity.AspNetUser = null;
 		}
+		
+		private void attach_StpUserForms(StpUserForm entity)
+		{
+			this.SendPropertyChanging();
+			entity.AspNetUser = this;
+		}
+		
+		private void detach_StpUserForms(StpUserForm entity)
+		{
+			this.SendPropertyChanging();
+			entity.AspNetUser = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.StpItem")]
@@ -2802,6 +3037,8 @@ namespace SmartShopWebApp.Data
 		private System.DateTime _CreatedDate;
 		
 		private System.DateTime _UpdatedDate;
+		
+		private EntitySet<ActPostItem> _ActPostItems;
 		
 		private EntityRef<AspNetUser> _AspNetUser;
 		
@@ -2833,6 +3070,7 @@ namespace SmartShopWebApp.Data
 		
 		public StpItem()
 		{
+			this._ActPostItems = new EntitySet<ActPostItem>(new Action<ActPostItem>(this.attach_ActPostItems), new Action<ActPostItem>(this.detach_ActPostItems));
 			this._AspNetUser = default(EntityRef<AspNetUser>);
 			this._SysItemCategory = default(EntityRef<SysItemCategory>);
 			OnCreated();
@@ -3026,6 +3264,19 @@ namespace SmartShopWebApp.Data
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="StpItem_ActPostItem", Storage="_ActPostItems", ThisKey="Id", OtherKey="ItemId")]
+		public EntitySet<ActPostItem> ActPostItems
+		{
+			get
+			{
+				return this._ActPostItems;
+			}
+			set
+			{
+				this._ActPostItems.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUser_StpItem", Storage="_AspNetUser", ThisKey="UserId", OtherKey="Id", IsForeignKey=true)]
 		public AspNetUser AspNetUser
 		{
@@ -3090,6 +3341,448 @@ namespace SmartShopWebApp.Data
 						this._ItemCategoryId = default(int);
 					}
 					this.SendPropertyChanged("SysItemCategory");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_ActPostItems(ActPostItem entity)
+		{
+			this.SendPropertyChanging();
+			entity.StpItem = this;
+		}
+		
+		private void detach_ActPostItems(ActPostItem entity)
+		{
+			this.SendPropertyChanging();
+			entity.StpItem = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.StpUserForm")]
+	public partial class StpUserForm : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _UserId;
+		
+		private int _FormId;
+		
+		private bool _CanView;
+		
+		private bool _CanPost;
+		
+		private bool _CanEdit;
+		
+		private bool _CanUpdate;
+		
+		private bool _CanTrash;
+		
+		private EntityRef<AspNetUser> _AspNetUser;
+		
+		private EntityRef<SysForm> _SysForm;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnUserIdChanging(string value);
+    partial void OnUserIdChanged();
+    partial void OnFormIdChanging(int value);
+    partial void OnFormIdChanged();
+    partial void OnCanViewChanging(bool value);
+    partial void OnCanViewChanged();
+    partial void OnCanPostChanging(bool value);
+    partial void OnCanPostChanged();
+    partial void OnCanEditChanging(bool value);
+    partial void OnCanEditChanged();
+    partial void OnCanUpdateChanging(bool value);
+    partial void OnCanUpdateChanged();
+    partial void OnCanTrashChanging(bool value);
+    partial void OnCanTrashChanged();
+    #endregion
+		
+		public StpUserForm()
+		{
+			this._AspNetUser = default(EntityRef<AspNetUser>);
+			this._SysForm = default(EntityRef<SysForm>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					if (this._SysForm.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="NVarChar(128) NOT NULL", CanBeNull=false)]
+		public string UserId
+		{
+			get
+			{
+				return this._UserId;
+			}
+			set
+			{
+				if ((this._UserId != value))
+				{
+					if (this._AspNetUser.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnUserIdChanging(value);
+					this.SendPropertyChanging();
+					this._UserId = value;
+					this.SendPropertyChanged("UserId");
+					this.OnUserIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FormId", DbType="Int NOT NULL")]
+		public int FormId
+		{
+			get
+			{
+				return this._FormId;
+			}
+			set
+			{
+				if ((this._FormId != value))
+				{
+					this.OnFormIdChanging(value);
+					this.SendPropertyChanging();
+					this._FormId = value;
+					this.SendPropertyChanged("FormId");
+					this.OnFormIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CanView", DbType="Bit NOT NULL")]
+		public bool CanView
+		{
+			get
+			{
+				return this._CanView;
+			}
+			set
+			{
+				if ((this._CanView != value))
+				{
+					this.OnCanViewChanging(value);
+					this.SendPropertyChanging();
+					this._CanView = value;
+					this.SendPropertyChanged("CanView");
+					this.OnCanViewChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CanPost", DbType="Bit NOT NULL")]
+		public bool CanPost
+		{
+			get
+			{
+				return this._CanPost;
+			}
+			set
+			{
+				if ((this._CanPost != value))
+				{
+					this.OnCanPostChanging(value);
+					this.SendPropertyChanging();
+					this._CanPost = value;
+					this.SendPropertyChanged("CanPost");
+					this.OnCanPostChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CanEdit", DbType="Bit NOT NULL")]
+		public bool CanEdit
+		{
+			get
+			{
+				return this._CanEdit;
+			}
+			set
+			{
+				if ((this._CanEdit != value))
+				{
+					this.OnCanEditChanging(value);
+					this.SendPropertyChanging();
+					this._CanEdit = value;
+					this.SendPropertyChanged("CanEdit");
+					this.OnCanEditChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CanUpdate", DbType="Bit NOT NULL")]
+		public bool CanUpdate
+		{
+			get
+			{
+				return this._CanUpdate;
+			}
+			set
+			{
+				if ((this._CanUpdate != value))
+				{
+					this.OnCanUpdateChanging(value);
+					this.SendPropertyChanging();
+					this._CanUpdate = value;
+					this.SendPropertyChanged("CanUpdate");
+					this.OnCanUpdateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CanTrash", DbType="Bit NOT NULL")]
+		public bool CanTrash
+		{
+			get
+			{
+				return this._CanTrash;
+			}
+			set
+			{
+				if ((this._CanTrash != value))
+				{
+					this.OnCanTrashChanging(value);
+					this.SendPropertyChanging();
+					this._CanTrash = value;
+					this.SendPropertyChanged("CanTrash");
+					this.OnCanTrashChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUser_StpUserForm", Storage="_AspNetUser", ThisKey="UserId", OtherKey="Id", IsForeignKey=true)]
+		public AspNetUser AspNetUser
+		{
+			get
+			{
+				return this._AspNetUser.Entity;
+			}
+			set
+			{
+				AspNetUser previousValue = this._AspNetUser.Entity;
+				if (((previousValue != value) 
+							|| (this._AspNetUser.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._AspNetUser.Entity = null;
+						previousValue.StpUserForms.Remove(this);
+					}
+					this._AspNetUser.Entity = value;
+					if ((value != null))
+					{
+						value.StpUserForms.Add(this);
+						this._UserId = value.Id;
+					}
+					else
+					{
+						this._UserId = default(string);
+					}
+					this.SendPropertyChanged("AspNetUser");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SysForm_StpUserForm", Storage="_SysForm", ThisKey="Id", OtherKey="Id", IsForeignKey=true)]
+		public SysForm SysForm
+		{
+			get
+			{
+				return this._SysForm.Entity;
+			}
+			set
+			{
+				SysForm previousValue = this._SysForm.Entity;
+				if (((previousValue != value) 
+							|| (this._SysForm.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SysForm.Entity = null;
+						previousValue.StpUserForm = null;
+					}
+					this._SysForm.Entity = value;
+					if ((value != null))
+					{
+						value.StpUserForm = this;
+						this._Id = value.Id;
+					}
+					else
+					{
+						this._Id = default(int);
+					}
+					this.SendPropertyChanged("SysForm");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SysForm")]
+	public partial class SysForm : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _Forms;
+		
+		private EntityRef<StpUserForm> _StpUserForm;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnFormsChanging(string value);
+    partial void OnFormsChanged();
+    #endregion
+		
+		public SysForm()
+		{
+			this._StpUserForm = default(EntityRef<StpUserForm>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Forms", DbType="VarChar(1000) NOT NULL", CanBeNull=false)]
+		public string Forms
+		{
+			get
+			{
+				return this._Forms;
+			}
+			set
+			{
+				if ((this._Forms != value))
+				{
+					this.OnFormsChanging(value);
+					this.SendPropertyChanging();
+					this._Forms = value;
+					this.SendPropertyChanged("Forms");
+					this.OnFormsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SysForm_StpUserForm", Storage="_StpUserForm", ThisKey="Id", OtherKey="Id", IsUnique=true, IsForeignKey=false)]
+		public StpUserForm StpUserForm
+		{
+			get
+			{
+				return this._StpUserForm.Entity;
+			}
+			set
+			{
+				StpUserForm previousValue = this._StpUserForm.Entity;
+				if (((previousValue != value) 
+							|| (this._StpUserForm.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._StpUserForm.Entity = null;
+						previousValue.SysForm = null;
+					}
+					this._StpUserForm.Entity = value;
+					if ((value != null))
+					{
+						value.SysForm = this;
+					}
+					this.SendPropertyChanged("StpUserForm");
 				}
 			}
 		}

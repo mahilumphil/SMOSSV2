@@ -1,6 +1,10 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-image:url('../img/cover.jpg');
+    background-size:cover;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -15,10 +19,137 @@
 .dl-horizontal dt {
     white-space: normal;
 }
-
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
 textarea {
-    max-width: 280px;
+    max-width:auto;
+}
+.btn {
+    border-radius:0px;
+}
+
+#navbar {
+    position:fixed;
+    width:15%;
+    border-radius:0px;
+    display:none;
+    margin-left:8%;
+    height:auto;
+}
+#navbar1 {
+    position:fixed;
+    width:15%;
+    border-radius:0px;
+    display:none;
+    margin-left:8%;
+    height:auto;
+}
+#profileManage {
+    height:60px;
+    width:90px;
+    padding:10px;
+}
+
+#postManage {
+    height:60px;
+    width:90px;
+    padding:10px;
+}
+
+a {
+    color:white;
+}
+
+#navbarUL>li{
+    width:100%; 
+    max-height:100px;
+
+}
+    #navbarUL > li > a {
+        color:gray;
+    }
+
+
+
+#homePanel{
+    margin:0;
+    display:none;
+}
+
+#contactInfo {
+    height:100%;
+    width:100%;
+    color:white;
+    font:bold;
+    text-align:justify;
+    background-color:transparent;
+}
+
+#cboItemCategory {
+    width:100%;
+    margin-top:200px;
+}
+
+#cboItemCategories {
+    width:100%;
+}
+
+.nav {
+    margin:0;
+}
+
+#manageShop {
+     margin-top:200px;
+}
+#post {
+}
+
+#manageAccount {
+    margin-top:100px;
+}
+
+#changePassword {
+    margin-top:100px;
+}
+
+#manageLogin {
+    margin-top:100px;
+}
+
+#manageRegister {
+    margin-top:100px;
+}
+
+#itemDetailGrid {
+    width:100%;
+    max-height:100%;
+}
+
+#divSeparator {
+    margin-top:20px;
+}
+
+#footerDetail {
+    margin-top:50px;
+}
+
+
+.footer {
+    height:50%;
+    color:white;
+    position:absolute;
+    width:100%;
+    background-color:rgba(0,0,0,0.1);
+    margin:0;
+}
+
+#footer{
+    text-align:center;
+}
+
+.btn-lg {
+    padding:10px;
+    width:100%;
+    border-radius:0px;
 }

@@ -22,6 +22,7 @@ namespace SmartShopWebApp
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/bootstrap.min.js",
+                       "~/Scripts/toastr.js",
                       "~/Scripts/respond.js",
                       "~/Scripts/wijmo.min.js",
                       "~/Scripts/wijmo.grid.min.js",
@@ -30,9 +31,13 @@ namespace SmartShopWebApp
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Scripts/toastr.css",
                       "~/Content/wijmo.css",
                       "~/Content/wijmo.min.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/themes/wijmo.theme.midnight.min.css",
+                      "~/fonts/css/font-awesome.css",
+                      "~/fonts/css/font-awesome.min.css"));
         }
     }
 }

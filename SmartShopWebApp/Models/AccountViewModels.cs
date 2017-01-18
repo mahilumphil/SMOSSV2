@@ -79,6 +79,24 @@ namespace SmartShopWebApp.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "FullName")]
+        public string FullName { get; set; }
+
+        [Required]
+        [Display(Name = "Address")]
+        public string Address { get; set; }
+
+        [Required]
+        [Display(Name = "Contact Number")]
+        public string ContactNumber { get; set; }
+
+        [Required]
+        [Display(Name = "Site")]
+        public string Site { get; set; }
+
+        public byte[] Photo { get; set; }
     }
 
     public class ResetPasswordViewModel

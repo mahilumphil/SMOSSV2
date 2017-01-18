@@ -10,6 +10,8 @@ namespace SmartShopWebApp.Entities
         public Int32 Id { get; set; }
         public Int32 ItemId { get; set; }
         public String Item { get; set; }
+        public String Specification { get; set; }
+        public String Remarks { get; set; }
         public String PostDate { get; set; }
         public String ExpiredDate { get; set; }
         public String UpdatedDate { get; set; }
@@ -20,5 +22,6 @@ namespace SmartShopWebApp.Entities
         public String PayType { get; set; }
         public Int32 StatusId { get; set; }
         public String Status { get; set; }
+        public Decimal Price { get; set; }
     }
 }

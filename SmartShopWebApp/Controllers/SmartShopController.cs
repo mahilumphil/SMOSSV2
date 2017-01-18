@@ -13,5 +13,21 @@ namespace SmartShopWebApp.Controllers
         {
             return View();
         }
+
+        public ActionResult Item()
+        {
+            return View();
+        }
+
+        public ActionResult Post()
+        {
+            return View();
+        }
+
+        public ActionResult PostList()
+        {
+            return View();
+        }
+
     }
 }

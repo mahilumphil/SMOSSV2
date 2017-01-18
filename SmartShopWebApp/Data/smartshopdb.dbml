@@ -44,10 +44,12 @@
       <Column Name="IsLiked" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="PayTypeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="StatusId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Remarks" Type="System.String" DbType="NVarChar(1000) NOT NULL" CanBeNull="false" />
       <Association Name="ActPostItem_ActBuy" Member="ActBuys" ThisKey="Id" OtherKey="PostId" Type="ActBuy" />
       <Association Name="ActPostItem_ActPostItemComment" Member="ActPostItemComments" ThisKey="Id" OtherKey="PostId" Type="ActPostItemComment" />
       <Association Name="SysPostItemStatus_ActPostItem" Member="SysPostItemStatus" ThisKey="StatusId" OtherKey="Id" Type="SysPostItemStatus" IsForeignKey="true" />
       <Association Name="AspNetUser_ActPostItem" Member="AspNetUser" ThisKey="PostedByUserId" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" />
+      <Association Name="StpItem_ActPostItem" Member="StpItem" ThisKey="ItemId" OtherKey="Id" Type="StpItem" IsForeignKey="true" />
       <Association Name="SysPayType_ActPostItem" Member="SysPayType" ThisKey="PayTypeId" OtherKey="Id" Type="SysPayType" IsForeignKey="true" />
     </Type>
   </Table>
@@ -109,6 +111,11 @@
       <Column Name="LockoutEnabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="AccessFailedCount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="UserName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="FullName" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Address" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="ContactNumber" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Site" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="ProfilePhoto" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
       <Association Name="AspNetUser_ActBuy" Member="ActBuys" ThisKey="Id" OtherKey="BoughtByUserId" Type="ActBuy" />
       <Association Name="AspNetUser_ActMessaging" Member="ActMessagings" ThisKey="Id" OtherKey="SenderUserId" Type="ActMessaging" />
       <Association Name="AspNetUser_ActMessaging1" Member="ActMessagings1" ThisKey="Id" OtherKey="RecipientUserId" Type="ActMessaging" />
@@ -118,6 +125,7 @@
       <Association Name="AspNetUser_AspNetUserLogin" Member="AspNetUserLogins" ThisKey="Id" OtherKey="UserId" Type="AspNetUserLogin" />
       <Association Name="AspNetUser_AspNetUserRole" Member="AspNetUserRoles" ThisKey="Id" OtherKey="UserId" Type="AspNetUserRole" />
       <Association Name="AspNetUser_StpItem" Member="StpItems" ThisKey="Id" OtherKey="UserId" Type="StpItem" />
+      <Association Name="AspNetUser_StpUserForm" Member="StpUserForms" ThisKey="Id" OtherKey="UserId" Type="StpUserForm" />
     </Type>
   </Table>
   <Table Name="dbo.StpItem" Member="StpItems">
@@ -131,8 +139,30 @@
       <Column Name="UserId" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
       <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="UpdatedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="StpItem_ActPostItem" Member="ActPostItems" ThisKey="Id" OtherKey="ItemId" Type="ActPostItem" />
       <Association Name="AspNetUser_StpItem" Member="AspNetUser" ThisKey="UserId" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" />
       <Association Name="SysItemCategory_StpItem" Member="SysItemCategory" ThisKey="ItemCategoryId" OtherKey="Id" Type="SysItemCategory" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.StpUserForm" Member="StpUserForms">
+    <Type Name="StpUserForm">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="UserId" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="FormId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CanView" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CanPost" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CanEdit" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CanUpdate" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CanTrash" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="AspNetUser_StpUserForm" Member="AspNetUser" ThisKey="UserId" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" />
+      <Association Name="SysForm_StpUserForm" Member="SysForm" ThisKey="Id" OtherKey="Id" Type="SysForm" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SysForm" Member="SysForms">
+    <Type Name="SysForm">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Forms" Type="System.String" DbType="VarChar(1000) NOT NULL" CanBeNull="false" />
+      <Association Name="SysForm_StpUserForm" Member="StpUserForm" ThisKey="Id" OtherKey="Id" Type="StpUserForm" Cardinality="One" />
     </Type>
   </Table>
   <Table Name="dbo.SysItemCategory" Member="SysItemCategories">

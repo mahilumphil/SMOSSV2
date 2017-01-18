@@ -1,0 +1,283 @@
+﻿@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Post";
+}
+
+@*<h2>Post</h2>*@
+<div id="divSeparator"></div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-10">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-6">
+                            Post Item
+                        </div>
+                        <div class="col-md-6" align="right">
+                            <a href="~/Manage" class="btn btn-success" onclick=""><span class="fa fa-hand-o-right">&nbsp;</span>Your Item's</a>
+                            <button class="btn btn-info" onclick="savePostOnclick()"><span class="fa fa-plus-square">&nbsp;</span>Post</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Item</label>
+                                <div id="cboItemList" style="width:100%;">
+
+                                </div>
+
+                            </div>
+                            <img id="imageDisplay" src="#" class="img-responsive img-thumbnail" />
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label>Specification</label>
+                                <textarea rows="5" class="form-control" id="Specification" disabled></textarea>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Price</label>
+                                        <input type="text" name="name" value=" " id="Price" class="form-control" disabled />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Quantity</label>
+                                        @*<select class="form-control" id="Quantity">
+                                            <option value="">1</option>
+                                            <option value="">2</option>
+                                            <option value="">3</option>
+                                            <option value="">4</option>
+                                            <option value="">5</option>
+                                            <option value="">6</option>
+                                            <option value="">7</option>
+                                            <option value="">8</option>
+                                            <option value="">9</option>
+                                            <option value="">10</option>
+                                        </select>*@
+                                        <div id="cboQuantity">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Say Something</label>
+                                <textarea rows="5" class="form-control" id="Remarks" placeholder="Say something"></textarea>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Pay Type</label>
+                                        <div id="cboPayType" style="width:100%;">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Status</label>
+                                    <div id="cboStatus" style="width:100%;">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h1>ADS HEADER</h1>
+                </div>
+                <div class="panel-body">
+                    <h4>ADS BODY</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="divSeparator"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <div id="postDetailGrid">
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var cboItemList;
+    var postDetailCollections;
+    var postDetail;
+    var cboPayType;
+    var cboStatus;
+    var cboQuantity;
+
+    //Add To Post
+
+    function savePostOnclick() {
+        var itemObject = {
+            ItemId: cboItemList.selectedItem["Id"],
+            Quantity: cboQuantity.selectedValue,
+            Remarks: document.getElementById("Remarks").value,
+            PayTypeId: cboPayType.selectedItem["Id"],
+            StatusId: cboStatus.selectedItem["Id"]
+        }
+
+        itemData = JSON.stringify(itemObject);
+
+        $.ajax({
+            type: "POST",
+            url: '/api/add/postitem',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: itemData,
+            statusCode: {
+                200: function () {
+                    alert("Successfully Added");
+                },
+                404: function () {
+                    toastr.error("Bad Request");
+                },
+                400: function () {
+                    toastr.error("Something Went Wrong");
+                }
+            }
+        });
+    }
+
+    //ItemList
+
+    function getItem() {
+        var items = new wijmo.collections.ObservableArray;
+        $.ajax({
+            type: "GET",
+            url: '/api/list/stpitem',
+            contentType: "application/json;charset=utf-8",
+            success: function (itemList) {
+                for (i = 0; i < itemList.length; i++) {
+                    items.push({
+                        Id: itemList[i]["Id"],
+                        ItemName: itemList[i]["ItemName"],
+                        Price: itemList[i]["Price"],
+                        Specification: itemList[i]["Specification"],
+                        Photo: itemList[i]["Photo"],
+                    });
+                }
+                cboItemList.dispose();
+                cboItemList = new wijmo.input.ComboBox("#cboItemList", {
+                    itemsSource: items,
+                    selectedValuePath: "ItemName",
+                    displayMemberPath: "ItemName",
+                    onSelectedIndexChanged: function () {
+                        //var imageElement = document.createElement("images");
+                        //var imageData = new Image();
+                        //imageData.src = "data:image/jpeg;base64," + this.selectedItem["Photo"];
+                        //imageData.className = "img-responsive";
+                        //imageElement.appendChild(imageData);
+                        //var photoDivElement = document.createElement("DIV");
+                        //var photoDiv = document.getElementById("photoDiv").appendChild(imageElement);
+                        //photoDiv.appendChild(photoDivElement);
+
+                        var imageDataValue = "data:image/jpeg;base64," + this.selectedItem["Photo"];
+                        document.getElementById("imageDisplay").src = imageDataValue;
+                        document.getElementById("Specification").value = this.selectedItem["Specification"];
+                        document.getElementById("Price").value = this.selectedItem["Price"].toLocaleString();
+                    }
+                });
+
+                var imageDataValue = "data:image/jpeg;base64," + cboItemList.selectedItem["Photo"];
+                document.getElementById("imageDisplay").src = imageDataValue;
+
+                document.getElementById("Specification").value = cboItemList.selectedItem["Specification"];
+                document.getElementById("Price").value = cboItemList.selectedItem["Price"].toLocaleString();
+            }
+        });
+    }
+    
+
+    // Pay Type
+    function getPayType() {
+        var pay = new wijmo.collections.ObservableArray;
+        $.ajax({
+            type: "GET",
+            url: '/api/list/syspaytype',
+            contentType: "application/json;charset=utf-8",
+            success: function (payType) {
+                for (i = 0; i < payType.length; i++) {
+                    pay.push({
+                        Id: payType[i]["Id"],
+                        PayType: payType[i]["PayType"],
+                    });
+                }
+                cboPayType.dispose();
+                cboPayType = new wijmo.input.ComboBox("#cboPayType", {
+                    itemsSource: pay,
+                    selectedValuePath: "PayType",
+                    displayMemberPath: "PayType",
+                });
+            }
+        });
+    }
+
+
+    //Status Type
+
+    function getStatus() {
+        var status = new wijmo.collections.ObservableArray;
+        $.ajax({
+            type: "GET",
+            url: '/api/list/syspostitemstatus',
+            contentType: "application/json;charset=utf-8",
+            success: function (statusList) {
+                for (i = 0; i < statusList.length; i++) {
+                    status.push({
+                        Id: statusList[i]["Id"],
+                        Status: statusList[i]["Status"],
+                        IsReserved: statusList[i]["IsReserved"],
+                        IsBought: statusList[i]["IsBought"],
+                        IsAvailable: statusList[i]["IsAvailable"],
+                    });
+                }
+                cboStatus.dispose();
+                cboStatus = new wijmo.input.ComboBox("#cboStatus", {
+                    itemsSource: status,
+                    selectedValuePath: "Status",
+                    displayMemberPath: "Status",
+                });
+            }
+        });
+    }
+
+    function createCBOQuantity(){
+        var number = new Array('1', '2', '3', '4', '5', '6', '7', '8', '9', '10' );
+
+        cboQuantity.dispose();
+        cboQuantity = new wijmo.input.ComboBox("#cboQuantity", {
+            itemsSource: number
+        });
+    }
+    window.onload = function () {
+        //console.log(getPost());
+        cboItemList = new wijmo.input.ComboBox("#cboItemList");
+        cboPayType = new wijmo.input.ComboBox("#cboPayType");
+        cboStatus = new wijmo.input.ComboBox("#cboStatus");
+        cboQuantity = new wijmo.input.ComboBox("#cboQuantity");
+        getItem();
+        getPayType();
+        getStatus();
+        createCBOQuantity();
+    }
+
+</script>

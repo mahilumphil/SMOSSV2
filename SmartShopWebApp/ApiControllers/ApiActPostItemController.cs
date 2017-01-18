@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Microsoft.AspNet.Identity;
 
 namespace SmartShopWebApp.ApiControllers
 {
@@ -17,18 +18,22 @@ namespace SmartShopWebApp.ApiControllers
         {
             try
             {
+                var userId = User.Identity.GetUserId();
                 Data.ActPostItem newActPostItem = new Data.ActPostItem();
 
-                newActPostItem.Id = add.Id;
                 newActPostItem.ItemId = add.ItemId;
-                newActPostItem.PostDate = Convert.ToDateTime(add.PostDate);
-                newActPostItem.ExpiredDate = Convert.ToDateTime(add.ExpiredDate);
-                newActPostItem.UpdatedDate = Convert.ToDateTime(add.UpdatedDate);
+                newActPostItem.Remarks = add.Remarks;
+                newActPostItem.PostDate = DateTime.Today;
+                newActPostItem.ExpiredDate = DateTime.Today.AddDays(30);
+                newActPostItem.UpdatedDate = DateTime.Today;
                 newActPostItem.Quantity = add.Quantity;
-                newActPostItem.PostedByUserId = add.PostedByUserId;
-                newActPostItem.IsLiked = add.IsLiked;
+                newActPostItem.PostedByUserId = userId;
+                newActPostItem.IsLiked = true;
                 newActPostItem.PayTypeId = add.PayTypeId;
-                newActPostItem.StatusId = add.StatusId;    
+                newActPostItem.StatusId = add.StatusId;
+
+                db.ActPostItems.InsertOnSubmit(newActPostItem);
+                db.SubmitChanges();
 
 
                 return Request.CreateResponse(HttpStatusCode.OK, "Sucessfully Added");
@@ -43,14 +48,18 @@ namespace SmartShopWebApp.ApiControllers
 
 
 
-        [HttpGet, Route("api/list/postitem")]
-        public List<Entities.ActPostItem> listActPostItem()
+        [HttpGet, Route("api/list/postitem/byuser")]
+        public List<Entities.ActPostItem> listActPostItemByUser()
         {
-            var post = from d in db.ActPostItems
+            var userId = User.Identity.GetUserId();
+            var post = from d in db.ActPostItems    
+                       where d.PostedByUserId == userId
                        select new Entities.ActPostItem
                        {
                            Id = d.Id,
                            ItemId = d.ItemId,
+                           Item = d.StpItem.ItemName,
+                           Specification = d.StpItem.Specification,
                            PostDate = d.PostDate.ToShortDateString(),
                            ExpiredDate = d.ExpiredDate.ToShortDateString(),
                            UpdatedDate = d.UpdatedDate.ToShortDateString(),
@@ -63,6 +72,63 @@ namespace SmartShopWebApp.ApiControllers
 
             return post.ToList();
         }
+
+
+        [HttpGet, Route("api/list/postitem/byitemcategory/{itemcategoryid}/{startDate}/{endDate}")]
+        public List<Entities.ActPostItem> listActPostItemAll(String itemcategoryid, String startDate,String endDate)
+        {
+            var post = from d in db.ActPostItems
+                       where d.StpItem.ItemCategoryId == Convert.ToInt32(itemcategoryid)
+                       && d.PostDate >= Convert.ToDateTime(startDate) && d.PostDate <= Convert.ToDateTime(endDate)
+                       && d.ExpiredDate < DateTime.Today
+                       select new Entities.ActPostItem
+                       {
+                           Id = d.Id,
+                           ItemId = d.ItemId,
+                           Item = d.StpItem.ItemName,
+                           Specification = d.StpItem.Specification,
+                           PostDate = d.PostDate.ToShortDateString(),
+                           ExpiredDate = d.ExpiredDate.ToShortDateString(),
+                           UpdatedDate = d.UpdatedDate.ToShortDateString(),
+                           Quantity = d.Quantity,
+                           PostedByUserId = d.PostedByUserId,
+                           IsLiked = d.IsLiked,
+                           PayTypeId = d.PayTypeId,
+                           StatusId = d.StatusId
+                       };
+
+            return post.ToList();
+        }
+
+        [HttpGet, Route("api/list/postlist")]
+        public List<Entities.ActPostItem> postItemList()
+        {
+            var userId = User.Identity.GetUserId();
+            var post = from d in db.ActPostItems
+                       where d.PostedByUserId == userId
+                       select new Entities.ActPostItem
+                       {
+                           Id = d.Id,
+                           ItemId = d.ItemId,
+                           Item = d.StpItem.ItemName,
+                           Remarks = d.Remarks,
+                           Price = d.StpItem.Price,
+                           Specification = d.StpItem.Specification,
+                           PostDate = d.PostDate.ToShortDateString(),
+                           ExpiredDate = d.ExpiredDate.ToShortDateString(),
+                           UpdatedDate = d.UpdatedDate.ToShortDateString(),
+                           Quantity = d.Quantity,
+                           PostedByUserId = userId,
+                           IsLiked = d.IsLiked,
+                           PayType = d.SysPayType.PayType,
+                           Status = d.SysPostItemStatus.Status,
+                           PayTypeId = d.PayTypeId,
+                           StatusId = d.StatusId
+                       };
+
+            return post.ToList();
+        }
+
 
 
         [HttpDelete, Route("api/delete/postitem/{id}")]

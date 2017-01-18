@@ -6,11 +6,19 @@
     @Html.AntiForgeryToken()
 
     <ul class="nav navbar-nav navbar-right">
+        <li><a href="~/SmartShop/PostList">Shop</a></li>
         <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            @Html.ActionLink("Good Day: " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" , @class="profile"})
         </li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
     </ul>
+    @*<div id="navbar1">
+        <ul class="nav nav-stacked" id="navbarUL">
+            <li><a href="/Manage/ChangePassword"> Change Password</a></li>
+            <li><a href="~/SmartShop/Post">Post</a></li>
+        </ul>
+       
+    </div>*@
     }
 }
 else
@@ -20,3 +28,6 @@ else
         <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
     </ul>
 }
+<script type="text/javascript">
+  
+</script>

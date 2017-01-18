@@ -1,12 +1,61 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
 <div class="container">
-    <div id="cboItemCategory">
+    <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-9">
+                    <div id="cboItemCategory">
 
+                    </div>
+                </div>
+                <div class="col-md-3" id="manageShop">
+                    <a href="~/SmartShop/PostList" class="btn btn-info" id="post">Shop Now</a>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-3"></div>
     </div>
+
 </div>
-<script type="text/javascript"></script>
+<div id="divSeparator"></div>
+
+<script type="text/javascript">
+    var cboItemCategory;
+
+
+    function getCategory() {
+        var itemCategory = new wijmo.collections.ObservableArray;
+        $.ajax({
+            type: "GET",
+            url: '/api/list/sysitemcategory',
+            contentType: "application/json;charset=utf-8",
+            success: function (itemCategoryList) {
+                for (i = 0; i < itemCategoryList.length; i++) {
+                    itemCategory.push({
+                        Id: itemCategoryList[i]["Id"],
+                        ItemCategory: itemCategoryList[i]["ItemCategory"],
+                    });
+                    console.log(itemCategoryList[i]["Id"]);
+                }
+                cboItemCategory.dispose();
+                cboItemCategory = new wijmo.input.ComboBox("#cboItemCategory", {
+                    itemsSource: itemCategory,
+                    selectedValuePath: "ItemCategory",
+                    displayMemberPath: "ItemCategory"
+                });
+
+            }
+        });
+    }
+
+    window.onload = function () {
+        cboItemCategory = new wijmo.input.ComboBox("#cboItemCategory");
+        getCategory();
+    }
+</script>
