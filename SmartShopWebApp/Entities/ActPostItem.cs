@@ -9,7 +9,7 @@ namespace SmartShopWebApp.Entities
     {
         public Int32 Id { get; set; }
         public Int32 ItemId { get; set; }
-        public String Item { get; set; }
+        public String ItemName { get; set; }
         public String Specification { get; set; }
         public String Remarks { get; set; }
         public String PostDate { get; set; }
@@ -17,11 +17,13 @@ namespace SmartShopWebApp.Entities
         public String UpdatedDate { get; set; }
         public Decimal Quantity { get; set; }
         public String PostedByUserId { get; set; }
-        public Boolean IsLiked { get; set; }
+        public String PostedByUser { get; set; }
+        public Boolean IsApproved { get; set; }
         public Int32 PayTypeId { get; set; }
         public String PayType { get; set; }
         public Int32 StatusId { get; set; }
         public String Status { get; set; }
         public Decimal Price { get; set; }
+        public byte[] PhotoValue { get; set; }
     }
 }

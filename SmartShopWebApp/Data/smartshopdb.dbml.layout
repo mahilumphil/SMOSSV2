@@ -1,221 +1,221 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 14.375, 10.25" name="smartshopdb">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 14.25, 20" name="smartshopdb">
   <DataContextMoniker Name="/smartshopdbDataContext" />
   <nestedChildShapes>
-    <classShape Id="a269a9be-96da-40de-b485-fce328cfbf8f" absoluteBounds="9.875, 5.625, 2, 1.7708968098958344">
+    <classShape Id="21acf41f-3d10-4731-a13e-c467d43be7b6" absoluteBounds="6.5, 11.375, 2, 1.7708968098958344">
       <DataClassMoniker Name="/smartshopdbDataContext/ActBuy" />
       <nestedChildShapes>
-        <elementListCompartment Id="a6b404b2-7643-42cb-bb00-b2d2be030d7f" absoluteBounds="9.89, 6.0850000000000009, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="7cddb036-3cc8-4933-a56d-3e39f4c91d89" absoluteBounds="6.515, 11.835, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="3368b165-1e7a-47fc-9f09-b2b223ba5a25" absoluteBounds="12.125, 4.75, 2, 1.7708968098958309">
+    <classShape Id="25c27a70-1ff9-497d-9038-77ae4dcde815" absoluteBounds="6.5, 17.5, 2, 1.7708968098958309">
       <DataClassMoniker Name="/smartshopdbDataContext/SysPostItemStatus" />
       <nestedChildShapes>
-        <elementListCompartment Id="b0310f64-e1e6-4c24-b242-57e963f67024" absoluteBounds="12.14, 5.2100000000000009, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="802be1e9-8767-462e-a9db-b8bce3e14da8" absoluteBounds="6.515, 17.96, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="c877e9e3-51b8-4602-816a-ca9e86d3467f" absoluteBounds="9.875, 7.625, 2, 1.7708968098958309">
+    <classShape Id="c2eac894-41ab-41f6-985e-e49476673c6c" absoluteBounds="3.5, 18, 2, 1.7708968098958309">
       <DataClassMoniker Name="/smartshopdbDataContext/ActMessaging" />
       <nestedChildShapes>
-        <elementListCompartment Id="1cef4868-953a-488e-ade5-be42b471e8ab" absoluteBounds="9.89, 8.085, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="5a5999eb-7e0c-4963-9236-a69de445f818" absoluteBounds="3.515, 18.46, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="80313148-80d9-4caa-b760-19b3c6c7881e" absoluteBounds="7.5, 3.25, 2, 2.9247054036458309">
+    <classShape Id="b4b41e01-94d1-4782-ab26-ddf24ba7c367" absoluteBounds="9.25, 11.875, 2, 2.9247054036458309">
       <DataClassMoniker Name="/smartshopdbDataContext/ActPostItem" />
       <nestedChildShapes>
-        <elementListCompartment Id="9f1c49d8-8973-4909-a697-67b35c2f302d" absoluteBounds="7.5150000000000006, 3.7100000000000009, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="2d6b0180-3c5a-4db3-844f-c0d0543e6f29" absoluteBounds="9.265, 12.335, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="1c8eb9e3-81df-4ef3-aea9-212cd793f61a" absoluteBounds="9.875, 3.25, 2, 1.9631982421874987">
+    <classShape Id="7e3903a5-e89b-4241-a634-3fde8a7f7caa" absoluteBounds="12, 11.5, 2, 1.9631982421874987">
       <DataClassMoniker Name="/smartshopdbDataContext/ActPostItemComment" />
       <nestedChildShapes>
-        <elementListCompartment Id="05e610d1-62c8-4a84-a33c-253685098738" absoluteBounds="9.89, 3.7100000000000009, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="1b0f991f-ad68-4069-aebb-ec5e20fa5af8" absoluteBounds="12.015, 11.96, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="1595f74b-e7f9-47af-a74d-11aace371de9" absoluteBounds="0.5, 3, 2, 1.1939925130208344">
+    <classShape Id="870b5811-3260-4577-b81b-596149f68afd" absoluteBounds="0.75, 7.625, 2, 1.1939925130208344">
       <DataClassMoniker Name="/smartshopdbDataContext/AspNetRole" />
       <nestedChildShapes>
-        <elementListCompartment Id="9760efea-6170-40c0-b8af-6e9a0ec4fee3" absoluteBounds="0.51500000000000012, 3.4600000000000009, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="89ffad2d-ee49-4991-8f73-9a4ade9422a1" absoluteBounds="0.765, 8.085, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="fd9a9508-8a43-4dfc-b6fb-1a7d5756fa02" absoluteBounds="7.5, 6.375, 2, 1.5785953776041666">
+    <classShape Id="35b684d3-1534-46dd-81fe-873ea416c0c3" absoluteBounds="3.5, 13.25, 2, 1.5785953776041666">
       <DataClassMoniker Name="/smartshopdbDataContext/AspNetUserClaim" />
       <nestedChildShapes>
-        <elementListCompartment Id="7df28ea4-2caf-4bca-bc97-30b127dcc4ab" absoluteBounds="7.5150000000000006, 6.8350000000000009, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="3320363f-21c6-4b86-afef-52ebba9298e1" absoluteBounds="3.515, 13.71, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="c5c8cac5-0cbf-44c9-a3ac-da61b0318023" absoluteBounds="5.125, 4.875, 2, 1.3862939453124987">
+    <classShape Id="41c2007c-0526-4266-b16d-58880ea9d5f6" absoluteBounds="3.5, 11.125, 2, 1.3862939453124987">
       <DataClassMoniker Name="/smartshopdbDataContext/AspNetUserLogin" />
       <nestedChildShapes>
-        <elementListCompartment Id="e3c91e9e-5c9e-4eac-ac2f-dc7e2f6038ea" absoluteBounds="5.1400000000000006, 5.3350000000000009, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="e84e5c59-8459-430e-b568-0b712d24f393" absoluteBounds="3.515, 11.585, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="b1b3b9bd-8d06-42dd-aa39-eecfc736f73e" absoluteBounds="2.75, 4.875, 2, 1.1939925130208344">
+    <classShape Id="3a15ae4f-30b1-47f5-854b-7bbe7415ec7d" absoluteBounds="3.5, 8.625, 2, 1.1939925130208344">
       <DataClassMoniker Name="/smartshopdbDataContext/AspNetUserRole" />
       <nestedChildShapes>
-        <elementListCompartment Id="3cbaeb35-d603-4cea-b16a-555c1bb9de51" absoluteBounds="2.7650000000000006, 5.3350000000000009, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="d25ec1ef-6da4-4e08-8077-927afd63bb74" absoluteBounds="3.515, 9.085, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="844731c2-7881-4ca8-a149-629b43b792a6" absoluteBounds="0.5, 4.625, 2, 4.0785139973958344">
+    <classShape Id="aa12e215-50b0-45e2-a0ff-4cf0005073af" absoluteBounds="0.75, 10.25, 2, 4.0785139973958344">
       <DataClassMoniker Name="/smartshopdbDataContext/AspNetUser" />
       <nestedChildShapes>
-        <elementListCompartment Id="14a7067a-713e-4c3f-8ced-f1e4ea443369" absoluteBounds="0.51500000000000012, 5.0850000000000009, 1.9700000000000002, 3.518513997395833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="4588336b-304e-4591-90f9-e7f447583a6e" absoluteBounds="0.765, 10.71, 1.9700000000000002, 3.518513997395833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="ae6405c6-51db-49e6-892e-7ab50e2a46a4" absoluteBounds="5, 6.375, 2, 2.5401025390624987">
+    <classShape Id="edf8324b-7ca1-4774-b45e-9e1fc38367e8" absoluteBounds="6.5, 14, 2, 2.5401025390624987">
       <DataClassMoniker Name="/smartshopdbDataContext/StpItem" />
       <nestedChildShapes>
-        <elementListCompartment Id="a7842b4b-a244-42d8-8ca9-c2aed4597d3e" absoluteBounds="5.0150000000000006, 6.8350000000000009, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="54640168-1801-4a6a-879f-b6d92543aa49" absoluteBounds="6.515, 14.46, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="6b4f91a0-9428-45ea-a867-26e5bc31c584" absoluteBounds="2.75, 6.25, 2, 2.3478011067708344">
+    <classShape Id="2805f774-8868-4c8e-b1a2-928038a1acce" absoluteBounds="6.5, 8.125, 2, 2.3478011067708344">
       <DataClassMoniker Name="/smartshopdbDataContext/StpUserForm" />
       <nestedChildShapes>
-        <elementListCompartment Id="061d694e-3cd0-4b10-b871-d697ca4b3805" absoluteBounds="2.7650000000000006, 6.7100000000000009, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="1a808a51-3122-457b-bf3b-97d1fcecc18d" absoluteBounds="6.515, 8.585, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="371a3ebe-9f21-40c3-970c-dafe23397315" absoluteBounds="2.875, 3.125, 2, 1.1939925130208344">
+    <classShape Id="e3b5a1c9-756a-4317-8184-2960b26afa9b" absoluteBounds="3.75, 5.5, 2, 1.3862939453125005">
       <DataClassMoniker Name="/smartshopdbDataContext/SysForm" />
       <nestedChildShapes>
-        <elementListCompartment Id="4bf99977-6014-4094-92c1-d5ae8c0b8e2f" absoluteBounds="2.8900000000000006, 3.585, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="bd45c978-8d04-44db-b060-097ab166c61f" absoluteBounds="3.765, 5.96, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="5fa9ba9b-a105-45b4-94d8-91210c5cf6bb" absoluteBounds="7.375, 8.125, 2, 1.1939925130208327">
+    <classShape Id="1c0d6c2a-01c3-46ad-a398-cf8135a3ce99" absoluteBounds="3.75, 15.625, 2, 1.1939925130208327">
       <DataClassMoniker Name="/smartshopdbDataContext/SysItemCategory" />
       <nestedChildShapes>
-        <elementListCompartment Id="d31d6e3d-284d-468c-8baa-7d03f12cb6a1" absoluteBounds="7.3900000000000006, 8.585, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="cbbacb9a-9be2-41a6-a1ca-b5bfa0f1cedc" absoluteBounds="3.765, 16.085, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="8715fd0d-fde5-41d2-9183-2e54285bcd8c" absoluteBounds="5.25, 3.25, 2, 1.1939925130208344">
+    <classShape Id="ee49fc17-89df-45ce-b9f2-4bf8b3991684" absoluteBounds="6.5, 5.5, 2, 1.1939925130208344">
       <DataClassMoniker Name="/smartshopdbDataContext/SysPayType" />
       <nestedChildShapes>
-        <elementListCompartment Id="3599f05e-af9c-464e-b730-ddef2bcf63e6" absoluteBounds="5.2650000000000006, 3.71, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="e748d024-5f38-4d3f-862f-1a95dfc3ea55" absoluteBounds="6.515, 5.96, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(9.5 : 5.89985270182292); (9.875 : 5.89985270182292)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(9.25 : 12.5104484049479); (8.5 : 12.5104484049479)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/smartshopdbDataContext/ActPostItem/ActPostItem_ActBuy" />
       <nodes>
-        <classShapeMoniker Id="80313148-80d9-4caa-b760-19b3c6c7881e" />
-        <classShapeMoniker Id="a269a9be-96da-40de-b485-fce328cfbf8f" />
+        <classShapeMoniker Id="b4b41e01-94d1-4782-ab26-ddf24ba7c367" />
+        <classShapeMoniker Id="21acf41f-3d10-4731-a13e-c467d43be7b6" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(12.125 : 5.41909912109375); (9.5 : 5.41909912109375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(8.5 : 18.3854484049479); (10.25 : 18.3854484049479); (10.25 : 14.7997054036458)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/smartshopdbDataContext/SysPostItemStatus/SysPostItemStatus_ActPostItem" />
       <nodes>
-        <classShapeMoniker Id="3368b165-1e7a-47fc-9f09-b2b223ba5a25" />
-        <classShapeMoniker Id="80313148-80d9-4caa-b760-19b3c6c7881e" />
+        <classShapeMoniker Id="25c27a70-1ff9-497d-9038-77ae4dcde815" />
+        <classShapeMoniker Id="b4b41e01-94d1-4782-ab26-ddf24ba7c367" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(9.5 : 4.23159912109375); (9.69791666666667 : 4.23159912109375 : JumpStart); (9.86458333333333 : 4.23159912109375 : JumpEnd); (9.875 : 4.23159912109375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(11.25 : 12.6690991210937); (12 : 12.6690991210937)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/smartshopdbDataContext/ActPostItem/ActPostItem_ActPostItemComment" />
       <nodes>
-        <classShapeMoniker Id="80313148-80d9-4caa-b760-19b3c6c7881e" />
-        <classShapeMoniker Id="1c8eb9e3-81df-4ef3-aea9-212cd793f61a" />
+        <classShapeMoniker Id="b4b41e01-94d1-4782-ab26-ddf24ba7c367" />
+        <classShapeMoniker Id="7e3903a5-e89b-4241-a634-3fde8a7f7caa" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.5 : 4.19399251302083); (2.6587820151738 : 4.62651947754483 : JumpStart); (2.7162179848262 : 4.78297677896559 : JumpEnd); (2.75 : 4.875)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(1.75 : 8.81899251302083); (1.75 : 9.22199625651042); (3.5 : 9.22199625651042)]" fixedFrom="Algorithm" fixedTo="NotFixed">
       <AssociationMoniker Name="/smartshopdbDataContext/AspNetRole/AspNetRole_AspNetUserRole" />
       <nodes>
-        <classShapeMoniker Id="1595f74b-e7f9-47af-a74d-11aace371de9" />
-        <classShapeMoniker Id="b1b3b9bd-8d06-42dd-aa39-eecfc736f73e" />
+        <classShapeMoniker Id="870b5811-3260-4577-b81b-596149f68afd" />
+        <classShapeMoniker Id="3a15ae4f-30b1-47f5-854b-7bbe7415ec7d" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.031252 : 4.625); (2.031252 : 4.5625); (2.55194692937486 : 4.5625 : JumpStart); (2.77083333333333 : 4.5625 : JumpEnd); (7.375 : 4.5625); (7.375 : 6.3125); (9.78125 : 6.3125); (9.78125 : 6.67912675585938); (9.875 : 6.67912675585938)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.75 : 12.8598453776042); (6.5 : 12.8598453776042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/smartshopdbDataContext/AspNetUser/AspNetUser_ActBuy" />
       <nodes>
-        <classShapeMoniker Id="844731c2-7881-4ca8-a149-629b43b792a6" />
-        <classShapeMoniker Id="a269a9be-96da-40de-b485-fce328cfbf8f" />
+        <classShapeMoniker Id="aa12e215-50b0-45e2-a0ff-4cf0005073af" />
+        <classShapeMoniker Id="21acf41f-3d10-4731-a13e-c467d43be7b6" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.5 : 8.66966684354968); (2.625 : 8.79466684354968); (2.625 : 9.70839680989583); (9.5338932053786 : 9.70839680989583); (9.875 : 9.36729001527444)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(1.75 : 14.3285139973958); (1.75 : 18.8854484049479); (3.5 : 18.8854484049479)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/smartshopdbDataContext/AspNetUser/AspNetUser_ActMessaging" />
       <nodes>
-        <classShapeMoniker Id="844731c2-7881-4ca8-a149-629b43b792a6" />
-        <classShapeMoniker Id="c877e9e3-51b8-4602-816a-ca9e86d3467f" />
+        <classShapeMoniker Id="aa12e215-50b0-45e2-a0ff-4cf0005073af" />
+        <classShapeMoniker Id="c2eac894-41ab-41f6-985e-e49476673c6c" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.5 : 8.67428222816507); (2.9375 : 9.11178222816507); (2.9375 : 9.77089680989583); (9.5299680229367 : 9.77089680989583); (9.9049680229367 : 9.39589680989583)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.2812525 : 14.3285139973958); (2.2812525 : 18.411471702474); (3.5 : 18.411471702474)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/smartshopdbDataContext/AspNetUser/AspNetUser_ActMessaging1" />
       <nodes>
-        <classShapeMoniker Id="844731c2-7881-4ca8-a149-629b43b792a6" />
-        <classShapeMoniker Id="c877e9e3-51b8-4602-816a-ca9e86d3467f" />
+        <classShapeMoniker Id="aa12e215-50b0-45e2-a0ff-4cf0005073af" />
+        <classShapeMoniker Id="c2eac894-41ab-41f6-985e-e49476673c6c" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.5 : 4.78125); (2.60416666666667 : 4.78125 : JumpStart); (2.79891741214579 : 4.78125 : JumpEnd); (7.29166666666667 : 4.78125 : JumpStart); (7.45833333333333 : 4.78125 : JumpEnd); (7.5 : 4.78125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.75 : 10.7989005533854); (2.91666666666667 : 10.7989005533854 : JumpStart); (3.08333333333333 : 10.7989005533854 : JumpEnd); (6.09056722005208 : 10.7989005533854 : JumpStart); (6.25723388671875 : 10.7989005533854 : JumpEnd); (9.63541416666667 : 10.7989005533854 : JumpStart); (9.80208083333333 : 10.7989005533854 : JumpEnd); (10.25 : 10.7989005533854); (10.25 : 11.875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/smartshopdbDataContext/AspNetUser/AspNetUser_ActPostItem" />
       <nodes>
-        <classShapeMoniker Id="844731c2-7881-4ca8-a149-629b43b792a6" />
-        <classShapeMoniker Id="80313148-80d9-4caa-b760-19b3c6c7881e" />
+        <classShapeMoniker Id="aa12e215-50b0-45e2-a0ff-4cf0005073af" />
+        <classShapeMoniker Id="b4b41e01-94d1-4782-ab26-ddf24ba7c367" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(1.5 : 4.625); (1.5 : 4.50649251302083); (2.53138640395847 : 4.50649251302083 : JumpStart); (2.77083333333333 : 4.50649251302083 : JumpEnd); (7.4375 : 4.50649251302083); (7.4375 : 3.1875); (9.78125 : 3.1875); (9.78125 : 4.75365068164062); (9.875 : 4.75365068164062)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.75 : 10.9619527766927); (5.92751499674479 : 10.9619527766927 : JumpStart); (6.09418166341146 : 10.9619527766927 : JumpEnd); (9.63541416666667 : 10.9619527766927 : JumpStart); (9.80208083333333 : 10.9619527766927 : JumpEnd); (10.1666666666667 : 10.9619527766927 : JumpStart); (10.3333333333333 : 10.9619527766927 : JumpEnd); (13 : 10.9619527766927); (13 : 11.5)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/smartshopdbDataContext/AspNetUser/AspNetUser_ActPostItemComment" />
       <nodes>
-        <classShapeMoniker Id="844731c2-7881-4ca8-a149-629b43b792a6" />
-        <classShapeMoniker Id="1c8eb9e3-81df-4ef3-aea9-212cd793f61a" />
+        <classShapeMoniker Id="aa12e215-50b0-45e2-a0ff-4cf0005073af" />
+        <classShapeMoniker Id="7e3903a5-e89b-4241-a634-3fde8a7f7caa" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.5 : 6.79169840494792); (2.625 : 6.79169840494792); (2.625 : 6.1875); (5.0625 : 6.1875); (5.0625 : 6.34375); (6.99467675922239 : 6.34375 : JumpStart); (7.16134342588906 : 6.34375 : JumpEnd); (8.5 : 6.34375); (8.5 : 6.375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.75 : 13.7892569986979); (3.5 : 13.7892569986979)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/smartshopdbDataContext/AspNetUser/AspNetUser_AspNetUserClaim" />
       <nodes>
-        <classShapeMoniker Id="844731c2-7881-4ca8-a149-629b43b792a6" />
-        <classShapeMoniker Id="fd9a9508-8a43-4dfc-b6fb-1a7d5756fa02" />
+        <classShapeMoniker Id="aa12e215-50b0-45e2-a0ff-4cf0005073af" />
+        <classShapeMoniker Id="35b684d3-1534-46dd-81fe-873ea416c0c3" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.5 : 6.15949625651042); (5.125 : 6.15949625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.75 : 11.8181469726562); (3.5 : 11.8181469726562)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/smartshopdbDataContext/AspNetUser/AspNetUser_AspNetUserLogin" />
       <nodes>
-        <classShapeMoniker Id="844731c2-7881-4ca8-a149-629b43b792a6" />
-        <classShapeMoniker Id="c5c8cac5-0cbf-44c9-a3ac-da61b0318023" />
+        <classShapeMoniker Id="aa12e215-50b0-45e2-a0ff-4cf0005073af" />
+        <classShapeMoniker Id="41c2007c-0526-4266-b16d-58880ea9d5f6" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.5 : 5.50324875651042); (2.75 : 5.50324875651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.75 : 10.2807682307692); (3.1875 : 9.84326823076923); (3.1875 : 10.1314925130208); (3.5 : 9.81899251302083)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/smartshopdbDataContext/AspNetUser/AspNetUser_AspNetUserRole" />
       <nodes>
-        <classShapeMoniker Id="844731c2-7881-4ca8-a149-629b43b792a6" />
-        <classShapeMoniker Id="b1b3b9bd-8d06-42dd-aa39-eecfc736f73e" />
+        <classShapeMoniker Id="aa12e215-50b0-45e2-a0ff-4cf0005073af" />
+        <classShapeMoniker Id="3a15ae4f-30b1-47f5-854b-7bbe7415ec7d" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(7 : 6.375); (7.29764266908396 : 6.2557675634761 : JumpStart); (7.45235733091604 : 6.19379054199264 : JumpEnd); (7.5 : 6.17470540364583)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(8.5 : 14.3998527018229); (9.25 : 14.3998527018229)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/smartshopdbDataContext/StpItem/StpItem_ActPostItem" />
       <nodes>
-        <classShapeMoniker Id="ae6405c6-51db-49e6-892e-7ab50e2a46a4" />
-        <classShapeMoniker Id="80313148-80d9-4caa-b760-19b3c6c7881e" />
+        <classShapeMoniker Id="edf8324b-7ca1-4774-b45e-9e1fc38367e8" />
+        <classShapeMoniker Id="b4b41e01-94d1-4782-ab26-ddf24ba7c367" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.5 : 8.68190755208333); (5 : 8.68190755208333)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(1.2187475 : 14.3285139973958); (1.2187475 : 15.2267976888021); (1.66666666666667 : 15.2267976888021 : JumpStart); (1.83333333333333 : 15.2267976888021 : JumpEnd); (2.19791916666667 : 15.2267976888021 : JumpStart); (2.36458583333333 : 15.2267976888021 : JumpEnd); (6.5 : 15.2267976888021)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/smartshopdbDataContext/AspNetUser/AspNetUser_StpItem" />
       <nodes>
-        <classShapeMoniker Id="844731c2-7881-4ca8-a149-629b43b792a6" />
-        <classShapeMoniker Id="ae6405c6-51db-49e6-892e-7ab50e2a46a4" />
+        <classShapeMoniker Id="aa12e215-50b0-45e2-a0ff-4cf0005073af" />
+        <classShapeMoniker Id="edf8324b-7ca1-4774-b45e-9e1fc38367e8" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.5 : 7.42390055338542); (2.75 : 7.42390055338542)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.75 : 10.2853836153846); (3 : 10.0353836153846); (3 : 11.0353011067708); (5.9375 : 11.0353011067708); (6.5 : 10.4728011067708)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/smartshopdbDataContext/AspNetUser/AspNetUser_StpUserForm" />
       <nodes>
-        <classShapeMoniker Id="844731c2-7881-4ca8-a149-629b43b792a6" />
-        <classShapeMoniker Id="6b4f91a0-9428-45ea-a867-26e5bc31c584" />
+        <classShapeMoniker Id="aa12e215-50b0-45e2-a0ff-4cf0005073af" />
+        <classShapeMoniker Id="2805f774-8868-4c8e-b1a2-928038a1acce" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.875 : 3.72199625651042); (2.6875 : 3.72199625651042); (2.6875 : 6.15625); (3.75 : 6.15625); (3.75 : 6.25)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.65625 : 6.8862939453125); (5.65625 : 10.1458943098958); (6.5 : 10.1458943098958)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/smartshopdbDataContext/SysForm/SysForm_StpUserForm" />
       <nodes>
-        <classShapeMoniker Id="371a3ebe-9f21-40c3-970c-dafe23397315" />
-        <classShapeMoniker Id="6b4f91a0-9428-45ea-a867-26e5bc31c584" />
+        <classShapeMoniker Id="e3b5a1c9-756a-4317-8184-2960b26afa9b" />
+        <classShapeMoniker Id="2805f774-8868-4c8e-b1a2-928038a1acce" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(7.375 : 8.52005126953125); (7 : 8.52005126953125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.75 : 16.0825512695313); (6.5 : 16.0825512695313)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/smartshopdbDataContext/SysItemCategory/SysItemCategory_StpItem" />
       <nodes>
-        <classShapeMoniker Id="5fa9ba9b-a105-45b4-94d8-91210c5cf6bb" />
-        <classShapeMoniker Id="ae6405c6-51db-49e6-892e-7ab50e2a46a4" />
+        <classShapeMoniker Id="1c0d6c2a-01c3-46ad-a398-cf8135a3ce99" />
+        <classShapeMoniker Id="edf8324b-7ca1-4774-b45e-9e1fc38367e8" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(7.25 : 3.84699625651042); (7.5 : 3.84699625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(8.5 : 6.09699625651042); (9.7187475 : 6.09699625651042); (9.7187475 : 11.875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/smartshopdbDataContext/SysPayType/SysPayType_ActPostItem" />
       <nodes>
-        <classShapeMoniker Id="8715fd0d-fde5-41d2-9183-2e54285bcd8c" />
-        <classShapeMoniker Id="80313148-80d9-4caa-b760-19b3c6c7881e" />
+        <classShapeMoniker Id="ee49fc17-89df-45ce-b9f2-4bf8b3991684" />
+        <classShapeMoniker Id="b4b41e01-94d1-4782-ab26-ddf24ba7c367" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

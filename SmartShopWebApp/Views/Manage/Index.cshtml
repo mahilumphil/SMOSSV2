@@ -22,7 +22,7 @@
                             <h4>Item List</h4>
                         </div>
                         <div class="col-md-7" align="right">
-                            <a href="~/SmartShop/Post" class="btn btn-primary"><span class="fa fa-pencil-square">&nbsp;</span>Post</a>
+                            <a href="~/SmartShop/Post" class="btn btn-primary"><span class="fa fa-pencil-square">&nbsp;</span>Add Post</a>
                             <button id="myModal" class="btn btn-default" onclick="addItemModal()"><span class="fa fa-plus">&nbsp;</span>Add Item</button>
                         </div>
                     </div>
@@ -433,7 +433,7 @@
             ItemCategoryId: cboItemCategory.selectedItem["Id"],
             Specification: document.getElementById("itemSpecification").value,
         }
-
+            
         itemData = JSON.stringify(itemObject);
         if (itemId == 0) {
 

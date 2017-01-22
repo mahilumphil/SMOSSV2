@@ -29,5 +29,15 @@ namespace SmartShopWebApp.Controllers
             return View();
         }
 
+        public ActionResult PostDetail()
+        {
+            return View();
+        }
+
+        public ActionResult ShopList()
+        {
+            return View();
+        }
+
     }
 }

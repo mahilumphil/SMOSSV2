@@ -28,9 +28,10 @@ namespace SmartShopWebApp.ApiControllers
                 newActPostItem.UpdatedDate = DateTime.Today;
                 newActPostItem.Quantity = add.Quantity;
                 newActPostItem.PostedByUserId = userId;
-                newActPostItem.IsLiked = true;
                 newActPostItem.PayTypeId = add.PayTypeId;
                 newActPostItem.StatusId = add.StatusId;
+                newActPostItem.IsApproved = false;
+
 
                 db.ActPostItems.InsertOnSubmit(newActPostItem);
                 db.SubmitChanges();
@@ -58,14 +59,13 @@ namespace SmartShopWebApp.ApiControllers
                        {
                            Id = d.Id,
                            ItemId = d.ItemId,
-                           Item = d.StpItem.ItemName,
+                           ItemName = d.StpItem.ItemName,
                            Specification = d.StpItem.Specification,
                            PostDate = d.PostDate.ToShortDateString(),
                            ExpiredDate = d.ExpiredDate.ToShortDateString(),
                            UpdatedDate = d.UpdatedDate.ToShortDateString(),
                            Quantity = d.Quantity,
                            PostedByUserId = d.PostedByUserId,
-                           IsLiked = d.IsLiked,
                            PayTypeId = d.PayTypeId,
                            StatusId = d.StatusId
                        };
@@ -85,14 +85,13 @@ namespace SmartShopWebApp.ApiControllers
                        {
                            Id = d.Id,
                            ItemId = d.ItemId,
-                           Item = d.StpItem.ItemName,
+                           ItemName = d.StpItem.ItemName,
                            Specification = d.StpItem.Specification,
                            PostDate = d.PostDate.ToShortDateString(),
                            ExpiredDate = d.ExpiredDate.ToShortDateString(),
                            UpdatedDate = d.UpdatedDate.ToShortDateString(),
                            Quantity = d.Quantity,
                            PostedByUserId = d.PostedByUserId,
-                           IsLiked = d.IsLiked,
                            PayTypeId = d.PayTypeId,
                            StatusId = d.StatusId
                        };
@@ -110,7 +109,7 @@ namespace SmartShopWebApp.ApiControllers
                        {
                            Id = d.Id,
                            ItemId = d.ItemId,
-                           Item = d.StpItem.ItemName,
+                           ItemName = d.StpItem.ItemName,
                            Remarks = d.Remarks,
                            Price = d.StpItem.Price,
                            Specification = d.StpItem.Specification,
@@ -119,11 +118,42 @@ namespace SmartShopWebApp.ApiControllers
                            UpdatedDate = d.UpdatedDate.ToShortDateString(),
                            Quantity = d.Quantity,
                            PostedByUserId = userId,
-                           IsLiked = d.IsLiked,
                            PayType = d.SysPayType.PayType,
                            Status = d.SysPostItemStatus.Status,
                            PayTypeId = d.PayTypeId,
-                           StatusId = d.StatusId
+                           StatusId = d.StatusId,
+                           IsApproved = d.IsApproved,
+                           PhotoValue = d.StpItem.Photo.ToArray()
+                       };
+
+            return post.ToList();
+        }
+
+
+        [HttpGet, Route("api/list/shoplist/{itemCategoryId}")]
+        public List<Entities.ActPostItem> shopItemList(String itemCategoryId)
+        {
+            var post = from d in db.ActPostItems
+                       where d.StpItem.ItemCategoryId == Convert.ToInt32(itemCategoryId)
+                       select new Entities.ActPostItem
+                       {
+                           Id = d.Id,
+                           ItemId = d.ItemId,
+                           ItemName = d.StpItem.ItemName,
+                           Remarks = d.Remarks,
+                           Price = d.StpItem.Price,
+                           Specification = d.StpItem.Specification,
+                           PostDate = d.PostDate.ToShortDateString(),
+                           ExpiredDate = d.ExpiredDate.ToShortDateString(),
+                           UpdatedDate = d.UpdatedDate.ToShortDateString(),
+                           Quantity = d.Quantity,
+                           PostedByUser = d.AspNetUser.FullName,
+                           PayType = d.SysPayType.PayType,
+                           Status = d.SysPostItemStatus.Status,
+                           PayTypeId = d.PayTypeId,
+                           StatusId = d.StatusId,
+                           IsApproved = d.IsApproved,
+                           PhotoValue = d.StpItem.Photo.ToArray()
                        };
 
             return post.ToList();
@@ -172,16 +202,15 @@ namespace SmartShopWebApp.ApiControllers
                 if (actPostItem.Any())
                 {
                     var updateActPostItem = actPostItem.FirstOrDefault();
-                    updateActPostItem.Id = postitem.Id;
-                    updateActPostItem.ItemId = postitem.ItemId;
-                    updateActPostItem.PostDate = Convert.ToDateTime(postitem.PostDate);
-                    updateActPostItem.ExpiredDate = Convert.ToDateTime(postitem.ExpiredDate);
-                    updateActPostItem.UpdatedDate = Convert.ToDateTime(postitem.UpdatedDate);
+                    updateActPostItem.ItemId= postitem.ItemId;
+                    updateActPostItem.Remarks = postitem.Remarks;
+                    updateActPostItem.PostDate = DateTime.Today;
+                    updateActPostItem.ExpiredDate = DateTime.Today;
+                    updateActPostItem.UpdatedDate = DateTime.Today;
                     updateActPostItem.Quantity = postitem.Quantity;
-                    updateActPostItem.PostedByUserId = postitem.PostedByUserId;
-                    updateActPostItem.IsLiked = postitem.IsLiked;
                     updateActPostItem.PayTypeId = postitem.PayTypeId;
-                    updateActPostItem.StatusId = postitem.StatusId;  
+                    updateActPostItem.StatusId = postitem.StatusId;
+                    updateActPostItem.IsApproved = postitem.IsApproved;
                     db.SubmitChanges();
 
                     return Request.CreateResponse(HttpStatusCode.OK);
@@ -193,6 +222,7 @@ namespace SmartShopWebApp.ApiControllers
             }
             catch (Exception e)
             {
+                Debug.WriteLine(e);
                 return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
         }

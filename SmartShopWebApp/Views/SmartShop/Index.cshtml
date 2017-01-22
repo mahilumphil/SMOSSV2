@@ -14,7 +14,7 @@
                     </div>
                 </div>
                 <div class="col-md-3" id="manageShop">
-                    <a href="~/SmartShop/PostList" class="btn btn-info" id="post">Shop Now</a>
+                    <button onclick="btnShopNow()" class="btn btn-info" id="post">Shop Now</button>
                 </div>
             </div>
 
@@ -27,6 +27,11 @@
 
 <script type="text/javascript">
     var cboItemCategory;
+
+    function btnShopNow() {
+        window.location = "/SmartShop/ShopList?itemCategoryId=" + cboItemCategory.selectedItem["Id"];
+
+    }
 
 
     function getCategory() {

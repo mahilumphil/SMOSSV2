@@ -2,9 +2,41 @@
 @{
     ViewBag.Title = "Profile";
 }
-<div id="divSeparator"></div>
+
 <div class="container">
     <div class="row">
+        <div class="col-md-3">
+            <div class="jumbotron">
+                <img src="~/img/defaultimg.png" class="img-responsive" />
+                <hr /><br />
+                @User.Identity.GetUserName()
+                <br /><br />
+                <a href="~/Manage/ChangePassword" style="margin-top:20px; color:black;">Update Password</a>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div class="jumbotron">
+                <ul class="nav nav-tabs">
+                    <li><a href="#">Timeline</a></li>
+                    <li><a href="#">Timeline</a></li>
+                    <li><a href="#">Timeline</a></li>
+                    <li><a href="#">Timeline</a></li>
+                </ul>
+                <textarea rows="7" class="form-control" placeholder="What's on your mind?" id="userInput"></textarea>
+                <hr />
+
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="jumbotron">
+
+                ads
+            </div>
+        </div>
+    </div>
+  
+</div>
+@*<div class="row">
         <div class="col-md-10">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -13,7 +45,6 @@
                             <h2>Profile</h2>
                         </div>
                         <div class="col-md-2">
-                            <a href="~/Manage/ChangePassword" class="btn btn-success" style="margin-top:20px;">Change Password</a>
                         </div>
                     </div>
                 </div>
@@ -21,7 +52,7 @@
                     <div class="row">
                         <div class="col-md-2">
                             <img src="~/img/defaultimg.png" class="img-responsive"/>
-                            <button class="btn btn-default btn-block"><span class="fa fa-plus"></span> Profile Picture</button>   
+                            <button class="btn btn-default btn-block"><span class="fa fa-plus"></span> Profile Picture</button>
                         </div>
                         <div class="col-md-10">
                             <label>Email:</label>
@@ -50,9 +81,15 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </div>*@
+
 <script type="text/javascript">
+    $(document).ready(function () {
+        $("#userInput").click(function () {
+            $(this).css({ "font-size":"large"});
+        });
+
+    })
     function getUser() {
         var user = new wijmo.collections.ObservableArray;
         $.ajax({
@@ -109,11 +146,11 @@
         });
     }
 
-    
-       
 
 
-    
+
+
+
     window.onload = function () {
         getUser();
     }

@@ -914,7 +914,7 @@ namespace SmartShopWebApp.Data
 		
 		private System.DateTime _UpdatedDate;
 		
-		private bool _IsLiked;
+		private bool _IsApproved;
 		
 		private int _PayTypeId;
 		
@@ -952,8 +952,8 @@ namespace SmartShopWebApp.Data
     partial void OnPostedByUserIdChanged();
     partial void OnUpdatedDateChanging(System.DateTime value);
     partial void OnUpdatedDateChanged();
-    partial void OnIsLikedChanging(bool value);
-    partial void OnIsLikedChanged();
+    partial void OnIsApprovedChanging(bool value);
+    partial void OnIsApprovedChanged();
     partial void OnPayTypeIdChanging(int value);
     partial void OnPayTypeIdChanged();
     partial void OnStatusIdChanging(int value);
@@ -1121,22 +1121,22 @@ namespace SmartShopWebApp.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsLiked", DbType="Bit NOT NULL")]
-		public bool IsLiked
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsApproved", DbType="Bit NOT NULL")]
+		public bool IsApproved
 		{
 			get
 			{
-				return this._IsLiked;
+				return this._IsApproved;
 			}
 			set
 			{
-				if ((this._IsLiked != value))
+				if ((this._IsApproved != value))
 				{
-					this.OnIsLikedChanging(value);
+					this.OnIsApprovedChanging(value);
 					this.SendPropertyChanging();
-					this._IsLiked = value;
-					this.SendPropertyChanged("IsLiked");
-					this.OnIsLikedChanged();
+					this._IsApproved = value;
+					this.SendPropertyChanged("IsApproved");
+					this.OnIsApprovedChanged();
 				}
 			}
 		}
@@ -3700,6 +3700,8 @@ namespace SmartShopWebApp.Data
 		
 		private string _Forms;
 		
+		private string _FormDescription;
+		
 		private EntityRef<StpUserForm> _StpUserForm;
 		
     #region Extensibility Method Definitions
@@ -3710,6 +3712,8 @@ namespace SmartShopWebApp.Data
     partial void OnIdChanged();
     partial void OnFormsChanging(string value);
     partial void OnFormsChanged();
+    partial void OnFormDescriptionChanging(string value);
+    partial void OnFormDescriptionChanged();
     #endregion
 		
 		public SysForm()
@@ -3738,7 +3742,7 @@ namespace SmartShopWebApp.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Forms", DbType="VarChar(1000) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Forms", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
 		public string Forms
 		{
 			get
@@ -3754,6 +3758,26 @@ namespace SmartShopWebApp.Data
 					this._Forms = value;
 					this.SendPropertyChanged("Forms");
 					this.OnFormsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FormDescription", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string FormDescription
+		{
+			get
+			{
+				return this._FormDescription;
+			}
+			set
+			{
+				if ((this._FormDescription != value))
+				{
+					this.OnFormDescriptionChanging(value);
+					this.SendPropertyChanging();
+					this._FormDescription = value;
+					this.SendPropertyChanged("FormDescription");
+					this.OnFormDescriptionChanged();
 				}
 			}
 		}

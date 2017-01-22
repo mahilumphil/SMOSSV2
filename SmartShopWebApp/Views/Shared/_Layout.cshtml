@@ -17,24 +17,21 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("SmartShop", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <a href="~/home/index" class="navbar-brand">SmartShop</a>
             </div>
+            <ul class="navbar-collapse collapse nav navbar-nav">
+                <li><a href="~/Home/Index">Home</a></li>
+                <li><a href="~/Home/About">About</a></li>
+                <li><a href="~/Home/Contact">Contact</a></li>
+            </ul>
 
             <div class="navbar-collapse collapse">
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
-        <div class="panel panel-default" id="navbar">
-            <div class="panel-body">
-                <ul class="nav nav-stacked" id="navbarUL">
-                    <li><a href="~/Home/Index">Home</a></li>
-                    <li><a href="~/Home/About">About</a></li>
-                    <li><a href="~/Home/Contact">Contact</a></li>
-                </ul>
-            </div>
-        </div>
+
     </div>
-  
+
     <div class="container body-content">
         @RenderBody()
     </div>
@@ -78,12 +75,11 @@
     @RenderSection("scripts", required: false)
     <script type="text/javascript">
         $(document).ready(function () {
-            $(".navbar-brand").hover(function(){
-                $("#navbar").stop(true, false, true).slideToggle(300);
+            $(".navbar-brand").hover(function () {
+                $(this).children("ul").stop(true, false, true).slideToggle(300);
             })
         })
     </script>
 </body>
 
 </html>
-

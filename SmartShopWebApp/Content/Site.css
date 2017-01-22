@@ -25,26 +25,21 @@ select,
 textarea {
     max-width:auto;
 }
+.fa fa-search {
+    width:auto;
+    height:auto;
+    padding:5px 5px 5px 5px;
+}
+
 .btn {
     border-radius:0px;
 }
 
-#navbar {
-    position:fixed;
-    width:15%;
-    border-radius:0px;
-    display:none;
-    margin-left:8%;
-    height:auto;
+#divImage {
+    height:100%;
 }
-#navbar1 {
-    position:fixed;
-    width:15%;
-    border-radius:0px;
-    display:none;
-    margin-left:8%;
-    height:auto;
-}
+
+
 #profileManage {
     height:60px;
     width:90px;
@@ -57,7 +52,12 @@ textarea {
     padding:10px;
 }
 
+.jumbotron {
+    border-radius:0px;
+}
+
 a {
+  
     color:white;
 }
 
