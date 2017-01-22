@@ -31,6 +31,31 @@ textarea {
     padding:5px 5px 5px 5px;
 }
 
+.navbar-left {
+    width:100%;
+    margin:0;
+}
+    .navbar-left > li {
+        width:100%;
+    }
+
+hr {
+    border:2px dotted lightgrey;
+    width:100%;
+    margin:auto;
+}
+
+.jumbotron {
+    height:auto;
+    width:auto;
+    padding:10px;
+    background-color:white;
+}
+
+.panel-default {
+    border-radius:0px;
+}
+
 .btn {
     border-radius:0px;
 }
@@ -58,7 +83,7 @@ textarea {
 
 a {
   
-    color:white;
+    color:black;
 }
 
 #navbarUL>li{

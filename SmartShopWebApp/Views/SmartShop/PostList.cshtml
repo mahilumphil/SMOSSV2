@@ -11,7 +11,7 @@
                     <h3>List Of Post</h3>
                 </div>
                 <div class="col-md-3">
-                    <input type="search" name="name" value=" " class="form-control" style="margin-top:5%;"/>
+                    <div class=""></div>
                 </div>
             </div>
         </div>
@@ -385,7 +385,6 @@
     }
 
 
-
     function createFlexGrid() {
         postDetailListCollection = new wijmo.collections.CollectionView(getPostDetail());
 
@@ -490,6 +489,7 @@
         postDetailGridList.trackChanges = true;
         //postDetailGridList.rows.defaultSize = 150;
     }
+
 
     function readURL(input) {
         if (input.files && input.files[0]) {

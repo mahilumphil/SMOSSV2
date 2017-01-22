@@ -6,35 +6,44 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3">
-            <div class="jumbotron">
-                <img src="~/img/defaultimg.png" class="img-responsive" />
-                <hr /><br />
-                @User.Identity.GetUserName()
-                <br /><br />
-                <a href="~/Manage/ChangePassword" style="margin-top:20px; color:black;">Update Password</a>
-            </div>
-        </div>
-        <div class="col-md-7">
-            <div class="jumbotron">
-                <ul class="nav nav-tabs">
-                    <li><a href="#">Timeline</a></li>
-                    <li><a href="#">Timeline</a></li>
-                    <li><a href="#">Timeline</a></li>
-                    <li><a href="#">Timeline</a></li>
-                </ul>
-                <textarea rows="7" class="form-control" placeholder="What's on your mind?" id="userInput"></textarea>
-                <hr />
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>Profile</h4>
+                </div>
+                <div class="panel-body">
+                    <img src="~/img/defaultimg.png" class="img-responsive" />
+                    <br />
+                    <h4>@User.Identity.GetUserName()</h4>
+                    <div class="panel-footer">
+                        <ul class="nav navbar-left">
+                            <li><a href="~/SmartShop/Index">My Items</a></li>
+                            <li><hr /></li>
+                            <li><a href="~/SmartShop/Index">Shop(Buy)</a></li>
+                            <li><a href="~/SmartShop/Post">Post(Sell)</a></li>
+                            <li><hr /></li>
+                            <li><a href="~/SmartShop/Messaging">Messaging</a></li>
+                            <li><hr /></li>
+                            <li><a href="~/SmartShop/PostList">My Post</a></li>
+                        </ul>
+                    </div>
+                </div>
 
             </div>
         </div>
-        <div class="col-md-2">
-            <div class="jumbotron">
+        <div class="col-md-9">
 
-                ads
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3>Profile</h3>
+                    <p>Your Timeline Post..</p>
+                </div>
+                <div class="panel-body">
+                    <div id="listOfItem"></div>
+                </div>
             </div>
         </div>
+
     </div>
-  
 </div>
 @*<div class="row">
         <div class="col-md-10">
@@ -84,74 +93,169 @@
     </div>*@
 
 <script type="text/javascript">
-    $(document).ready(function () {
-        $("#userInput").click(function () {
-            $(this).css({ "font-size":"large"});
-        });
-
-    })
-    function getUser() {
-        var user = new wijmo.collections.ObservableArray;
+    function listOfItem() {
+        postDetail = new wijmo.collections.ObservableArray;
         $.ajax({
             type: "GET",
-            url: '/api/list/userdetail',
+            url: '/api/list/postlist',
             contentType: "application/json;charset=utf-8",
-            success: function (userDetail) {
-                for (i = 0; i < userDetail.length; i++) {
-                    user.push({
-                        Id: userDetail[i]["Id"],
-                        Email: userDetail[i]["Email"],
-                        FullName: userDetail[i]["FullName"],
-                        ContactNumber: userDetail[i]["ContactNumber"],
-                        Address: userDetail[i]["Address"],
+            success: function (postDetailList) {
+                for (i = 0; i < postDetailList.length; i++) {
+                    var imageElement = document.createElement("images");
+                    var imageData = new Image();
+                    imageData.src = "data:image/jpeg;base64," + postDetailList[i]["PhotoValue"];
+                    imageElement.appendChild(imageData);
+                    var photoDivElement = document.createElement("DIV").appendChild(imageElement);
+                    var imageSRCData = "data:image/jpeg;base64," + postDetailList[i]["PhotoValue"];
 
+                    postDetail.push({
+                        Id: postDetailList[i]["Id"],
+                        userId: postDetailList["PostedByUserId"],
+                        Photo: "<img class='img-responsive' src='" + imageSRCData + "' />",
+                        PhotoValue: imageSRCData,
+                        Price: postDetailList[i]["Price"],
+                        ItemName: postDetailList[i]["ItemName"],
+                        Specification: postDetailList[i]["Specification"],
+                        Remarks: postDetailList[i]["Remarks"],
+                        PayType: postDetailList[i]["PayType"],
+                        Status: postDetailList[i]["Status"],
+                        IsApproved: postDetailList[i]["IsApproved"],
+                        Quantity: postDetailList[i]["Quantity"],
+                        btnEdit: "<button onclick='editPostModal()' class='btn btn-info btn-block btn-xs'>Edit</button>",
+                        btnDelete: "<button onclick='deleteItemModal()' class='btn btn-danger btn-block btn-xs'>Delete</button>",
+                        PhotoValue: postDetailList[i]["PhotoValue"]
                     });
-                    onSelectedIndexChanged: function userList() {
-                        document.getElementById("Email").value = userDetail[i]["Email"],
-                        document.getElementById("FullName").value = userDetail[i]["FullName"],
-                        document.getElementById("ContactNumber").value = userDetail[i]["ContactNumber"],
-                        document.getElementById("Address").value = userDetail[i]["Address"]
-                    }
-                    console.log(userDetail)
-                    return user;
                 }
-                //cboItemList.dispose();
-                //cboItemList = new wijmo.input.ComboBox("#cboItemList", {
-                //    itemsSource: items,
-                //    selectedValuePath: "ItemName",
-                //    displayMemberPath: "ItemName",
-                //    onSelectedIndexChanged: function () {
-                //        //var imageElement = document.createElement("images");
-                //        //var imageData = new Image();
-                //        //imageData.src = "data:image/jpeg;base64," + this.selectedItem["Photo"];
-                //        //imageData.className = "img-responsive";
-                //        //imageElement.appendChild(imageData);
-                //        //var photoDivElement = document.createElement("DIV");
-                //        //var photoDiv = document.getElementById("photoDiv").appendChild(imageElement);
-                //        //photoDiv.appendChild(photoDivElement);
-
-                //        var imageDataValue = "data:image/jpeg;base64," + this.selectedItem["Photo"];
-                //        document.getElementById("imageDisplay").src = imageDataValue;
-                //        document.getElementById("Specification").value = this.selectedItem["Specification"];
-                //        document.getElementById("Price").value = this.selectedItem["Price"].toLocaleString();
-                //    }
-                //});
-
-                //var imageDataValue = "data:image/jpeg;base64," + cboItemList.selectedItem["Photo"];
-                //document.getElementById("imageDisplay").src = imageDataValue;
-
-                //document.getElementById("Specification").value = cboItemList.selectedItem["Specification"];
-                //document.getElementById("Price").value = cboItemList.selectedItem["Price"].toLocaleString();
             }
         });
+        console.log(postDetail);
+        return postDetail;
+    }
+    
+
+    function createFlexGrid() {
+        postDetailListCollection = new wijmo.collections.CollectionView(listOfItem());
+
+        //Flex Grid
+        postDetailGridList = new wijmo.grid.FlexGrid("#listOfItem");
+        postDetailGridList.initialize({
+            columns: [
+                {
+                    "header": "Photo",
+                    "binding": "Photo",
+                    "allowSorting": true,
+                    "width": "4*",
+                    "allowResizing": true,
+                    "allowSorting": false,
+                    "isContentHtml": true
+                },
+                {
+                    "header": "Item name",
+                    "binding": "ItemName",
+                    "allowSorting": true,
+                    "width": "2*",
+                    "allowResizing": true,
+                    "allowSorting": false,
+                    "isContentHtml": true
+                },
+                {
+                    "header": "Price",
+                    "binding": "Price",
+                    "allowSorting": true,
+                    "width": 150,
+                    "allowResizing": true,
+                    "allowSorting": false,
+                    "isContentHtml": true
+                },
+                {
+
+                    "header": "Approved",
+                    "binding": "IsApproved",
+                    "allowSorting": true,
+                    "width": 100,
+                    "allowResizing": true,
+                    "allowSorting": false,
+                    "isContentHtml": true
+                },
+            ],
+            autoGenerateColumns: false,
+            itemsSource: postDetailListCollection,
+            isReadOnly: true,
+            autoSizeMode: wijmo.grid.AutoSizeMode.Both,
+            allowDragging: wijmo.grid.AllowDragging.None,
+            selectionMode: wijmo.grid.SelectionMode.Row,
+            headersVisibility: wijmo.grid.HeadersVisibility.Column
+        });
+        postDetailGridList.trackChanges = true;
+        postDetailGridList.rows.defaultSize = 200;
     }
 
+   
 
 
+
+
+
+
+    //function getUser() {
+    //    var user = new wijmo.collections.ObservableArray;
+    //    $.ajax({
+    //        type: "GET",
+    //        url: '/api/list/userdetail',
+    //        contentType: "application/json;charset=utf-8",
+    //        success: function (userDetail) {
+    //            for (i = 0; i < userDetail.length; i++) {
+    //                user.push({
+    //                    Id: userDetail[i]["Id"],
+    //                    Email: userDetail[i]["Email"],
+    //                    FullName: userDetail[i]["FullName"],
+    //                    ContactNumber: userDetail[i]["ContactNumber"],
+    //                    Address: userDetail[i]["Address"],
+
+    //                });
+    //                onSelectedIndexChanged: function userList() {
+    //                    document.getElementById("Email").value = userDetail[i]["Email"],
+    //                    document.getElementById("FullName").value = userDetail[i]["FullName"],
+    //                    document.getElementById("ContactNumber").value = userDetail[i]["ContactNumber"],
+    //                    document.getElementById("Address").value = userDetail[i]["Address"]
+    //                }
+    //                console.log(userDetail)
+    //                return user;
+    //            }
+    //            //cboItemList.dispose();
+    //            //cboItemList = new wijmo.input.ComboBox("#cboItemList", {
+    //            //    itemsSource: items,
+    //            //    selectedValuePath: "ItemName",
+    //            //    displayMemberPath: "ItemName",
+    //            //    onSelectedIndexChanged: function () {
+    //            //        //var imageElement = document.createElement("images");
+    //            //        //var imageData = new Image();
+    //            //        //imageData.src = "data:image/jpeg;base64," + this.selectedItem["Photo"];
+    //            //        //imageData.className = "img-responsive";
+    //            //        //imageElement.appendChild(imageData);
+    //            //        //var photoDivElement = document.createElement("DIV");
+    //            //        //var photoDiv = document.getElementById("photoDiv").appendChild(imageElement);
+    //            //        //photoDiv.appendChild(photoDivElement);
+
+    //            //        var imageDataValue = "data:image/jpeg;base64," + this.selectedItem["Photo"];
+    //            //        document.getElementById("imageDisplay").src = imageDataValue;
+    //            //        document.getElementById("Specification").value = this.selectedItem["Specification"];
+    //            //        document.getElementById("Price").value = this.selectedItem["Price"].toLocaleString();
+    //            //    }
+    //            //});
+
+    //            //var imageDataValue = "data:image/jpeg;base64," + cboItemList.selectedItem["Photo"];
+    //            //document.getElementById("imageDisplay").src = imageDataValue;
+
+    //            //document.getElementById("Specification").value = cboItemList.selectedItem["Specification"];
+    //            //document.getElementById("Price").value = cboItemList.selectedItem["Price"].toLocaleString();
+    //        }
+    //    });
+    //}
 
 
 
     window.onload = function () {
-        getUser();
+        createFlexGrid();
     }
 </script>
