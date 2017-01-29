@@ -8,7 +8,7 @@
     <ul class="nav navbar-nav navbar-right">
         <li><a href="~/SmartShop/Index">Shop</a></li>
         <li>
-            @Html.ActionLink("Good Day: " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" , @class="profile"})
+            @Html.ActionLink("Good Day: " + User.Identity.GetUserName() + "!", "Profile", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" , @class="profile"})
         </li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
     </ul>

@@ -39,5 +39,9 @@ namespace SmartShopWebApp.Controllers
             return View();
         }
 
+        public ActionResult Messaging()
+        {
+            return View();
+        }
     }
 }
