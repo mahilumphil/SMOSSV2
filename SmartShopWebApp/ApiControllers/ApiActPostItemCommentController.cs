@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Microsoft.AspNet.Identity;
 
 namespace SmartShopWebApp.ApiControllers
 {
@@ -19,14 +20,14 @@ namespace SmartShopWebApp.ApiControllers
             {
                 Data.ActPostItemComment newActPostItemComment = new Data.ActPostItemComment();
 
-                newActPostItemComment.Id = add.Id;
+                var userId = User.Identity.GetUserId();
                 newActPostItemComment.PostId = add.PostId;
                 newActPostItemComment.Comment = add.Comment;
-                newActPostItemComment.CommentByUserId = add.CommentByUserId;
-                newActPostItemComment.CommentDate = Convert.ToDateTime(add.CommentDate);
-                newActPostItemComment.UpdatedDate = Convert.ToDateTime(add.UpdatedDate);
-
-
+                newActPostItemComment.CommentByUserId = userId;
+                newActPostItemComment.CommentDate = DateTime.Today;
+                newActPostItemComment.UpdatedDate = DateTime.Today;
+                db.ActPostItemComments.InsertOnSubmit(newActPostItemComment);
+                db.SubmitChanges();
 
                 return Request.CreateResponse(HttpStatusCode.OK);
 
@@ -39,21 +40,25 @@ namespace SmartShopWebApp.ApiControllers
         }
 
 
-        [HttpGet, Route("api/list/postitemcomment")]
-        public List<Entities.ActPostItemComment> listActPostItemComment()
+        [HttpGet, Route("api/list/postitemcomment/{postId}")]
+        public List<Entities.ActPostItemComment> listActPostItemComment(String postId)
         {
             var postComment = from d in db.ActPostItemComments
+                              where d.PostId == Convert.ToInt32(postId)
                               select new Entities.ActPostItemComment
                               {
                                   Id = d.Id,
                                   PostId = d.PostId,
                                   Comment = d.Comment,
                                   CommentByUserId = d.CommentByUserId,
+                                  CommentByUser = d.AspNetUser.FullName,
                                   CommentDate = d.CommentDate.ToShortDateString(),
                                   UpdatedDate = d.UpdatedDate.ToShortDateString()
                               };
             return postComment.ToList();
         }
+
+
 
         [HttpDelete, Route("api/delete/postitemcomment/{id}")]
         public HttpResponseMessage deleteActPostItemComment(String id)

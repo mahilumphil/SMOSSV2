@@ -1591,7 +1591,7 @@ namespace SmartShopWebApp.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ActPostItem_ActPostItemComment", Storage="_ActPostItem", ThisKey="PostId", OtherKey="Id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ActPostItem_ActPostItemComment", Storage="_ActPostItem", ThisKey="PostId", OtherKey="Id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public ActPostItem ActPostItem
 		{
 			get

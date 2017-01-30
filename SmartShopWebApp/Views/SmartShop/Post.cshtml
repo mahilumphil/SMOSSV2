@@ -4,10 +4,41 @@
 }
 
 @*<h2>Post</h2>*@
-<div id="divSeparator"></div>
-<div class="container-fluid">
+<div class="container">
     <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>Profile</h4>
+                </div>
+                <div class="panel-body">
+                    <img src="~/img/defaultimg.png" class="img-responsive" />
+                    <br />
+                    <h4>@User.Identity.GetUserName()</h4>
+                    <div class="panel-footer">
+                        <ul class="nav navbar-left">
+                            <li><a href="~/Manage/Index">My Item</a></li>
+                            <li><hr /></li>
+                            <li><a href="~/SmartShop/Index">Shop(Buy)</a></li>
+                            <li><a href="~/SmartShop/Post">Post(Sell)</a></li>
+                            <li><hr /></li>
+                            <li><a href="~/SmartShop/Messaging">Messaging</a></li>
+                            <li><hr /></li>
+                            <li><a href="~/SmartShop/PostList">My Post</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    ADS HEADER
+                </div>
+                <div class="panel-body">
+                    ADS BODY
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <div class="row">
@@ -26,9 +57,7 @@
                             <div class="form-group">
                                 <label>Item</label>
                                 <div id="cboItemList" style="width:100%;">
-
                                 </div>
-
                             </div>
                             <img id="imageDisplay" src="#" class="img-responsive img-thumbnail" />
                         </div>
@@ -48,17 +77,17 @@
                                     <div class="form-group">
                                         <label>Quantity</label>
                                         @*<select class="form-control" id="Quantity">
-                                            <option value="">1</option>
-                                            <option value="">2</option>
-                                            <option value="">3</option>
-                                            <option value="">4</option>
-                                            <option value="">5</option>
-                                            <option value="">6</option>
-                                            <option value="">7</option>
-                                            <option value="">8</option>
-                                            <option value="">9</option>
-                                            <option value="">10</option>
-                                        </select>*@
+                                                <option value="">1</option>
+                                                <option value="">2</option>
+                                                <option value="">3</option>
+                                                <option value="">4</option>
+                                                <option value="">5</option>
+                                                <option value="">6</option>
+                                                <option value="">7</option>
+                                                <option value="">8</option>
+                                                <option value="">9</option>
+                                                <option value="">10</option>
+                                            </select>*@
                                         <div id="cboQuantity">
 
                                         </div>
@@ -97,18 +126,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h1>ADS HEADER</h1>
-                </div>
-                <div class="panel-body">
-                    <h4>ADS BODY</h4>
-                </div>
-            </div>
-        </div>
+
     </div>
-    <div id="divSeparator"></div>
     <div class="row">
         <div class="col-md-12">
             <div id="postDetailGrid">
@@ -205,7 +224,7 @@
             }
         });
     }
-    
+
 
     // Pay Type
     function getPayType() {
@@ -260,8 +279,8 @@
         });
     }
 
-    function createCBOQuantity(){
-        var number = new Array('1', '2', '3', '4', '5', '6', '7', '8', '9', '10' );
+    function createCBOQuantity() {
+        var number = new Array('1', '2', '3', '4', '5', '6', '7', '8', '9', '10');
 
         cboQuantity.dispose();
         cboQuantity = new wijmo.input.ComboBox("#cboQuantity", {

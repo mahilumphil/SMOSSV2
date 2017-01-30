@@ -12,6 +12,7 @@ namespace SmartShopWebApp.Entities
         public String Post { get; set; }
         public String Comment { get; set; }
         public String CommentByUserId { get; set; }
+        public String CommentByUser { get; set; }
         public String CommentDate { get; set; }
         public String UpdatedDate { get; set; }
     }

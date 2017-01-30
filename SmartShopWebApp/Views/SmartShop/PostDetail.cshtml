@@ -1,56 +1,62 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "PostDetail";
 }
-<div id="divSeparator"></div>
 <div class="container">
     <div class="row">
         <div class="col-md-9">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h1>Detail</h1>
-                    <p>Detail of Item</p>
+                    <h1>Item Detail</h1>
                 </div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-5">
-                            <h4>Photo</h4>
-                            <img src="~/img/defaultimg.png" class="img-responsive"/>
+                            <label>Item</label>
+                            <input type="text" name="name" value=" " id="ItemName" class="form-control" disabled />
+                            @*<div id="cboItemList" style="width:100%;">
+                                </div>*@
+                            <div id="divSeparator"></div>
+                            <img src="#" class="img-responsive" id="imageDisplay" />
                         </div>
                         <div class="col-md-7">
-                            <h4>Item</h4>
-                            <input type="text" name="name" value=" " class="form-control" />
-                            <h4>Specification</h4>
-                            <textarea rows="7" class="form-control"></textarea>
-                            <h4>Remarks</h4>
-                            <textarea rows="7" class="form-control"></textarea>
+                            <label>Specification</label>
+                            <textarea rows="7" class="form-control" id="Specification" disabled></textarea>
+                            <label>Remarks</label>
+                            <textarea rows="7" class="form-control" id="Remarks" disabled></textarea>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <h4>Price</h4>
-                                    <input type="text" name="name" value=" " class="form-control" />
+                                    <label>Price</label>
+                                    <input type="text" name="name" value=" " id="Price" class="form-control" disabled />
                                 </div>
                                 <div class="col-md-6">
-                                    <h4>Quantity</h4>
-                                    <input type="text" name="name" value=" " class="form-control" />
+                                    <label>Quantity</label>
+                                    <input type="text" name="name" value=" " id="Quantity" class="form-control" disabled />
+                                    @*<div id="cboQuantity" style="width:100%;">
+                                        </div>*@
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <h4>Payment Type</h4>
-                                    <input type="text" name="name" value=" " class="form-control" />
+                                    <label>Payment Type</label>
+                                    <input type="text" name="name" value=" " id="PayType" class="form-control" disabled />
+                                    @*<div id="cboPayType" style="width:100%;" disabled>
+                                        </div>*@
                                 </div>
                                 <div class="col-md-6">
-                                    <h4>Status</h4>
-                                    <input type="text" name="name" value=" " class="form-control" />
+                                    <label>Status</label>
+                                    <input type="text" name="name" value=" " id="Status" class="form-control" disabled />
+                                    @*<div id="cboStatus" style="width:100%;" disabled>
+
+                                        </div>*@
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
                 <div class="panel-footer">
                     <div align="right">
-                        <button onclick="buyItemModal()" class="btn btn-success">Buy</button>  
+                        <button onclick="buyItemModal()" class="btn btn-success">Purchase</button>
                     </div>
                 </div>
             </div>
@@ -59,18 +65,27 @@
                     <h1>Comment</h1>
                 </div>
                 <div class="panel-body">
-                    <textarea rows="15" class="form-control"></textarea>
-                    <br />
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h4>Comment goes here...</h4>
-                            <img src="~/img/defaultimg.png" width="50" height="55"/>Sample ....
-                        </div>
-                    </div> 
+                    <textarea rows="15" class="form-control" id="commentBox"></textarea>
                 </div>
                 <div class="panel-footer">
                     <div align="right">
-                        <button onclick="" class="btn btn-primary">Send Comment</button> 
+                        <button onclick="saveComment()" class="btn btn-primary">Send Comment</button>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table id="commentTableId" class="table">
+                                <tr>
+                                    <th>Inquirer</th>
+                                    <th>Comment</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -100,11 +115,12 @@
                 <div class="panel-heading">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Buy <i class="fa fa-shopping-cart"></i></h4>
+                        <h4 class="modal-title">Purchase <i class="fa fa-shopping-cart"></i></h4>
                     </div>
                 </div>
                 <div class="panel-body">
                     <div class="modal-body">
+                        <h4>Are you sure you want to purchase this item?</h4>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -118,6 +134,135 @@
 
 
 <script type="text/javascript">
+    var cboItemList;
+    var postDetailCollections;
+    var postDetail;
+    var cboPayType;
+    var cboStatus;
+    var cboQuantity;
+    var postId = getUrlParameter("postid");
+
+    function getPostDetail() {
+        $.ajax({
+            type: "GET",
+            url: '/api/list/postdetail/' + postId,
+            contentType: "application/json;charset=utf-8",
+            success: function (postDetailResult) {
+                document.getElementById("ItemName").value = postDetailResult.ItemName;
+                document.getElementById("Specification").value = postDetailResult.Specification;
+                document.getElementById("Remarks").value = postDetailResult.Remarks;
+                document.getElementById("Price").value = postDetailResult.Price;
+                document.getElementById("Quantity").value = postDetailResult.Quantity;
+                document.getElementById("PayType").value = postDetailResult.PayType;
+                document.getElementById("Status").value = postDetailResult.Status;
+                document.getElementById("imageDisplay").src = "data:image/jpeg;base64," + postDetailResult.PhotoValue;
+                getComment();
+            }
+        });
+    }
+
+
+    function saveComment() {
+        var commentObject = {
+            Comment: document.getElementById("commentBox").value,
+            PostId: postId
+        }
+
+        var commentData = JSON.stringify(commentObject);
+
+
+        $.ajax({
+            type: "POST",
+            url: '/api/add/postitemcomment',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: commentData,
+            statusCode: {
+                200: function () {
+                    location.reload();
+                },
+                404: function () {
+                    toastr.error("Bad Request");
+                },
+                400: function () {
+                    toastr.error("Something Went Wrong");
+                }
+            }
+        });
+
+    }
+
+    function getComment() {
+        var comments = new Array();
+        $.ajax({
+            type: "GET",
+            url: '/api/list/postitemcomment/' + postId,
+            contentType: "application/json;charset=utf-8",
+            success: function (commentList) {
+                for (i = 0; i < commentList.length; i++) {
+                    //EDIT
+                    var buttonEdit = document.createElement("BUTTON")
+                    var buttonTextNode = document.createTextNode("Edit");
+                    buttonEdit.appendChild(buttonTextNode);
+                    buttonEdit.setAttribute('class', 'btn btn-info form-control');
+                    buttonEdit.setAttribute('onclick', 'btnEditComment(' + commentList[i]["Id"] + ')');
+                    //DELETE
+                    var buttonDelete = document.createElement("BUTTON")
+                    var buttonTextNode = document.createTextNode("Delete");
+                    buttonDelete.appendChild(buttonTextNode);
+                    buttonDelete.setAttribute('class', 'btn btn-danger form-control');
+                    buttonDelete.setAttribute('onclick', 'btnEditComment(' + commentList[i]["Id"] + ')');
+
+
+                    comments.push({
+                        Id: commentList[i]["Id"],
+                        PostId: commentList[i]["PostId"],
+                        Comment: commentList[i]["Comment"],
+                        CommentByUserId: commentList[i]["CommentByUserId"],
+                        CommentByUser: commentList[i]["CommentByUser"],
+                        CommentDate: commentList[i]["CommentDate"],
+                        UpdatedDate: commentList[i]["UpdatedDate"],
+                        btnEdit: buttonEdit,
+                        btnDelete: buttonDelete
+                    });
+                }
+
+                var parser = new DOMParser();
+                var buttonEdit = document.createElement('BUTTON');
+                var buttonDelte = document.createElement('BUTTON');
+
+                $(function () {
+                    $.each(comments, function (i, item) {
+                        var $tr = $('<tr>').append(
+                            $('<td style="width: 30%; height:auto;">').text(item.CommentByUser),
+                            $('<td style="width: 50%; height:auto;">').text(item.Comment),
+                            $('<td style="width: 10%; height:auto;">').append(item.btnEdit),
+                            $('<td style="width: 10%; height:auto;">').append(item.btnDelete)
+
+                        ).appendTo('#commentTableId');
+                    });
+                });
+
+            }
+        });
+
+    }
+
+    function btnEditComment(commendId) {
+        console.log(commendId);
+    }
+
+    function getUrlParameter(name) {
+        name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+        var regexS = "[\\?&]" + name + "=([^&#]*)";
+        var regex = new RegExp(regexS);
+        var results = regex.exec(window.location.href);
+        if (results == null) {
+            return "";
+        } else {
+            return results[1];
+        }
+    }
 
     //Buy Modal
     function buyItemModal() {
@@ -126,4 +271,139 @@
             "show": true
         });
     }
+
+
+
+    function getItem() {
+        var items = new wijmo.collections.ObservableArray;
+        $.ajax({
+            type: "GET",
+            url: '/api/list/postlist',
+            contentType: "application/json;charset=utf-8",
+            success: function (itemList) {
+                for (i = 0; i < itemList.length; i++) {
+                    items.push({
+                        Id: itemList[i]["Id"],
+                        ItemName: itemList[i]["ItemName"],
+                        Price: itemList[i]["Price"],
+                        Specification: itemList[i]["Specification"],
+                        Quantity: itemList[i]["Quantity"],
+                        Remarks: itemList[i]["Remarks"],
+                        PayType: itemList[i]["PayType"],
+                        Status: itemList[i]["Status"],
+                        Photo: itemList[i]["Photo"],
+                    });
+                }
+                cboItemList.dispose();
+                cboItemList = new wijmo.input.ComboBox("#cboItemList", {
+                    itemsSource: items,
+                    selectedValuePath: "ItemName",
+                    displayMemberPath: "ItemName",
+                    onSelectedIndexChanged: function () {
+                        //var imageElement = document.createElement("images");
+                        //var imageData = new Image();
+                        //imageData.src = "data:image/jpeg;base64," + this.selectedItem["Photo"];
+                        //imageData.className = "img-responsive";
+                        //imageElement.appendChild(imageData);
+                        //var photoDivElement = document.createElement("DIV");
+                        //var photoDiv = document.getElementById("photoDiv").appendChild(imageElement);
+                        //photoDiv.appendChild(photoDivElement);
+
+                        var imageDataValue = "data:image/jpeg;base64," + this.selectedItem["Photo"];
+                        document.getElementById("imageDisplay").src = imageDataValue;
+                        document.getElementById("Specification").value = this.selectedItem["Specification"];
+                        document.getElementById("Remarks").value = this.selectedItem["Remarks"];
+                        document.getElementById("Status").value = this.selectedItem["Status"];
+                        document.getElementById("ItemName").value = this.selectedItem["ItemName"];
+                        document.getElementById("Quantity").value = this.selectedItem["Quantity"];
+                        document.getElementById("Price").value = this.selectedItem["Price"].toLocaleString();
+                    }
+                });
+
+                var imageDataValue = "data:image/jpeg;base64," + cboItemList.selectedItem["Photo"];
+                document.getElementById("imageDisplay").src = imageDataValue;
+                document.getElementById("Specification").value = this.selectedItem["Specification"];
+                document.getElementById("Remarks").value = this.selectedItem["Remarks"];
+                document.getElementById("Status").value = this.selectedItem["Status"];
+                document.getElementById("ItemName").value = this.selectedItem["ItemName"];
+                document.getElementById("Quantity").value = this.selectedItem["Quantity"];
+                document.getElementById("Price").value = this.selectedItem["Price"].toLocaleString();
+            }
+        });
+    }
+
+    function getPayType() {
+        var pay = new wijmo.collections.ObservableArray;
+        $.ajax({
+            type: "GET",
+            url: '/api/list/syspaytype',
+            contentType: "application/json;charset=utf-8",
+            success: function (payType) {
+                for (i = 0; i < payType.length; i++) {
+                    pay.push({
+                        Id: payType[i]["Id"],
+                        PayType: payType[i]["PayType"],
+                    });
+                }
+                cboPayType.dispose();
+                cboPayType = new wijmo.input.ComboBox("#cboPayType", {
+                    itemsSource: pay,
+                    selectedValuePath: "PayType",
+                    displayMemberPath: "PayType",
+                });
+            }
+        });
+    }
+
+
+    //Status Type
+
+    function getStatus() {
+        var status = new wijmo.collections.ObservableArray;
+        $.ajax({
+            type: "GET",
+            url: '/api/list/syspostitemstatus',
+            contentType: "application/json;charset=utf-8",
+            success: function (statusList) {
+                for (i = 0; i < statusList.length; i++) {
+                    status.push({
+                        Id: statusList[i]["Id"],
+                        Status: statusList[i]["Status"],
+                        IsReserved: statusList[i]["IsReserved"],
+                        IsBought: statusList[i]["IsBought"],
+                        IsAvailable: statusList[i]["IsAvailable"],
+                    });
+                }
+                cboStatus.dispose();
+                cboStatus = new wijmo.input.ComboBox("#cboStatus", {
+                    itemsSource: status,
+                    selectedValuePath: "Status",
+                    displayMemberPath: "Status",
+                });
+            }
+        });
+    }
+
+    function createCBOQuantity() {
+        var number = new Array('1', '2', '3', '4', '5', '6', '7', '8', '9', '10');
+
+        cboQuantity.dispose();
+        cboQuantity = new wijmo.input.ComboBox("#cboQuantity", {
+            itemsSource: number
+        });
+    }
+
+
+    window.onload = function () {
+        //cboItemList = new wijmo.input.ComboBox("#cboItemList");
+        //cboPayType = new wijmo.input.ComboBox("#cboPayType");
+        //cboStatus = new wijmo.input.ComboBox("#cboStatus");
+        //cboQuantity = new wijmo.input.ComboBox("#cboQuantity");
+        //getItem();
+        //getPayType();
+        //getStatus();
+        //createCBOQuantity();
+        getPostDetail();
+    }
+
 </script>

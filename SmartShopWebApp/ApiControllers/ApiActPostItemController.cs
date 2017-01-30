@@ -80,7 +80,6 @@ namespace SmartShopWebApp.ApiControllers
             var post = from d in db.ActPostItems
                        where d.StpItem.ItemCategoryId == Convert.ToInt32(itemcategoryid)
                        && d.PostDate >= Convert.ToDateTime(startDate) && d.PostDate <= Convert.ToDateTime(endDate)
-                       && d.ExpiredDate < DateTime.Today
                        select new Entities.ActPostItem
                        {
                            Id = d.Id,
@@ -104,6 +103,37 @@ namespace SmartShopWebApp.ApiControllers
 
             return post.ToList();
         }
+
+        [HttpGet, Route("api/list/postdetail/{id}")]
+        public Entities.ActPostItem postDetailById(String id)
+        {
+            var post = from d in db.ActPostItems
+                       where d.Id == Convert.ToInt32(id)
+                       select new Entities.ActPostItem
+                       {
+                           Id = d.Id,
+                           ItemId = d.ItemId,
+                           ItemName = d.StpItem.ItemName,
+                           Remarks = d.Remarks,
+                           Price = d.StpItem.Price,
+                           Specification = d.StpItem.Specification,
+                           PostDate = d.PostDate.ToShortDateString(),
+                           ExpiredDate = d.ExpiredDate.ToShortDateString(),
+                           UpdatedDate = d.UpdatedDate.ToShortDateString(),
+                           Quantity = d.Quantity,
+                           PostedByUserId = d.PostedByUserId,
+                           PostedByUser = d.AspNetUser.FullName,
+                           PayType = d.SysPayType.PayType,
+                           Status = d.SysPostItemStatus.Status,
+                           PayTypeId = d.PayTypeId,
+                           StatusId = d.StatusId,
+                           IsApproved = d.IsApproved,
+                           PhotoValue = d.StpItem.Photo.ToArray()
+                       };
+
+            return (Entities.ActPostItem)post.FirstOrDefault();
+        }
+
 
         [HttpGet, Route("api/list/postlist")]
         public List<Entities.ActPostItem> postItemList()

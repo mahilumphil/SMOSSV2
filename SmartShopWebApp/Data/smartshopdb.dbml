@@ -61,7 +61,7 @@
       <Column Name="CommentByUserId" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
       <Column Name="CommentDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="UpdatedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Association Name="ActPostItem_ActPostItemComment" Member="ActPostItem" ThisKey="PostId" OtherKey="Id" Type="ActPostItem" IsForeignKey="true" />
+      <Association Name="ActPostItem_ActPostItemComment" Member="ActPostItem" ThisKey="PostId" OtherKey="Id" Type="ActPostItem" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
       <Association Name="AspNetUser_ActPostItemComment" Member="AspNetUser" ThisKey="CommentByUserId" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" />
     </Type>
   </Table>

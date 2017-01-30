@@ -155,7 +155,11 @@
     var payTypeCategory;
     var cboStartDate;
     var cboEndDate;
+    
 
+    function getPostDetail() {
+        
+    }
 
 
     function createCBOQuantity() {
@@ -169,7 +173,9 @@
 
 
     function viewItemDetail() {
-        window.location = "/SmartShop/PostDetail";
+        postDetailListCollection.editItem(postDetailListCollection.currentItem);
+        currentItem = postDetailListCollection.currentEditItem;
+        window.location = "/SmartShop/PostDetail?postid=" + currentItem.Id;
     }
 
     //Get Item
