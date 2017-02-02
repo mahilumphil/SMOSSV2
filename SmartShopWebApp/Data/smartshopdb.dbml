@@ -31,6 +31,9 @@
       <Column Name="RecipientUserId" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
       <Column Name="MessageBody" Type="System.String" DbType="NVarChar(1000) NOT NULL" CanBeNull="false" />
       <Column Name="MessageDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="IsOpen" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="MessageForFirstUserId" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="MessageForSecondUserId" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
       <Association Name="AspNetUser_ActMessaging" Member="AspNetUser" ThisKey="SenderUserId" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" />
       <Association Name="AspNetUser_ActMessaging1" Member="AspNetUser1" ThisKey="RecipientUserId" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" />
     </Type>

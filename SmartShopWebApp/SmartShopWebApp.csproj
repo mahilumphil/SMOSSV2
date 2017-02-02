@@ -287,7 +287,6 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Data\smartshopdb.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>smartshopdb.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
     <Content Include="fonts\fonts\fontawesome-webfont.eot" />

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Microsoft.AspNet.Identity;
 
 namespace SmartShopWebApp.ApiControllers
 {
@@ -37,17 +38,39 @@ namespace SmartShopWebApp.ApiControllers
         }
 
 
-        [HttpGet, Route("api/list/messaging")]
+        [HttpGet, Route("api/list/usermessages")]
         public List<Entities.ActMessaging> listActMessaging()
         {
-            var message = from d in db.ActMessagings
+            var userId = User.Identity.GetUserId();
+            var message = from d in db.ActMessagings.OrderByDescending(d => d.IsOpen)
+                          where d.SenderUserId != userId
+                          group d by new
+                          {
+                            SenderUserId = d.SenderUserId,
+                            SenderUser = d.AspNetUser.FullName
+                          }into g
                           select new Entities.ActMessaging
                           {
-                              Id = d.Id,
-                              SenderUserId = d.SenderUserId,
-                              RecipientUserId = d.RecipientUserId,
-                              MessageBody = d.MessageBody,
-                              MessageDate = d.MessageDate.ToShortDateString()
+                             SenderUserId = g.Key.SenderUserId,
+                             SenderUser = g.Key.SenderUser
+                          };
+            return message.ToList();
+        }
+
+        [HttpGet, Route("api/list/message/{senderuserid}")]
+        public List<Entities.ActMessaging> listActMessaging(String senderUserId)
+        {
+            var userId = User.Identity.GetUserId();
+            var message = from d in db.ActMessagings
+                          where d.MessageForFirstUserId == senderUserId
+                          && d.MessageForSecondUserId == userId
+                          select new Entities.ActMessaging
+                          {
+                                SenderUserId = d.SenderUserId,
+                                SenderUser = d.AspNetUser.FullName,
+                                RecipientUser = d.AspNetUser1.FullName,
+                                MessageBody = d.MessageBody,
+                                MessageDate = d.MessageDate.ToShortDateString()
                           };
             return message.ToList();
         }

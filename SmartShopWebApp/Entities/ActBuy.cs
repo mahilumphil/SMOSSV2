@@ -11,6 +11,7 @@ namespace SmartShopWebApp.Entities
         public Int32 PostId { get; set; }
         public String Post { get; set; }
         public String BoughtByUserId { get; set; }
+        public String BoughtByUser { get; set; }
         public String SenderUserId { get; set; }
         public String RecipientUserId { get; set; }
         public String BoughtDate { get; set; }
@@ -18,5 +19,8 @@ namespace SmartShopWebApp.Entities
         public String Message { get; set; }
         public Decimal Quantity { get; set; }
         public Decimal PartialAmount { get; set; }
+        public String Inquirer { get; set; }
+        public String InquirerUserId { get; set; }
+        public String InquiredItem { get; set; }
     }
 }

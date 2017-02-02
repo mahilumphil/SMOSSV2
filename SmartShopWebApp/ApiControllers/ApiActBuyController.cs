@@ -41,6 +41,8 @@ namespace SmartShopWebApp.ApiControllers
                     messaging.RecipientUserId = postItem.FirstOrDefault().PostedByUserId;
                     messaging.MessageBody = add.Message + " - Requested Item: " + postItem.FirstOrDefault().StpItem.ItemName;
                     messaging.MessageDate = DateTime.Today;
+                    messaging.MessageForFirstUserId = userId;
+                    messaging.MessageForSecondUserId = postItem.FirstOrDefault().PostedByUserId;
                     db.ActMessagings.InsertOnSubmit(messaging);
                     db.SubmitChanges();
                 }
@@ -56,24 +58,26 @@ namespace SmartShopWebApp.ApiControllers
         }
 
 
-        [HttpGet, Route("api/list/buy")]
+        [HttpGet, Route("api/list/inquirer")]
         public List<Entities.ActBuy> listActBuy()
         {
             var userId = User.Identity.GetUserId();
-            Data.ActMessaging message = new Data.ActMessaging();
             var buy = from d in db.ActBuys
+                      where d.ActPostItem.PostedByUserId == userId
+                      && d.IsAccepted == false
                       select new Entities.ActBuy
                       {
                           Id = d.Id,
                           PostId = d.PostId,
                           Quantity = d.Quantity,
                           PartialAmount = d.PartialAmount,
-                          BoughtByUserId = userId,
-                          SenderUserId = message.SenderUserId,
-                          RecipientUserId = message.RecipientUserId,
-                          Message = message.MessageBody,
+                          BoughtByUser = d.AspNetUser.FullName,
                           BoughtDate = d.BoughtDate.ToShortDateString(),
-                          IsAccepted = false,
+                          IsAccepted = d.IsAccepted,
+                          Inquirer = d.AspNetUser.FullName,
+                          InquirerUserId = d.BoughtByUserId,
+                          InquiredItem = d.ActPostItem.StpItem.ItemName
+                        
                       };
             return buy.ToList();
         }

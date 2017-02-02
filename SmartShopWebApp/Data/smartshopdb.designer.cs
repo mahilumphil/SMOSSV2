@@ -742,6 +742,12 @@ namespace SmartShopWebApp.Data
 		
 		private System.DateTime _MessageDate;
 		
+		private bool _IsOpen;
+		
+		private string _MessageForFirstUserId;
+		
+		private string _MessageForSecondUserId;
+		
 		private EntityRef<AspNetUser> _AspNetUser;
 		
 		private EntityRef<AspNetUser> _AspNetUser1;
@@ -760,6 +766,12 @@ namespace SmartShopWebApp.Data
     partial void OnMessageBodyChanged();
     partial void OnMessageDateChanging(System.DateTime value);
     partial void OnMessageDateChanged();
+    partial void OnIsOpenChanging(bool value);
+    partial void OnIsOpenChanged();
+    partial void OnMessageForFirstUserIdChanging(string value);
+    partial void OnMessageForFirstUserIdChanged();
+    partial void OnMessageForSecondUserIdChanging(string value);
+    partial void OnMessageForSecondUserIdChanged();
     #endregion
 		
 		public ActMessaging()
@@ -873,6 +885,66 @@ namespace SmartShopWebApp.Data
 					this._MessageDate = value;
 					this.SendPropertyChanged("MessageDate");
 					this.OnMessageDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsOpen", DbType="Bit NOT NULL")]
+		public bool IsOpen
+		{
+			get
+			{
+				return this._IsOpen;
+			}
+			set
+			{
+				if ((this._IsOpen != value))
+				{
+					this.OnIsOpenChanging(value);
+					this.SendPropertyChanging();
+					this._IsOpen = value;
+					this.SendPropertyChanged("IsOpen");
+					this.OnIsOpenChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MessageForFirstUserId", DbType="NVarChar(128) NOT NULL", CanBeNull=false)]
+		public string MessageForFirstUserId
+		{
+			get
+			{
+				return this._MessageForFirstUserId;
+			}
+			set
+			{
+				if ((this._MessageForFirstUserId != value))
+				{
+					this.OnMessageForFirstUserIdChanging(value);
+					this.SendPropertyChanging();
+					this._MessageForFirstUserId = value;
+					this.SendPropertyChanged("MessageForFirstUserId");
+					this.OnMessageForFirstUserIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MessageForSecondUserId", DbType="NVarChar(128) NOT NULL", CanBeNull=false)]
+		public string MessageForSecondUserId
+		{
+			get
+			{
+				return this._MessageForSecondUserId;
+			}
+			set
+			{
+				if ((this._MessageForSecondUserId != value))
+				{
+					this.OnMessageForSecondUserIdChanging(value);
+					this.SendPropertyChanging();
+					this._MessageForSecondUserId = value;
+					this.SendPropertyChanged("MessageForSecondUserId");
+					this.OnMessageForSecondUserIdChanged();
 				}
 			}
 		}
@@ -2795,7 +2867,7 @@ namespace SmartShopWebApp.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProfilePhoto", DbType="VarBinary(MAX)", CanBeNull=true, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProfilePhoto", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary ProfilePhoto
 		{
 			get

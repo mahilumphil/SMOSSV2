@@ -10,7 +10,12 @@ namespace SmartShopWebApp.Entities
         public Int32 Id { get; set; }
         public String SenderUserId { get; set; }
         public String RecipientUserId { get; set; }
+        public String RecipientUser { get; set; }
+        public String SenderUser { get; set; }
         public String MessageBody { get; set; }
         public String MessageDate { get; set; }
+        public Boolean IsOpen { get; set; }
+        public String MessageForFirstUserId { get; set; }
+        public String MessageForSecondUserId { get; set; }
     }
 }

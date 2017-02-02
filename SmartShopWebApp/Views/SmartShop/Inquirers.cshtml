@@ -50,7 +50,7 @@
             inquire = new wijmo.collections.ObservableArray;
             $.ajax({
                 type: "GET",
-                url: '/api/list/buy',
+                url: '/api/list/inquirer',
                 contentType: "application/json;charset=utf-8",
                 success: function (inquireDetail) {
                     for (i = 0; i < inquireDetail.length; i++) {
@@ -63,16 +63,26 @@
 
                         inquire.push({
                             Id: inquireDetail[i]["Id"],
-                            SenderUserId: inquireDetail["SenderUserId"],
-                            RecipientUserId: inquireDetail[i]["RecipientUserId"],
-                            Message: inquireDetail[i]["Message"],
+                            Inquirer: inquireDetail[i]["Inquirer"],
+                            InquirerUserId: inquireDetail[i]["InquirerUserId"],
+                            InquiredItem: inquireDetail[i]["InquiredItem"],
                             Quantity: inquireDetail[i]["Quantity"],
                             PartialAmount: inquireDetail[i]["PartialAmount"],
+                            btnMessage: "<button class='btn btn-info form-control text-center' onclick='openMessage()'>Open Message</button>"
                         });
                     }
                 }
             });
             return inquire;
+        }
+
+
+
+        function openMessage() {
+            getInquirerDetailCollection.editItem(getInquirerDetailCollection.currentItem);
+            var currentItem = getInquirerDetailCollection.currentEditItem;
+            window.location = "/SmartShop/Messaging?senderUserId=" + currentItem.InquirerUserId;
+
         }
 
 
@@ -83,30 +93,28 @@
             inquirerDetailGridList = new wijmo.grid.FlexGrid("#inquirerList");
             inquirerDetailGridList.initialize({
                 columns: [
-                    
                     {
-
-                        "header": "Sender",
-                        "binding": "SenderUserId",
-                        "allowSorting": true,
-                        "width": "2*",
-                        "allowResizing": true,
-                        "allowSorting": false,
-                        "isContentHtml": true
-                    },
-                    {
-                        "header": "Receiver",
-                        "binding": "RecipientUserId",
-                        "allowSorting": true,
-                        "width": "2*",
-                        "allowResizing": true,
-                        "allowSorting": false,
-                        "isContentHtml": true
-                    },
-                    {
-
                         "header": "Message",
-                        "binding": "Message",
+                        "binding": "btnMessage",
+                        "allowSorting": true,
+                        "width": "2*",
+                        "allowResizing": true,
+                        "allowSorting": false,
+                        "isContentHtml": true
+                    },
+                    {
+                        "header": "Inquirer",
+                        "binding": "Inquirer",
+                        "allowSorting": true,
+                        "width": "2*",
+                        "allowResizing": true,
+                        "allowSorting": false,
+                        "isContentHtml": true
+                    },
+                    {
+
+                        "header": "Item Inquired",
+                        "binding": "InquiredItem",
                         "allowSorting": true,
                         "width": "2*",
                         "allowResizing": true,

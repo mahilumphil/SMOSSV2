@@ -35,7 +35,7 @@ namespace SmartShopWebApp
                       "~/Content/wijmo.css",
                       "~/Content/wijmo.min.css",
                       "~/Content/site.css",
-                      "~/Content/themes/wijmo.theme.midnight.min.css",
+                      "~/Content/themes/wijmo.theme.slate.min.css",
                       "~/fonts/css/font-awesome.css",
                       "~/fonts/css/font-awesome.min.css"));
         }
