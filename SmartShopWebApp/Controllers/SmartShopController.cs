@@ -43,5 +43,10 @@ namespace SmartShopWebApp.Controllers
         {
             return View();
         }
+
+        public ActionResult Inquirers()
+        {
+            return View();
+        }
     }
 }

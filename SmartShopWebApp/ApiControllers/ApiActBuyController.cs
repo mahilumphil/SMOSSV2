@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -17,13 +18,32 @@ namespace SmartShopWebApp.ApiControllers
         {
             try
             {
+                var userId = User.Identity.GetUserId();
                 Data.ActBuy newActBuy = new Data.ActBuy();
 
-                newActBuy.Id = add.Id;
                 newActBuy.PostId = add.PostId;
-                newActBuy.BoughtByUserId = add.BoughtByUserId;
-                newActBuy.BoughtDate = Convert.ToDateTime(add.BoughtDate);
-                newActBuy.IsAccepted = add.IsAccepted;
+                newActBuy.BoughtByUserId = userId;
+                newActBuy.BoughtDate = DateTime.Today;
+                newActBuy.IsAccepted = false;
+                newActBuy.Quantity = add.Quantity;
+                newActBuy.PartialAmount = add.PartialAmount;
+                db.ActBuys.InsertOnSubmit(newActBuy);
+                db.SubmitChanges();
+
+                var postItem = from d in db.ActPostItems
+                               where d.Id == add.PostId
+                               select d;
+
+                if (postItem.Any())
+                {
+                    Data.ActMessaging messaging = new Data.ActMessaging();
+                    messaging.SenderUserId = userId;
+                    messaging.RecipientUserId = postItem.FirstOrDefault().PostedByUserId;
+                    messaging.MessageBody = add.Message + " - Requested Item: " + postItem.FirstOrDefault().StpItem.ItemName;
+                    messaging.MessageDate = DateTime.Today;
+                    db.ActMessagings.InsertOnSubmit(messaging);
+                    db.SubmitChanges();
+                }
 
                 return Request.CreateResponse(HttpStatusCode.OK);
 
@@ -39,17 +59,25 @@ namespace SmartShopWebApp.ApiControllers
         [HttpGet, Route("api/list/buy")]
         public List<Entities.ActBuy> listActBuy()
         {
+            var userId = User.Identity.GetUserId();
+            Data.ActMessaging message = new Data.ActMessaging();
             var buy = from d in db.ActBuys
                       select new Entities.ActBuy
                       {
                           Id = d.Id,
                           PostId = d.PostId,
-                          BoughtByUserId = d.BoughtByUserId,
+                          Quantity = d.Quantity,
+                          PartialAmount = d.PartialAmount,
+                          BoughtByUserId = userId,
+                          SenderUserId = message.SenderUserId,
+                          RecipientUserId = message.RecipientUserId,
+                          Message = message.MessageBody,
                           BoughtDate = d.BoughtDate.ToShortDateString(),
-                          IsAccepted = d.IsAccepted
+                          IsAccepted = false,
                       };
             return buy.ToList();
         }
+
 
         [HttpDelete, Route("api/delete/buy/{id}")]
         public HttpResponseMessage deleteActBuy(String id)

@@ -244,6 +244,12 @@ namespace SmartShopWebApp.Data
 		
 		private bool _IsAccepted;
 		
+		private decimal _Quantity;
+		
+		private decimal _PartialAmount;
+		
+		private decimal _Change;
+		
 		private EntityRef<ActPostItem> _ActPostItem;
 		
 		private EntityRef<AspNetUser> _AspNetUser;
@@ -262,6 +268,12 @@ namespace SmartShopWebApp.Data
     partial void OnBoughtDateChanged();
     partial void OnIsAcceptedChanging(bool value);
     partial void OnIsAcceptedChanged();
+    partial void OnQuantityChanging(decimal value);
+    partial void OnQuantityChanged();
+    partial void OnPartialAmountChanging(decimal value);
+    partial void OnPartialAmountChanged();
+    partial void OnChangeChanging(decimal value);
+    partial void OnChangeChanged();
     #endregion
 		
 		public ActBuy()
@@ -375,6 +387,66 @@ namespace SmartShopWebApp.Data
 					this._IsAccepted = value;
 					this.SendPropertyChanged("IsAccepted");
 					this.OnIsAcceptedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Quantity", DbType="Decimal(18,5) NOT NULL")]
+		public decimal Quantity
+		{
+			get
+			{
+				return this._Quantity;
+			}
+			set
+			{
+				if ((this._Quantity != value))
+				{
+					this.OnQuantityChanging(value);
+					this.SendPropertyChanging();
+					this._Quantity = value;
+					this.SendPropertyChanged("Quantity");
+					this.OnQuantityChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PartialAmount", DbType="Decimal(18,5) NOT NULL")]
+		public decimal PartialAmount
+		{
+			get
+			{
+				return this._PartialAmount;
+			}
+			set
+			{
+				if ((this._PartialAmount != value))
+				{
+					this.OnPartialAmountChanging(value);
+					this.SendPropertyChanging();
+					this._PartialAmount = value;
+					this.SendPropertyChanged("PartialAmount");
+					this.OnPartialAmountChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Change", DbType="Decimal(18,5) NOT NULL")]
+		public decimal Change
+		{
+			get
+			{
+				return this._Change;
+			}
+			set
+			{
+				if ((this._Change != value))
+				{
+					this.OnChangeChanging(value);
+					this.SendPropertyChanging();
+					this._Change = value;
+					this.SendPropertyChanged("Change");
+					this.OnChangeChanged();
 				}
 			}
 		}
@@ -2723,7 +2795,7 @@ namespace SmartShopWebApp.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProfilePhoto", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProfilePhoto", DbType="VarBinary(MAX)", CanBeNull=true, UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary ProfilePhoto
 		{
 			get

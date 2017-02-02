@@ -1,12 +1,11 @@
 ﻿body {
     padding-top: 50px;
-    padding-bottom: 20px;
-    background-color:whitesmoke;
-    background-size:cover;
-    /*background-image:url('../img/cover.jpg');
-    background-size:cover;
-    background-repeat:no-repeat;
-    background-attachment:fixed;*/
+    /*background-color:whitesmoke;
+    background-size:cover;*/
+    background-image: url('../img/cover.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -25,176 +24,230 @@
 input,
 select,
 textarea {
-    max-width:auto;
+    max-width: auto;
 }
+
 .fa fa-search {
-    width:auto;
-    height:auto;
-    padding:5px 5px 5px 5px;
+    width: auto;
+    height: auto;
+    padding: 5px 5px 5px 5px;
 }
 
 .navbar-left {
-    width:100%;
-    margin:0;
+    width: 100%;
+    margin: 0;
 }
+
     .navbar-left > li {
-        width:100%;
+        width: 100%;
     }
 
 hr {
-    border:2px dotted lightgrey;
-    width:100%;
-    margin:auto;
+    border: 2px dotted lightgrey;
+    width: 100%;
+    margin: auto;
 }
 
 .jumbotron {
-    height:auto;
-    width:auto;
-    padding:10px;
-    background-color:white;
+    height: auto;
+    width: auto;
+    padding: 10px;
+    background-color: white;
 }
 
+
 .panel-default {
-    border-radius:0px;
+    border-radius: 0px;
 }
 
 .btn {
-    border-radius:0px;
+    border-radius: 0px;
 }
 
 #divImage {
-    height:100%;
+    height: 100%;
 }
 
 
 #profileManage {
-    height:60px;
-    width:90px;
-    padding:10px;
+    height: 60px;
+    width: 90px;
+    padding: 10px;
 }
 
 #postManage {
-    height:60px;
-    width:90px;
-    padding:10px;
+    height: 60px;
+    width: 90px;
+    padding: 10px;
 }
 
 .jumbotron {
-    border-radius:0px;
+    border-radius: 0px;
 }
 
 a {
-  
-    color:black;
+    color: black;
 }
 
-#navbarUL>li{
-    width:100%; 
-    max-height:100px;
-
+#headerNav {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
-    #navbarUL > li > a {
-        color:gray;
+
+.navbar-fixed-top {
+    background-color: #333;
+    bottom: auto;
+    height: auto;
+}
+.navbar-brand {
+    color:white;
+}
+
+    .navbar-brand:hover {
+        color:lightgray;
+    }
+
+#header {
+    color: white;
+    height: auto;
+}
+
+#headerNav > li > a {
+    font-size: smaller;
+    color: white;
+}
+
+    #headerNav > li > a:hover {
+        background-color: #111;
+        color: white;
+        font-size:15px;
+    }
+
+    #headerNav > li > a:current {
+        background-color: blue;
     }
 
 
 
-#homePanel{
-    margin:0;
-    display:none;
+#navbarUL > li {
+    width: 100%;
+    max-height: 100px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+    #navbarUL > li > a {
+        color: gray;
+    }
+
+
+
+#homePanel {
+    margin: 0;
+    display: none;
 }
 
 #contactInfo {
-    height:100%;
-    width:100%;
-    color:white;
-    font:bold;
-    text-align:justify;
-    background-color:transparent;
+    height: 100%;
+    width: 100%;
+    color: white;
+    font: bold;
+    text-align: justify;
+    background-color: transparent;
 }
 
 #cboItemCategory {
-    width:100%;
-    margin-top:200px;
+    width: 100%;
+    margin-top: 200px;
 }
 
 #cboItemCategories {
-    width:100%;
+    width: 100%;
 }
 
 .nav {
-    margin:0;
+    margin: 0;
 }
 
 #manageShop {
-     margin-top:200px;
+    margin-top: 200px;
 }
+
 #post {
 }
 
 #manageAccount {
-    margin-top:100px;
+    margin-top: 100px;
 }
 
 #changePassword {
-    margin-top:100px;
+    margin-top: 100px;
 }
 
 #manageLogin {
-    margin-top:100px;
+    margin-top: 100px;
 }
 
 #manageRegister {
-    margin-top:100px;
+    margin-top: 100px;
 }
 
 #itemDetailGrid {
-    width:100%;
-    max-height:100%;
+    width: 100%;
+    max-height: 100%;
 }
 
 #divSeparator {
-    margin-top:20px;
+    margin-top: 20px;
 }
 
 #footerDetail {
-    margin-top:50px;
+    margin-top: 50px;
 }
 
 
 .footer {
-    height:50%;
-    position:absolute;
-    width:100%;
-    background-color:#fff;
-    margin:0;
-    border-top:1px solid lightgray;
+    margin-top: 100%;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #333;
+    position: absolute;
+    height: 40%;
 }
 
-#footer{
-    text-align:center;
+#footer {
+    text-align: center;
+    color:white;
 }
 
+i:hover {
+    color:white;
+}
 .btn-lg {
-    padding:10px;
-    width:100%;
-    border-radius:0px;
+    padding: 10px;
+    width: 100%;
+    border-radius: 0px;
 }
 
 #userContainer {
-    width:100%;
-    height:auto;
-    border:1px solid lightgrey;
-    padding:5px;
+    width: 100%;
+    height: auto;
+    border: 1px solid lightgrey;
+    padding: 5px;
 }
 
 #messageContainer {
-    padding:5px;
-     width:100%;
-    height:auto;
-    border:1px solid lightgrey;
+    padding: 5px;
+    width: 100%;
+    height: auto;
+    border: 1px solid lightgrey;
 }
 
 .panel-default {
-    box-shadow:1px 2px 2px 2px lightgray;
+    box-shadow: 1px 2px 2px 2px lightgray;
 }

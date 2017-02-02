@@ -7,9 +7,6 @@
     <div class="row">
         <div class="col-md-3">
             <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4>Profile</h4>
-                </div>
                 <div class="panel-body">
                     <img src="~/img/defaultimg.png" class="img-responsive" />
                     <br />
@@ -17,13 +14,14 @@
                     <div class="panel-footer">
                         <ul class="nav navbar-left">
                             <li><a href="~/Manage/Index">My Item</a></li>
+                            <li><a href="~/SmartShop/PostList">My Post</a></li>
                             <li><hr /></li>
                             <li><a href="~/SmartShop/Index">Shop(Buy)</a></li>
                             <li><a href="~/SmartShop/Post">Post(Sell)</a></li>
                             <li><hr /></li>
                             <li><a href="~/SmartShop/Messaging">Messaging</a></li>
                             <li><hr /></li>
-                            <li><a href="~/SmartShop/PostList">My Post</a></li>
+                            <li><a href="~/SmartShop/Inquirers">Inquirers</a></li>
                         </ul>
                     </div>
                 </div>
@@ -43,7 +41,7 @@
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-md-8">
-                            <h3>My Post</h3>
+                            <h3>My Post <small> / List of your Post </small></h3>
                         </div>
                         <div class="col-md-3">
                             <div class=""></div>
@@ -81,7 +79,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <div id="cboItemList" style="width:100%;">
+                                <div id="cboItemList" style="width:100%;" disabled>
 
                                 </div>
                                 <div id="divImage">

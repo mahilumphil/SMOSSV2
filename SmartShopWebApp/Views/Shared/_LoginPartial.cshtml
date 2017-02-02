@@ -5,10 +5,10 @@
     {
     @Html.AntiForgeryToken()
 
-    <ul class="nav navbar-nav navbar-right">
+    <ul class="nav navbar-nav navbar-right" id="headerNav">
         <li><a href="~/SmartShop/Index">Shop</a></li>
         <li>
-            @Html.ActionLink("Good Day: " + User.Identity.GetUserName() + "!", "Profile", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" , @class="profile"})
+            @Html.ActionLink("" + User.Identity.GetUserName() + "", "Profile", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" , @class="profile"})
         </li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
     </ul>
@@ -23,7 +23,7 @@
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
+    <ul class="nav navbar-nav navbar-right" id="headerNav">
         <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
         <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
     </ul>

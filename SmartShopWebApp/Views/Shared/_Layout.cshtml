@@ -9,8 +9,8 @@
 
 </head>
 <body>
-    <div class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
+    <div class="navbar navbar-fixed-top">
+        <div class="container" id="header">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
@@ -19,11 +19,24 @@
                 </button>
                 <a href="~/home/index" class="navbar-brand">SmartShop</a>
             </div>
-            <ul class="navbar-collapse collapse nav navbar-nav">
-                <li><a href="~/Home/Index">Home</a></li>
-                <li><a href="~/Home/About">About</a></li>
-                <li><a href="~/Home/Contact">Contact</a></li>
-            </ul>
+            @if (Request.IsAuthenticated)
+            {
+                <ul class="navbar-collapse collapse nav navbar-nav" id="headerNav">
+                    <li><a href="~/Home/Index"><span class="fa fa-globe"></span></a></li>
+                    <li><a href="~/Manage/Profile"><span class="fa fa-user"></span></a></li>
+                    <li><a href="~/SmartShop/Messaging"><span class="fa fa-envelope"></span></a></li>
+                    <li><a href="~/Home/Contact"><span class="fa fa-bell"></span></a></li>
+                </ul>
+            }
+            else
+            {
+                <ul class="navbar-collapse collapse nav navbar-nav" id="headerNav">
+                    <li><a href="~/Home/Index">Home</a></li>
+                    <li><a href="~/Home/About">About</a></li>
+                    <li><a href="~/Home/Contact">Contact</a></li>
+                </ul>
+            }
+            
 
             <div class="navbar-collapse collapse">
                 @Html.Partial("_LoginPartial")
