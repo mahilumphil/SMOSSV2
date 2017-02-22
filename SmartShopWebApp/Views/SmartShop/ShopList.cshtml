@@ -7,11 +7,28 @@
     <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6">
+            <h2 id="itemCategoryTitle"></h2>
             <input type="search" name="name" value=" " placeholder="Search Items" class="form-control" />
         </div>
         <div class="col-md-3"></div>
     </div>
     <div id="divSeparator"></div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i> Start Date</span>
+                <div id="cboStartDate"></div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i> End Date</span>
+                <div id="cboEndDate"></div>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+    <br />
     <div class="row">
         <div class="col-md-12">
             <div style="height:500px;  background-color:rgba(0,0,0,0.1);" id="postDetailGridList"></div>
@@ -130,6 +147,8 @@
     var cboQuantity;
     var cboPayType;
     var payTypeCategory;
+    var cboStartDate;
+    var cboEndDate;
 
     function createCBOQuantity() {
         var number = new Array('1', '2', '3', '4', '5', '6', '7', '8', '9', '10');
@@ -265,10 +284,14 @@
 
     //get Post Detail List
     function getPostDetail() {
+
+        var startDateValue = [cboStartDate.value.getMonth() + 1, cboStartDate.value.getDate(), cboStartDate.value.getFullYear()].join('-');
+        var endDateValue = [cboEndDate.value.getMonth() + 1, cboEndDate.value.getDate(), cboEndDate.value.getFullYear()].join('-');
+
         postDetail = new wijmo.collections.ObservableArray;
         $.ajax({
             type: "GET",
-            url: '/api/list/shoplist/1',
+            url: '/api/list/postitem/byitemcategory/' + getUrlParameter("itemCategoryId") + "/" + startDateValue + "/" + endDateValue,
             contentType: "application/json;charset=utf-8",
             success: function (postDetailList) {
                 for (i = 0; i < postDetailList.length; i++) {
@@ -279,9 +302,12 @@
                     var photoDivElement = document.createElement("DIV").appendChild(imageElement);
                     var imageSRCData = "data:image/jpeg;base64," + postDetailList[i]["PhotoValue"];
 
+                    var postNewDate = new Date(postDetailList[i]["PostDate"]);
+                    var postDateValue = [postNewDate.getMonth() + 1, postNewDate.getDate(), postNewDate.getFullYear()].join('-');
+
                     postDetail.push({
                         Id: postDetailList[i]["Id"],
-                        PostedByUser: postDetailList[i]["PostedByUser"],
+                        PostedByUser: postDetailList[i]["PostedByUserId"],
                         ItemName: postDetailList[i]["ItemName"],
                         Price: postDetailList[i]["Price"],
                         Specification: postDetailList[i]["Specification"],
@@ -291,7 +317,8 @@
                         IsApproved: postDetailList[i]["IsApproved"],
                         Quantity: postDetailList[i]["Quantity"],
                         btnView: "<button onclick='viewItemDetail()' class='btn btn-primary btn-block btn-xs'><i class='fa fa-eye'></i> View</button>",
-                        PhotoValue: postDetailList[i]["PhotoValue"]
+                        PhotoValue: postDetailList[i]["PhotoValue"],
+                        PostDate: postDateValue,
                     });
                 }
             }
@@ -406,6 +433,17 @@
                     "allowSorting": false,
                     "isContentHtml": true
                 },
+                {
+
+                    "header": "Posted Date",
+                    "binding": "PostDate",
+                    "allowSorting": true,
+                    "width": "1.5*",
+                    "align": "right",
+                    "allowResizing": true,
+                    "allowSorting": false,
+                    "isContentHtml": true
+                },
             ],
             autoGenerateColumns: false,
             itemsSource: postDetailListCollection,
@@ -430,9 +468,55 @@
         }
     }
 
+    // get parameters in url
+    function getUrlParameter(name) {
+        name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+        var regexS = "[\\?&]" + name + "=([^&#]*)";
+        var regex = new RegExp(regexS);
+        var results = regex.exec(window.location.href);
+        if (results == null) {
+            return "";
+        } else {
+            return results[1];
+        }
+    }
 
+    var isCboStartDateClicked = false;
+    var isCboEndDateClicked = false;
 
     window.onload = function () {
+        document.getElementById("itemCategoryTitle").innerHTML = decodeURIComponent(getUrlParameter("label").replace(/\+/g, '%20'));
+
+        cboStartDate = new wijmo.input.InputDate('#cboStartDate', {
+            format: 'MM-dd-yyyy',
+            value: new Date(),
+            mask: '99-99-9999',
+            onValueChanged: function () {
+                if (isCboStartDateClicked == true) {
+                    postDetailListCollection = new wijmo.collections.CollectionView(getPostDetail());
+                    postDetailGridList.itemsSource = postDetailListCollection;
+                    postDetailGridList.trackChanges = true;
+                } else {
+                    isCboStartDateClicked = true;
+                }
+            }
+        });
+
+        cboEndDate = new wijmo.input.InputDate('#cboEndDate', {
+            format: 'MM-dd-yyyy',
+            value: new Date(),
+            mask: '99-99-9999',
+            onValueChanged: function () {
+                if (isCboEndDateClicked == true) {
+                    postDetailListCollection = new wijmo.collections.CollectionView(getPostDetail());
+                    postDetailGridList.itemsSource = postDetailListCollection;
+                    postDetailGridList.trackChanges = true;
+                } else {
+                    isCboEndDateClicked = true;
+                }
+            }
+        });
+
         createFlexGrid();
         cboStatus = new wijmo.input.ComboBox("#cboStatus");
         cboPayType = new wijmo.input.ComboBox("#cboPayType");
@@ -442,5 +526,6 @@
         getPayType();
         getStatusCategory();
         createCBOQuantity();
+
     }
 </script>

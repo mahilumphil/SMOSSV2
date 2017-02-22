@@ -86,14 +86,20 @@ namespace SmartShopWebApp.ApiControllers
                            Id = d.Id,
                            ItemId = d.ItemId,
                            ItemName = d.StpItem.ItemName,
+                           Remarks = d.Remarks,
+                           Price = d.StpItem.Price,
                            Specification = d.StpItem.Specification,
                            PostDate = d.PostDate.ToShortDateString(),
                            ExpiredDate = d.ExpiredDate.ToShortDateString(),
                            UpdatedDate = d.UpdatedDate.ToShortDateString(),
                            Quantity = d.Quantity,
-                           PostedByUserId = d.PostedByUserId,
+                           PostedByUserId = d.AspNetUser.FullName,
+                           PayType = d.SysPayType.PayType,
+                           Status = d.SysPostItemStatus.Status,
                            PayTypeId = d.PayTypeId,
-                           StatusId = d.StatusId
+                           StatusId = d.StatusId,
+                           IsApproved = d.IsApproved,
+                           PhotoValue = d.StpItem.Photo.ToArray()
                        };
 
             return post.ToList();
