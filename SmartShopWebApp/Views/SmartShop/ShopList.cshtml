@@ -8,7 +8,7 @@
         <div class="col-md-3"></div>
         <div class="col-md-6">
             <h2 id="itemCategoryTitle"></h2>
-            <input type="search" name="name" value=" " placeholder="Search Items" class="form-control" />
+            <input type="search" name="name" value=" " placeholder="Search Items" id="filterSearch" class="form-control" />
         </div>
         <div class="col-md-3"></div>
     </div>
@@ -381,6 +381,18 @@
     function createFlexGrid() {
         postDetailListCollection = new wijmo.collections.CollectionView(getPostDetail());
 
+        var filterText = '';
+        $('#filterSearch').keyup(function () {
+            filterText = this.value.toLowerCase();
+            postDetailListCollection.refresh();
+        });
+
+        postDetailListCollection.filter = function (item) {
+            return !filterText || (item.ItemName.toLowerCase().indexOf(filterText) > -1)
+                               || (item.PostedByUser.toLowerCase().indexOf(filterText) > -1)
+                               || (item.Status.toLowerCase().indexOf(filterText) > -1);
+        }
+
         //Flex Grid
         postDetailGridList = new wijmo.grid.FlexGrid("#postDetailGridList");
         postDetailGridList.initialize({
@@ -494,6 +506,17 @@
             onValueChanged: function () {
                 if (isCboStartDateClicked == true) {
                     postDetailListCollection = new wijmo.collections.CollectionView(getPostDetail());
+                    var filterText = '';
+                    $('#filterSearch').keyup(function () {
+                        filterText = this.value.toLowerCase();
+                        postDetailListCollection.refresh();
+                    });
+
+                    postDetailListCollection.filter = function (item) {
+                        return !filterText || (item.ItemName.toLowerCase().indexOf(filterText) > -1)
+                                           || (item.PostedByUser.toLowerCase().indexOf(filterText) > -1)
+                                           || (item.Status.toLowerCase().indexOf(filterText) > -1);
+                    }
                     postDetailGridList.itemsSource = postDetailListCollection;
                     postDetailGridList.trackChanges = true;
                 } else {
@@ -509,6 +532,17 @@
             onValueChanged: function () {
                 if (isCboEndDateClicked == true) {
                     postDetailListCollection = new wijmo.collections.CollectionView(getPostDetail());
+                    var filterText = '';
+                    $('#filterSearch').keyup(function () {
+                        filterText = this.value.toLowerCase();
+                        postDetailListCollection.refresh();
+                    });
+
+                    postDetailListCollection.filter = function (item) {
+                        return !filterText || (item.ItemName.toLowerCase().indexOf(filterText) > -1)
+                                           || (item.PostedByUser.toLowerCase().indexOf(filterText) > -1)
+                                           || (item.Status.toLowerCase().indexOf(filterText) > -1);
+                    }
                     postDetailGridList.itemsSource = postDetailListCollection;
                     postDetailGridList.trackChanges = true;
                 } else {
