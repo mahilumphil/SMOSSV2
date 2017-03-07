@@ -18,14 +18,31 @@ namespace SmartShopWebApp.ApiControllers
         {
             try
             {
+                var userId = User.Identity.GetUserId();
+
+                // sender data message
                 Data.ActMessaging newActMessaging = new Data.ActMessaging();
-
-                newActMessaging.Id = add.Id;
-                newActMessaging.SenderUserId = add.SenderUserId;
-                newActMessaging.RecipientUserId = add.RecipientUserId;
+                newActMessaging.SenderUserId = userId;
+                newActMessaging.RecipientUserId = add.SenderUserId;
+                newActMessaging.IsOpen = true;
                 newActMessaging.MessageBody = add.MessageBody;
-                newActMessaging.MessageDate = Convert.ToDateTime(add.MessageDate);
+                newActMessaging.MessageDate = DateTime.Today;
+                newActMessaging.MessageForFirstUserId = userId;
+                newActMessaging.MessageForSecondUserId = add.SenderUserId;
+                db.ActMessagings.InsertOnSubmit(newActMessaging);
+                db.SubmitChanges();
 
+                // receiver data message
+                Data.ActMessaging newActMessaging2 = new Data.ActMessaging();
+                newActMessaging2.SenderUserId = add.SenderUserId;
+                newActMessaging2.RecipientUserId = userId;
+                newActMessaging2.IsOpen = true;
+                newActMessaging2.MessageBody = add.MessageBody;
+                newActMessaging2.MessageDate = DateTime.Today;
+                newActMessaging2.MessageForFirstUserId = userId;
+                newActMessaging2.MessageForSecondUserId = add.SenderUserId;
+                db.ActMessagings.InsertOnSubmit(newActMessaging2);
+                db.SubmitChanges();
 
                 return Request.CreateResponse(HttpStatusCode.OK);
 
@@ -62,8 +79,8 @@ namespace SmartShopWebApp.ApiControllers
         {
             var userId = User.Identity.GetUserId();
             var message = from d in db.ActMessagings
-                          where d.MessageForFirstUserId == senderUserId
-                          && d.MessageForSecondUserId == userId
+                          where d.MessageForFirstUserId == userId
+                          && d.MessageForSecondUserId == senderUserId
                           select new Entities.ActMessaging
                           {
                                 SenderUserId = d.SenderUserId,

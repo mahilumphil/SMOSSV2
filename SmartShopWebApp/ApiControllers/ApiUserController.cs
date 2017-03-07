@@ -19,10 +19,12 @@ namespace SmartShopWebApp.ApiControllers
         {
             try
             {
-                byte[] imageArray = add.Photo;
+                byte[] imageArray = add.ProfilePhoto;
 
                 Data.AspNetUser newUserProfile = new Data.AspNetUser();
                 newUserProfile.ProfilePhoto = new Binary(imageArray);
+                db.AspNetUsers.InsertOnSubmit(newUserProfile);
+                db.SubmitChanges();
 
                 return Request.CreateResponse(HttpStatusCode.OK);
             }

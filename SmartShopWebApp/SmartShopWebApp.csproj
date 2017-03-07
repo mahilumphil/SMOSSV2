@@ -275,6 +275,17 @@
     <Content Include="img\chr.jpg" />
     <Content Include="img\cover.jpg" />
     <Content Include="img\defaultimg.png" />
+    <Content Include="img\img\asus_zenfone_AR.jpg" />
+    <Content Include="img\img\dell2in1laptop.png" />
+    <Content Include="img\img\Intel_Credit_card_sized_computer.png" />
+    <Content Include="img\img\Lenovo_smart_assistant.png" />
+    <Content Include="img\img\LG_w-series_tv.jpg" />
+    <Content Include="img\img\mattel_aristotle.jpeg" />
+    <Content Include="img\img\mohu_airwave.jpg" />
+    <Content Include="img\img\noka2017.jpg" />
+    <Content Include="img\img\powerRay_aquatic_drone.png" />
+    <Content Include="img\img\razer_project_valerie.png" />
+    <Content Include="img\img\toyota_concept_i.jpg" />
     <Content Include="img\jan.jpg" />
     <Content Include="img\logo.png" />
     <Content Include="img\nich.jpg" />
@@ -283,6 +294,7 @@
     <Content Include="img\portfolio-2.jpg" />
     <Content Include="img\portfolio-3.jpg" />
     <Content Include="img\portfolio-4.jpg" />
+    <Content Include="img\searchicon.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Data\smartshopdb.dbml">

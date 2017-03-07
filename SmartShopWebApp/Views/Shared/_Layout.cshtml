@@ -17,16 +17,20 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="~/home/index" class="navbar-brand">SmartShop</a>
+                <a href="~/Home/Index" class="navbar-brand">SmartShop</a>
             </div>
             @if (Request.IsAuthenticated)
             {
                 <ul class="navbar-collapse collapse nav navbar-nav" id="headerNav">
                     <li><a href="~/Home/Index"><span class="fa fa-globe"></span></a></li>
                     <li><a href="~/Manage/Profile"><span class="fa fa-user"></span></a></li>
-                    <li><a href="~/SmartShop/Messaging"><span class="fa fa-envelope"></span></a></li>
+                    <li><a href="~/SmartShop/Messaging"><span class="fa fa-comments"></span></a></li>
                     <li><a href="~/Home/Contact"><span class="fa fa-bell"></span></a></li>
+                    <li>
+                            <input type="text" name="search" placeholder="Search.." id="searchBox">
+                    </li>
                 </ul>
+                
             }
             else
             {
@@ -48,14 +52,18 @@
     <div class="container body-content">
         @RenderBody()
     </div>
-    <footer class="footer nav navbar-default">
+    <footer class="navbar navbar-fixed-bottom footer">
         <div class="container" id="footerDetail">
             <div class="row">
-                <div class="col-md-3"></div>
+                <div class="col-md-3">
+                    <ul class="nav nav-pills">
+                        <li><small><a href="~/Home/Index">Home</a></small></li>
+                        <li><small><a href="~/Home/About">About</a></small></li>
+                        <li><small><a href="~/Home/Contact">Contact</a></small></li>
+                    </ul>
+                </div>
                 <div class="col-md-6">
                     <div id="footer">
-                        <h3>Join us now , Here at Smart Shops</h3>
-                        <hr />
                         <p>&copy; @DateTime.Now.Year - SmartShop</p>
                         <ul class="list-unstyled">
                             <li><i class="fa fa-phone fa-fw"></i> (123) 456-7890</li>

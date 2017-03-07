@@ -30,7 +30,7 @@
         </div>
         <div class="col-md-6">
             <div align="right">
-                <input type="search" name="name" value="" id="filterSearch" class="form-control" placeholder="Looking for Item.." />
+                <input type="search" name="name" value="" id="filterSearch" class="form-control" placeholder="Looking for Item?" />
             </div>
         </div>
     </div>
@@ -330,12 +330,12 @@
                         Status: postDetailList[i]["Status"],
                         IsApproved: postDetailList[i]["IsApproved"],
                         Quantity: postDetailList[i]["Quantity"],
-                        btnView: "<button onclick='viewItemDetail()' class='btn btn-primary btn-block btn-xs'><i class='fa fa-eye'></i> View</button>",
+                        btnView: "<button onclick='viewItemDetail()' class='btn btn-primary btn-block-xs form-control'><i class='fa fa-eye'></i> View</button>",
                         PhotoValue: postDetailList[i]["PhotoValue"],
                         PostDate: postDateValue,
                     });
                 }
-            }
+            }   
         });
         console.log(postDetail);
         return postDetail;
@@ -415,7 +415,7 @@
                     "header": "Detail",
                     "binding": "btnView",
                     "allowSorting": true,
-                    "width": "1*",
+                    "width": "0.7*",
                     "allowResizing": true,
                     "allowSorting": false,
                     "isContentHtml": true

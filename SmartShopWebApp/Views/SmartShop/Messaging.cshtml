@@ -7,12 +7,29 @@
         <div class="col-md-3" id="containerForUser">
             <table id="userContainer"></table>
         </div>
-        <div class="col-md-5" id="colMessage">
+        <div class="col-md-5">
             <div class="panel panel-default">
-                <div class="panel-body">
+                <div class="panel-heading">
+                    <table id="currentUserContainer"></table>
+                </div>
+                <div class="panel-body" id="colMessage">
                     <table id="messageContainer"></table>
                 </div>
             </div>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <textarea rows="7" class="form-control" id="inboxMessaging"></textarea>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button class="btn btn-success" onclick="saveMessageOnClick()">Send</button>
+                                @*<input type="submit" class="btn btn-success form-control" value="Send" />*@
+                            </div>
+                            <div class="col-md-10"></div>
+                        </div>
+                    </div>
+                </div>
         </div>
         <div class="col-md-2 col-md-push-1">
             <div class="panel panel-default">
@@ -27,7 +44,47 @@
     </div>
 </div>
 <script type="text/javascript">
+    var message = 0;
+    var chatUser = getUrlParameter("senderUserId");
+    //
+    //
+    //Add Message
+    //
+    //
+    function saveMessageOnClick() {
+        var itemObject = {
+            MessageBody: document.getElementById("inboxMessaging").value,
+            SenderUserId: getUrlParameter("senderUserId")
+        }
 
+        itemData = JSON.stringify(itemObject);
+        if (message == 0) {
+
+            $.ajax({
+                type: "POST",
+                url: '/api/add/messaging',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: itemData,
+                statusCode: {
+                    200: function () {
+                        location.reload();
+                    },
+                    404: function () {
+                    },
+                    400: function () {
+                    }
+                }
+            });
+        }
+    }
+
+
+    //
+    //
+    //Conversation Messaging
+    //
+    //
     function getMessages() {
         userMessages = new wijmo.collections.ObservableArray;
         $.ajax({
@@ -37,16 +94,26 @@
             success: function (userMessageResult) {
                 if (userMessageResult.length > 0) {
                     for (i = 0; i < userMessageResult.length; i++) {
+                        //User LINK
                         var buttonEdit = document.createElement('a')
                         var buttonTextNode = document.createTextNode(userMessageResult[i]["SenderUser"]);
                         buttonEdit.appendChild(buttonTextNode);
                         buttonEdit.title = userMessageResult[i]["SenderUser"];
                         buttonEdit.className = "messaggeLink";
                         buttonEdit.href = '/SmartShop/Messaging?senderUserId=' + userMessageResult[i]["SenderUserId"];
+                        //User IMG
+                        //var imageElement = document.createElement("images");
+                        //var imageData = new Image();
+                        //imageData.src = "data:image/jpeg;base64," + userMessageResult[i]["Photo"];
+                        //imageElement.appendChild(imageData);
+                        //var photoDivElement = document.createElement("DIV").appendChild(imageElement);
+                        //var imageSRCData = "data:image/jpeg;base64," + userMessageResult[i]["Photo"];
+
 
                         userMessages.push({
                             SenderUserId: userMessageResult[i]["SenderUserId"],
                             SenderUser: buttonEdit,
+                            //UserImg: imageSRCDATA
                         });
                     }
                 }
@@ -70,6 +137,7 @@
         });
         return userMessages;
     }
+
 
     function messageBox() {
         messages = new wijmo.collections.ObservableArray;
@@ -100,7 +168,11 @@
                         }
 
                         var $tr = $('<tr class="messagetr' + classActive + '">').append(
-                            $('<td class="messagetd" align="' + textalign + '">').text(user.MessageBody)
+                            $('<td class="messagetd" align="' + textalign + '">').text(user.SenderUser).css({ "background-color": "transparent" })
+                            .append($('<td class="" align="' + textalign + '">').text(user.MessageBody).css({
+                                "background-color": "lightgray", "color": "white", "border-radius": "1px"
+                            , "font-size": "20px", "padding": "10px", "margin-bottom": "5px"
+                            }))
                         ).appendTo('#messageContainer');
 
                     });

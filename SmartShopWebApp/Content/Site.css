@@ -1,10 +1,10 @@
 ﻿body {
     padding-top: 50px;
-    /*background-color:whitesmoke;
-    background-size:cover;*/
-    background-image: url('../img/cover.jpg');
+    background-color:#e9ebee;
+    background-size:cover;
+    /*background-image: url('../img/cover.jpg');
     background-size: cover;
-    background-repeat: no-repeat;
+    background-repeat: no-repeat;*/
     background-attachment: fixed;
 }
 
@@ -97,9 +97,9 @@ a {
 }
 
 .navbar-fixed-top {
-    background-color: #333;
     bottom: auto;
     height: auto;
+    background-color:rgba(0,0,0,0.3);
 }
 
 .navbar-brand {
@@ -110,6 +110,21 @@ a {
         color: lightgray;
     }
 
+.badge {
+    width:100%;
+}
+    .badge,li {
+    }
+
+.badge,li,small,a{
+    color:white;
+    font:12px;
+}
+    .badge, li, small,a:hover {
+        text-decoration:none;
+        color:whitesmoke;
+    }
+
 #header {
     color: white;
     height: auto;
@@ -117,13 +132,14 @@ a {
 
 #headerNav > li > a {
     font-size: smaller;
-    color: white;
+    color: lightgray;
 }
 
     #headerNav > li > a:hover {
-        background-color: #111;
-        color: white;
-        font-size: 15px;
+        background-color:white;
+        color: darkturquoise;
+        font-size:15px;
+        font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     }
 
     #headerNav > li > a:current {
@@ -145,7 +161,52 @@ a {
         color: gray;
     }
 
+#searchBox{
+    width: 40%;
+    box-sizing: content-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: whitesmoke;
+    background-image: url('/img/searchicon.png');
+    background-size:25px;
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition:width 0.4s ease-in-out;
+}
 
+#searchBox:focus {
+    width: 100%;
+    background-color:transparent;
+}
+
+#filterSearch{
+    height:1px;
+    width: 130px;
+    box-sizing: content-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: whitesmoke;
+    background-image: url('/img/searchicon.png');
+    background-size:25px;
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 20px 20px 20px 40px;
+    -webkit-transition: width 0.5s ease-in-out;
+    transition: width 0.5s ease-in-out;
+}
+
+#filterSearch:focus {
+    width: 80%;
+}
+
+
+/*.icon-bar {
+    background-color:black;
+}*/
 
 #homePanel {
     margin: 0;
@@ -181,20 +242,58 @@ a {
 #post {
 }
 
-#manageAccount {
-    margin-top: 100px;
-}
+/*CAROUSEL*/
+  .carousel-inner , .item ,#imgC{
+      width: 100%;
+      height: 520px;
+      margin:auto;
+      border-radius:0px;
+      border:0px;
+  }
 
+
+  #carouselContainer{
+      padding:0px 0px 20px 30px;
+      border-radius:0px;
+      width:100%;
+      height:530px;
+      margin:0;
+      top:0;
+      left:0;
+      right:0;
+      bottom:0;
+  }
+
+#a {
+    border-radius:0px;
+}
 #changePassword {
     margin-top: 100px;
 }
 
 #manageLogin {
-    margin-top: 100px;
+    margin-top:20px;
+}
+
+#indexItem {
+    width:100%;
+    height:500px;
+}
+
+#indexMostV {
+    width:100%;
+    height:250px;
+    
+}
+
+#indexDiscounted {
+    width:100%;
+    height:250px;
+
 }
 
 #manageRegister {
-    margin-top: 100px;
+    margin-top: 20px;
 }
 
 #itemDetailGrid {
@@ -207,27 +306,57 @@ a {
 }
 
 #footerDetail {
-    margin-top: 50px;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
 }
 
 
 .footer {
-    margin-top: 100%;
+    background-color:rgba(0,0,0,0.3);
+    position:inherit;
+    margin-top: 18%;
     top: 0;
     bottom: 0;
     width: 100%;
-    background-color: #333;
-    position: absolute;
-    height: 40%;
+    height:25%;
+    left:0;
+    right:0;
 }
 
-#footer {
+#footer,li,a{
     text-align: center;
-    color: white;
+    color: black;
+   
 }
 
 i:hover {
-    color: white;
+    color: green;
+}
+
+
+#backtoProfile{
+    width:auto;
+    border-radius:0px;
+    height:150px;
+}
+    #backtoProfile:hover {
+        background-color:transparent;
+        color:darkcyan;
+        }
+#profile{
+    font-size:30px;
+    margin-top:50px;
+    padding:0% 10% 10% 10%;
+}
+
+.btn-primary{
+    width:auto;
+}
+
+.btn-success {
+    width:auto;
 }
 
 .btn-lg {
@@ -236,15 +365,20 @@ i:hover {
     border-radius: 0px;
 }
 
+#inquirerList {
+    width:100%;
+    height:500px;
+    overflow:auto;
+}
 
 #containerForUser {
-    background-color:white;
     max-height:50%;
 }
 
 #userContainer {
+   
     width: 100%;
-    height: auto;
+    height: 400px;
     top: 0;
     bottom: 0;
     left: 0;
@@ -277,55 +411,50 @@ i:hover {
 
 .userClassDefault {
     width: 100%;
-    background-color: #333;
+    background-color: whitesmoke;
     font-size: 15px;
     text-align: left;
 }
 
+    .userClassDefault:hover {
+        background-color:transparent;
+    }
+
 .messaggeLink {
-    color: white;
+    color: black;
     text-align: center;
-    font-size: 17px;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 15px;
 }
 
     .messaggeLink:hover {
         text-decoration: none;
-        color: green;
-        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        color: white;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     }
 
 
-.useractive {
+.useractive{
     font-size: 15px;
-    text-align: center;
-    font-size: 15px;
-    background-color: gold;
+    font-size: 12px;
+    background-color: rgba(0,0,0,0.1);
 }
 
 #colMessage {
-    height: 70%;
-    
+    height: 300px;
+    overflow:auto;
 }
 
 
 #messageContainer {
-    overflow: hidden;
+    height:250px;
     top: 0;
     bottom: 0;
     right: 0;
     left: 0;
     width: 100%;
-    height: 100%;
     background-color: white;
 }
 
-#messageContainer, .messagetr, .messagetd {
-    padding:15px;
-    background-color:#f64444;
-    border-radius:0;
-    font-size:15px;
-}
 
 .left {
     background-color: white;
@@ -339,10 +468,10 @@ i:hover {
     background-color: skyblue;
     color: black;
     font-size: 17px;
-    padding: 20px;
+    padding: 0px;
     border-radius: 5px;
 }
 
 .panel-default {
-    box-shadow: 1px 2px 2px 2px lightgray;
+    box-shadow: 2px 2px 2px 2px gray;
 }
