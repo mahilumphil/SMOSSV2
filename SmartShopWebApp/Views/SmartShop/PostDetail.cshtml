@@ -200,7 +200,8 @@
                 200: function () {
                     alert("Success");
                     $("#buyItemModal").modal('hide');
-                    
+                    document.getElementById("PartialAmount").value = " ";
+                    document.getElementById("Message").value = " ";
                 },
                 404: function () {
                     toastr.error("Bad Request");

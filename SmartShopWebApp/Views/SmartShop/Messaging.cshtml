@@ -7,7 +7,7 @@
         <div class="col-md-3" id="containerForUser">
             <table id="userContainer"></table>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-7">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <table id="currentUserContainer"></table>
@@ -16,22 +16,22 @@
                     <table id="messageContainer"></table>
                 </div>
             </div>
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <textarea rows="7" class="form-control" id="inboxMessaging"></textarea>
-                    </div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <button class="btn btn-success" onclick="saveMessageOnClick()">Send</button>
-                                @*<input type="submit" class="btn btn-success form-control" value="Send" />*@
-                            </div>
-                            <div class="col-md-10"></div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <textarea rows="7" class="form-control" id="inboxMessaging"></textarea>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <button class="btn btn-success" onclick="saveMessageOnClick()">Send</button>
+                            @*<input type="submit" class="btn btn-success form-control" value="Send" />*@
                         </div>
+                        <div class="col-md-10"></div>
                     </div>
                 </div>
+            </div>
         </div>
-        <div class="col-md-2 col-md-push-1">
+        <div class="col-md-2">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     ads head
@@ -46,6 +46,8 @@
 <script type="text/javascript">
     var message = 0;
     var chatUser = getUrlParameter("senderUserId");
+    var userMessage;
+    var userMessageResult;
     //
     //
     //Add Message
@@ -155,6 +157,7 @@
                             MessageBody: messageBox[i]["MessageBody"],
                             MessageDate: messageBox[i]["MessageDate"],
                         });
+                        console.log(messageBox[i]["SenderUser"]);
                     }
                 }
 

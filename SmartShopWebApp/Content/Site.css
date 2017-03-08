@@ -24,6 +24,7 @@
 input,
 select,
 textarea {
+    color:white;
     max-width: auto;
 }
 
@@ -32,6 +33,19 @@ textarea {
     height: auto;
     padding: 5px 5px 5px 5px;
 }
+.nav-pills {
+    width:100%;
+    font-size:15px;
+    
+}
+    .nav-pills,li,small,a{
+        color:black;
+        text-decoration:none;
+    }
+    .nav-pills , li ,small,a:hover{
+        width:auto;
+        color:darkturquoise;
+    }
 
 .navbar-left {
     width: 100%;
@@ -48,12 +62,7 @@ hr {
     margin: auto;
 }
 
-.jumbotron {
-    height: auto;
-    width: auto;
-    padding: 10px;
-    background-color: white;
-}
+
 
 
 .panel-default {
@@ -85,9 +94,9 @@ hr {
     border-radius: 0px;
 }
 
-a {
+/*a {
     color: black;
-}
+}*/
 
 #headerNav {
     top: 0;
@@ -99,31 +108,20 @@ a {
 .navbar-fixed-top {
     bottom: auto;
     height: auto;
-    background-color:rgba(0,0,0,0.3);
+    background-color:#0d1e2b;
 }
 
 .navbar-brand {
-    color: white;
+    color: darkgray;
+    font-size:x-large;
+    font-weight:bolder;
 }
 
     .navbar-brand:hover {
-        color: lightgray;
+        color: darkturquoise;
     }
 
-.badge {
-    width:100%;
-}
-    .badge,li {
-    }
 
-.badge,li,small,a{
-    color:white;
-    font:12px;
-}
-    .badge, li, small,a:hover {
-        text-decoration:none;
-        color:whitesmoke;
-    }
 
 #header {
     color: white;
@@ -131,8 +129,8 @@ a {
 }
 
 #headerNav > li > a {
-    font-size: smaller;
-    color: lightgray;
+    font-size: inherit;
+    color: whitesmoke;
 }
 
     #headerNav > li > a:hover {
@@ -204,9 +202,9 @@ a {
 }
 
 
-/*.icon-bar {
-    background-color:black;
-}*/
+.icon-bar {
+    background-color:white;
+}
 
 #homePanel {
     margin: 0;
@@ -267,8 +265,12 @@ a {
 #a {
     border-radius:0px;
 }
+
+#addProfile {
+    margin-top: 50px;
+}
 #changePassword {
-    margin-top: 100px;
+    margin-top: 50px;
 }
 
 #manageLogin {
@@ -298,7 +300,8 @@ a {
 
 #itemDetailGrid {
     width: 100%;
-    max-height: 100%;
+    height: 500px;
+    overflow:auto;
 }
 
 #divSeparator {
@@ -314,7 +317,7 @@ a {
 
 
 .footer {
-    background-color:rgba(0,0,0,0.3);
+    background-color:rgba(0,0,0,0);
     position:inherit;
     margin-top: 18%;
     top: 0;
@@ -357,6 +360,26 @@ i:hover {
 
 .btn-success {
     width:auto;
+}
+
+#overlay {
+     visibility: hidden;
+     position: absolute;
+     left: 0px;
+     top: 0px;
+     width:100%;
+     padding:5px;
+     text-align:center;
+     z-index: 1000;
+}
+
+#overlay div {
+     width:40%;
+     margin: 100px auto;
+     background-color: whitesmoke;
+     border:2px solid #000;
+     box-shadow:1px 2px 1px 2px dimgray;
+     text-align:center;
 }
 
 .btn-lg {
@@ -411,7 +434,7 @@ i:hover {
 
 .userClassDefault {
     width: 100%;
-    background-color: whitesmoke;
+    background-color: rgba(0,0,0,0);
     font-size: 15px;
     text-align: left;
 }
@@ -421,23 +444,35 @@ i:hover {
     }
 
 .messaggeLink {
-    color: black;
     text-align: center;
     font-size: 15px;
+    color:dimgray;
 }
 
     .messaggeLink:hover {
         text-decoration: none;
-        color: white;
+        color: cyan;
         font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     }
 
 
 .useractive{
+    text-align:center;
     font-size: 15px;
     font-size: 12px;
-    background-color: rgba(0,0,0,0.1);
+    background-color: #0d1e2b;
+    background-image:url('/img/img/point1.png');
+    background-size:20px;
+    background-repeat:no-repeat;
+    background-position:10px;
+    
 }
+
+    .useractive:before {
+        padding:10px;
+        height:15px;
+        width:20px;
+    }
 
 #colMessage {
     height: 300px;

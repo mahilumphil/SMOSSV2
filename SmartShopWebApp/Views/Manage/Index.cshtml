@@ -8,6 +8,16 @@
 
 @*<h2>@ViewBag.Title.</h2>*@
 <div class="container">
+    <div id="overlay">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h1>Success</h1>
+            </div>
+            <div class="panel-body">
+                <h4>You have successfully added Item.</h4>
+            </div>
+        </div>
+    </div>
     <div class="row">
 
         <div class="col-md-3">
@@ -161,6 +171,11 @@
     var itemId;
     var postDetail
 
+
+    function overlay() {
+        el = document.getElementById("overlay");
+        el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+    }
 
     function getCategory() {
         var itemCategory = new wijmo.collections.ObservableArray;
@@ -450,7 +465,7 @@
             ItemCategoryId: cboItemCategory.selectedItem["Id"],
             Specification: document.getElementById("itemSpecification").value,
         }
-            
+
         itemData = JSON.stringify(itemObject);
         if (itemId == 0) {
 
@@ -461,9 +476,11 @@
                 dataType: "json",
                 data: itemData,
                 statusCode: {
-                    200: function () {
-                        toastr.success("Successfully Added");
+                    200: function (over) {
+                        
                         $("#itemDetailModal").modal('hide');
+                        overlay();
+                        $("#overlay").hide(2000);
                         itemDetailCollections = new wijmo.collections.CollectionView(getItem());
                         itemDetailGrid.itemsSource = itemDetailCollections;
                         itemDetailGrid.trackChanges = true;
