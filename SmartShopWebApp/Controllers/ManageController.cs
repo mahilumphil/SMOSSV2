@@ -81,6 +81,21 @@ namespace SmartShopWebApp.Controllers
             return View();
         }
 
+        public ActionResult BuyerProfile()
+        {
+            return View();
+        }
+
+        public ActionResult SellerProfile()
+        {
+            return View();
+        }
+
+        public ActionResult BothProfile()
+        {
+            return View();
+        }
+
         //
         // POST: /Manage/RemoveLogin
         [HttpPost]

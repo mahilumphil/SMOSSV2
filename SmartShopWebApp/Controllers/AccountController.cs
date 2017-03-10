@@ -158,8 +158,8 @@ namespace SmartShopWebApp.Controllers
                     FullName = model.FullName,
                     Address = model.Address,
                     ContactNumber = model.ContactNumber,
-                    Site = model.Site
-                    
+                    Site = model.Site,
+                    Type = model.Type
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)

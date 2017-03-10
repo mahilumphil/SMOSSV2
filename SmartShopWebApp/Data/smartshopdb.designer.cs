@@ -736,17 +736,15 @@ namespace SmartShopWebApp.Data
 		
 		private string _SenderUserId;
 		
+		private string _SenderMessageBody;
+		
+		private System.DateTime _SenderMessageDate;
+		
 		private string _RecipientUserId;
 		
-		private string _MessageBody;
+		private string _RecipientMessageBody;
 		
-		private System.DateTime _MessageDate;
-		
-		private bool _IsOpen;
-		
-		private string _MessageForFirstUserId;
-		
-		private string _MessageForSecondUserId;
+		private System.DateTime _RecipientMessageDate;
 		
 		private EntityRef<AspNetUser> _AspNetUser;
 		
@@ -760,18 +758,16 @@ namespace SmartShopWebApp.Data
     partial void OnIdChanged();
     partial void OnSenderUserIdChanging(string value);
     partial void OnSenderUserIdChanged();
+    partial void OnSenderMessageBodyChanging(string value);
+    partial void OnSenderMessageBodyChanged();
+    partial void OnSenderMessageDateChanging(System.DateTime value);
+    partial void OnSenderMessageDateChanged();
     partial void OnRecipientUserIdChanging(string value);
     partial void OnRecipientUserIdChanged();
-    partial void OnMessageBodyChanging(string value);
-    partial void OnMessageBodyChanged();
-    partial void OnMessageDateChanging(System.DateTime value);
-    partial void OnMessageDateChanged();
-    partial void OnIsOpenChanging(bool value);
-    partial void OnIsOpenChanged();
-    partial void OnMessageForFirstUserIdChanging(string value);
-    partial void OnMessageForFirstUserIdChanged();
-    partial void OnMessageForSecondUserIdChanging(string value);
-    partial void OnMessageForSecondUserIdChanged();
+    partial void OnRecipientMessageBodyChanging(string value);
+    partial void OnRecipientMessageBodyChanged();
+    partial void OnRecipientMessageDateChanging(System.DateTime value);
+    partial void OnRecipientMessageDateChanged();
     #endregion
 		
 		public ActMessaging()
@@ -825,6 +821,46 @@ namespace SmartShopWebApp.Data
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SenderMessageBody", DbType="NVarChar(1000) NOT NULL", CanBeNull=false)]
+		public string SenderMessageBody
+		{
+			get
+			{
+				return this._SenderMessageBody;
+			}
+			set
+			{
+				if ((this._SenderMessageBody != value))
+				{
+					this.OnSenderMessageBodyChanging(value);
+					this.SendPropertyChanging();
+					this._SenderMessageBody = value;
+					this.SendPropertyChanged("SenderMessageBody");
+					this.OnSenderMessageBodyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SenderMessageDate", DbType="DateTime NOT NULL")]
+		public System.DateTime SenderMessageDate
+		{
+			get
+			{
+				return this._SenderMessageDate;
+			}
+			set
+			{
+				if ((this._SenderMessageDate != value))
+				{
+					this.OnSenderMessageDateChanging(value);
+					this.SendPropertyChanging();
+					this._SenderMessageDate = value;
+					this.SendPropertyChanged("SenderMessageDate");
+					this.OnSenderMessageDateChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RecipientUserId", DbType="NVarChar(128) NOT NULL", CanBeNull=false)]
 		public string RecipientUserId
 		{
@@ -849,102 +885,42 @@ namespace SmartShopWebApp.Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MessageBody", DbType="NVarChar(1000) NOT NULL", CanBeNull=false)]
-		public string MessageBody
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RecipientMessageBody", DbType="NVarChar(1000) NOT NULL", CanBeNull=false)]
+		public string RecipientMessageBody
 		{
 			get
 			{
-				return this._MessageBody;
+				return this._RecipientMessageBody;
 			}
 			set
 			{
-				if ((this._MessageBody != value))
+				if ((this._RecipientMessageBody != value))
 				{
-					this.OnMessageBodyChanging(value);
+					this.OnRecipientMessageBodyChanging(value);
 					this.SendPropertyChanging();
-					this._MessageBody = value;
-					this.SendPropertyChanged("MessageBody");
-					this.OnMessageBodyChanged();
+					this._RecipientMessageBody = value;
+					this.SendPropertyChanged("RecipientMessageBody");
+					this.OnRecipientMessageBodyChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MessageDate", DbType="DateTime NOT NULL")]
-		public System.DateTime MessageDate
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RecipientMessageDate", DbType="DateTime NOT NULL")]
+		public System.DateTime RecipientMessageDate
 		{
 			get
 			{
-				return this._MessageDate;
+				return this._RecipientMessageDate;
 			}
 			set
 			{
-				if ((this._MessageDate != value))
+				if ((this._RecipientMessageDate != value))
 				{
-					this.OnMessageDateChanging(value);
+					this.OnRecipientMessageDateChanging(value);
 					this.SendPropertyChanging();
-					this._MessageDate = value;
-					this.SendPropertyChanged("MessageDate");
-					this.OnMessageDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsOpen", DbType="Bit NOT NULL")]
-		public bool IsOpen
-		{
-			get
-			{
-				return this._IsOpen;
-			}
-			set
-			{
-				if ((this._IsOpen != value))
-				{
-					this.OnIsOpenChanging(value);
-					this.SendPropertyChanging();
-					this._IsOpen = value;
-					this.SendPropertyChanged("IsOpen");
-					this.OnIsOpenChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MessageForFirstUserId", DbType="NVarChar(128) NOT NULL", CanBeNull=false)]
-		public string MessageForFirstUserId
-		{
-			get
-			{
-				return this._MessageForFirstUserId;
-			}
-			set
-			{
-				if ((this._MessageForFirstUserId != value))
-				{
-					this.OnMessageForFirstUserIdChanging(value);
-					this.SendPropertyChanging();
-					this._MessageForFirstUserId = value;
-					this.SendPropertyChanged("MessageForFirstUserId");
-					this.OnMessageForFirstUserIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MessageForSecondUserId", DbType="NVarChar(128) NOT NULL", CanBeNull=false)]
-		public string MessageForSecondUserId
-		{
-			get
-			{
-				return this._MessageForSecondUserId;
-			}
-			set
-			{
-				if ((this._MessageForSecondUserId != value))
-				{
-					this.OnMessageForSecondUserIdChanging(value);
-					this.SendPropertyChanging();
-					this._MessageForSecondUserId = value;
-					this.SendPropertyChanged("MessageForSecondUserId");
-					this.OnMessageForSecondUserIdChanged();
+					this._RecipientMessageDate = value;
+					this.SendPropertyChanged("RecipientMessageDate");
+					this.OnRecipientMessageDateChanged();
 				}
 			}
 		}
@@ -2472,6 +2448,8 @@ namespace SmartShopWebApp.Data
 		
 		private System.Data.Linq.Binary _ProfilePhoto;
 		
+		private string _Type;
+		
 		private EntitySet<ActBuy> _ActBuys;
 		
 		private EntitySet<ActMessaging> _ActMessagings;
@@ -2530,6 +2508,8 @@ namespace SmartShopWebApp.Data
     partial void OnSiteChanged();
     partial void OnProfilePhotoChanging(System.Data.Linq.Binary value);
     partial void OnProfilePhotoChanged();
+    partial void OnTypeChanging(string value);
+    partial void OnTypeChanged();
     #endregion
 		
 		public AspNetUser()
@@ -2883,6 +2863,26 @@ namespace SmartShopWebApp.Data
 					this._ProfilePhoto = value;
 					this.SendPropertyChanged("ProfilePhoto");
 					this.OnProfilePhotoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type", DbType="VarChar(255)")]
+		public string Type
+		{
+			get
+			{
+				return this._Type;
+			}
+			set
+			{
+				if ((this._Type != value))
+				{
+					this.OnTypeChanging(value);
+					this.SendPropertyChanging();
+					this._Type = value;
+					this.SendPropertyChanged("Type");
+					this.OnTypeChanged();
 				}
 			}
 		}

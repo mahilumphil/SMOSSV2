@@ -38,12 +38,22 @@ namespace SmartShopWebApp.ApiControllers
                 {
                     Data.ActMessaging messaging = new Data.ActMessaging();
                     messaging.SenderUserId = userId;
+                    messaging.SenderMessageBody = add.Message + " - Requested Item: " + postItem.FirstOrDefault().StpItem.ItemName;
+                    messaging.SenderMessageDate = DateTime.Today;
                     messaging.RecipientUserId = postItem.FirstOrDefault().PostedByUserId;
-                    messaging.MessageBody = add.Message + " - Requested Item: " + postItem.FirstOrDefault().StpItem.ItemName;
-                    messaging.MessageDate = DateTime.Today;
-                    messaging.MessageForFirstUserId = userId;
-                    messaging.MessageForSecondUserId = postItem.FirstOrDefault().PostedByUserId;
+                    messaging.RecipientMessageBody = "";
+                    messaging.RecipientMessageDate = DateTime.Today;
                     db.ActMessagings.InsertOnSubmit(messaging);
+                    db.SubmitChanges();
+
+                    Data.ActMessaging messagingReceiver = new Data.ActMessaging();
+                    messagingReceiver.SenderUserId = postItem.FirstOrDefault().PostedByUserId;
+                    messagingReceiver.SenderMessageBody = "";
+                    messagingReceiver.SenderMessageDate = DateTime.Today;
+                    messagingReceiver.RecipientUserId = userId;
+                    messagingReceiver.RecipientMessageBody = add.Message + " - Requested Item: " + postItem.FirstOrDefault().StpItem.ItemName;
+                    messagingReceiver.RecipientMessageDate = DateTime.Today;
+                    db.ActMessagings.InsertOnSubmit(messagingReceiver);
                     db.SubmitChanges();
                 }
 
@@ -82,6 +92,69 @@ namespace SmartShopWebApp.ApiControllers
             return buy.ToList();
         }
 
+
+        [HttpGet, Route("api/list/unapproved/sold/{isaccepted}")]
+        public List<Entities.ActBuy> listActBuy(String isaccepted)
+        {
+            var userId = User.Identity.GetUserId();
+            var buy = from d in db.ActBuys
+                      where d.ActPostItem.PostedByUserId == userId
+                      && d.IsAccepted == Convert.ToBoolean(isaccepted)
+                      select new Entities.ActBuy
+                      {
+                          Id = d.Id,
+                          PostId = d.PostId,
+                          Quantity = d.Quantity,
+                          PartialAmount = d.PartialAmount,
+                          BoughtByUser = d.AspNetUser.FullName,
+                          BoughtDate = d.BoughtDate.ToShortDateString(),
+                          IsAccepted = d.IsAccepted,
+                          Inquirer = d.AspNetUser.FullName,
+                          InquirerUserId = d.BoughtByUserId,
+                          InquiredItem = d.ActPostItem.StpItem.ItemName
+
+                      };
+            return buy.ToList();
+        }
+
+        [HttpPut, Route("api/update/approved/{id}")]
+        public HttpResponseMessage updateApproved(String id)
+        {
+            try
+            {
+                var actBuy = from d in db.ActBuys
+                             where d.Id == Convert.ToInt32(id)
+                             select d;
+
+                if (actBuy.Any())
+                {
+                    var updateActBuy = actBuy.FirstOrDefault();
+                    updateActBuy.IsAccepted = true;
+                    db.SubmitChanges();
+
+                    var postItem = from d in db.ActPostItems
+                                   where d.Id == actBuy.FirstOrDefault().PostId
+                                   select d;
+                    
+                    if(postItem.Any()){
+                        var buyQuantity = postItem.FirstOrDefault().Quantity;
+                        var updatePostItem = postItem.FirstOrDefault();
+                        updatePostItem.Quantity = buyQuantity - actBuy.FirstOrDefault().Quantity;
+                        db.SubmitChanges();
+                    }
+
+                    return Request.CreateResponse(HttpStatusCode.OK);
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotFound);
+                }
+            }
+            catch (Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+        }
 
         [HttpDelete, Route("api/delete/buy/{id}")]
         public HttpResponseMessage deleteActBuy(String id)

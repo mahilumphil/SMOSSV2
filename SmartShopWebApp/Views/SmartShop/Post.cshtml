@@ -5,13 +5,22 @@
 
 @*<h2>Post</h2>*@
 <div class="container">
+    <div id="overlay">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h1>Success</h1>
+            </div>
+            <div class="panel-body">
+                <h4>You have successfully post your Item.</h4>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-3">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <a href="~/Manage/Profile" class="form-control btn-primary" id="backtoProfile"><span class="fa fa-user-secret" id="profile"></span></a>
+                    <a href="~/Manage/Profile" class="form-control btn-primary" id="backtoProfile"><span class="fa fa-user" title="Back To Profile" id="profile"></span></a>
                     <br />
-                    <h4>@User.Identity.GetUserName()</h4>
                     <div class="panel-footer">
                         <ul class="nav navbar-left">
                             <li><a href="~/Manage/Index">My Item</a></li>
@@ -143,6 +152,11 @@
 
     //Add To Post
 
+    function overlay() {
+        el = document.getElementById("overlay");
+        el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+    }
+
     function savePostOnclick() {
         var itemObject = {
             ItemId: cboItemList.selectedItem["Id"],
@@ -162,7 +176,8 @@
             data: itemData,
             statusCode: {
                 200: function () {
-                    alert("Successfully Added");
+                    overlay();
+                    $("#overlay").fadeOut(5000);
                 },
                 404: function () {
                     toastr.error("Bad Request");

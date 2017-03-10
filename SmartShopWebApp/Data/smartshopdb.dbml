@@ -28,12 +28,11 @@
     <Type Name="ActMessaging">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="SenderUserId" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="SenderMessageBody" Type="System.String" DbType="NVarChar(1000) NOT NULL" CanBeNull="false" />
+      <Column Name="SenderMessageDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="RecipientUserId" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
-      <Column Name="MessageBody" Type="System.String" DbType="NVarChar(1000) NOT NULL" CanBeNull="false" />
-      <Column Name="MessageDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="IsOpen" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="MessageForFirstUserId" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
-      <Column Name="MessageForSecondUserId" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="RecipientMessageBody" Type="System.String" DbType="NVarChar(1000) NOT NULL" CanBeNull="false" />
+      <Column Name="RecipientMessageDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Association Name="AspNetUser_ActMessaging" Member="AspNetUser" ThisKey="SenderUserId" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" />
       <Association Name="AspNetUser_ActMessaging1" Member="AspNetUser1" ThisKey="RecipientUserId" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" />
     </Type>
@@ -122,6 +121,7 @@
       <Column Name="ContactNumber" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
       <Column Name="Site" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
       <Column Name="ProfilePhoto" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Type" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
       <Association Name="AspNetUser_ActBuy" Member="ActBuys" ThisKey="Id" OtherKey="BoughtByUserId" Type="ActBuy" />
       <Association Name="AspNetUser_ActMessaging" Member="ActMessagings" ThisKey="Id" OtherKey="SenderUserId" Type="ActMessaging" />
       <Association Name="AspNetUser_ActMessaging1" Member="ActMessagings1" ThisKey="Id" OtherKey="RecipientUserId" Type="ActMessaging" />

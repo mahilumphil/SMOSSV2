@@ -1,4 +1,9 @@
-﻿@using Microsoft.AspNet.Identity
+﻿
+@{
+    ViewBag.Title = "BuyerProfile";
+}
+
+@using Microsoft.AspNet.Identity
 @{
     ViewBag.Title = "Profile";
 }
@@ -18,15 +23,11 @@
                     <table id="userDetail" style="width:100%;"></table>
                     <div class="panel-footer">
                         <ul class="nav navbar-left">
-                            <li><a href="~/Manage/Index">My Item</a></li>
-                            <li><a href="~/SmartShop/PostList">My Post</a></li>
                             <li><hr /></li>
                             <li><a href="~/SmartShop/Index">Shop(Buy)</a></li>
-                            <li><a href="~/SmartShop/Post">Post(Sell)</a></li>
                             <li><hr /></li>
                             <li><a href="~/SmartShop/Messaging">Messaging</a></li>
                             <li><hr /></li>
-                            <li><a href="~/SmartShop/Inquirers">Inquirers</a></li>
                         </ul>
                     </div>
                 </div>
@@ -44,16 +45,16 @@
                     <h4>Posted Items</h4>
                 </div>
                 <div class="panel-body">
-                    <div id="listOfItem" class="listofItem"></div>
+                    <div id="listOfItem"></div>
                 </div>
             </div>
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4>Unapproved Items</h4>
+                    <h4>Pending Item To be Delivered</h4>
                 </div>
                 <div class="panel-body">
-                    <div id="listofUnapprovedItems" class="listofItem">
-
+                    <div id="">
+                        Pending Item Goes Here..
                     </div>
                 </div>
             </div>
@@ -62,7 +63,9 @@
                     <h4>Sold</h4>
                 </div>
                 <div class="panel-body">
-                    <div id="listofSoldItem" class="listofItem">
+                    <div id="">
+
+                        Sold Item Goes Here..
                     </div>
                 </div>
             </div>
@@ -203,45 +206,10 @@
         </div>
     </div>*@
 
-<div class="modal fade" id="approvedItem" role="dialog">
-    <div class="modal-dialog modal-sm">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Approved</h4>
-                    </div>
-                </div>
-                <div class="panel-body">
-                    <div class="modal-body">
-                        <div class="panel-default">
-                            <div class="panel-body">
-                                <h6>Are you sure you want to Approved?</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary btn-sm" onclick="approvedSuccess()"><i class="fa fa-check"></i> Approve</button>
-                    <button class="btn btn-warning btn-sm" id="" data-dismiss="modal"><i class="fa fa-close"></i> Cancel</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
 <script type="text/javascript">
-    var postDetailListCollection;
-    var postDetailGrid;
-    var postDetailListCollectionUnapproved;
-    var postDetailListCollectionSold;
-    var postDetailGridListUnapproved;
-    var postDetailGridListSold;
     //Open Modal Profile
     function profile() {
         $("#addProfile").modal({
@@ -251,34 +219,6 @@
         document.getElementById("imageDisplay").src = "#";
         document.getElementById("profiles").files = "";
         $("#imageDisplay").hide();
-    }
-
-    function approvedSuccess() {
-        postDetailListCollectionUnapproved.editItem(postDetailListCollectionUnapproved.currentItem);
-        currentItem = postDetailListCollectionUnapproved.currentEditItem;
-        $.ajax({
-            type: "PUT",
-            url: '/api/update/approved/' + currentItem.Id,
-            contentType: "application/json;charset=utf-8",
-            dataType: "json",
-            statusCode: {
-                200: function () {
-                    toastr.success("Successfully Update");
-                    $("#approvedItem").modal('hide');
-                    location.reload();
-
-                    postDetailListCollectionUnapproved = new wijmo.collections.CollectionView(listofUnapprovedItems());
-                    postDetailGridListUnapproved.itemsSource = postDetailListCollectionUnapproved;
-                    postDetailGridListUnapproved.trackChanges = true;
-                    postDetailListCollectionSold = new wijmo.collections.CollectionView(listofSoldItem());
-                    postDetailGridListSold.itemsSource = postDetailListCollectionSold;
-                    postDetailGridListSold.trackChanges = true;
-                },
-                400: function (message) {
-                    toastr.error(message.responseText.replace(/"/g, ""), "Bad Request");
-                }
-            }
-        });
     }
 
 
@@ -400,189 +340,8 @@
     //});
 
 
-    //List of Sold Item
-    function listofSoldItem() {
-        var soldItem = new wijmo.collections.ObservableArray;
-        $.ajax({
-            type: "GET",
-            url: '/api/list/unapproved/sold/true',
-            contentType: "application/json;charset=utf-8",
-            success: function (listofSoldItem) {
-                for (i = 0; i < listofSoldItem.length; i++) {
-                    //var imageElement = document.createElement("images");
-                    //var imageData = new Image();
-                    //imageData.src = "data:image/jpeg;base64," + postDetailList[i]["PhotoValue"];
-                    //imageElement.appendChild(imageData);
-                    //var photoDivElement = document.createElement("DIV").appendChild(imageElement);
-                    //var imageSRCData = "data:image/jpeg;base64," + postDetailList[i]["PhotoValue"];
-
-                    soldItem.push({
-                        Id: listofSoldItem[i]["Id"],
-                        PostId: listofSoldItem["PostId"],
-                        Quantity: listofSoldItem[i]["Quantity"],
-                        PartialAmount: listofSoldItem[i]["PartialAmount"],
-                        BoughtByUser: listofSoldItem[i]["BoughtByUser"],
-                        BoughtDate: listofSoldItem[i]["BoughtDate"],
-                        Inquirer: listofSoldItem[i]["Inquirer"],
-                        InquirerUserId: listofSoldItem[i]["InquirerUserId"],
-                        InquiredItem: listofSoldItem[i]["InquiredItem"],
-                        IsAccepted: listofSoldItem[i]["IsAccepted"],
-                        btnApproved: "<button onclick='approvePostModal()' class='btn btn-info btn-block btn-xs'>Approved</button>",
-                    });
-                }
-            }
-        });
-        return soldItem;
-    }
-
-    //Approved Modal
-    function approvePostModal() {
-        $("#approvedItem").modal({
-            "backDrop": "static",
-            "show": true
-        });
-    }
-
-    function createFlexGridSold() {
-        postDetailListCollectionSold = new wijmo.collections.CollectionView(listofSoldItem());
-
-        //Flex Grid
-        postDetailGridListSold = new wijmo.grid.FlexGrid("#listofSoldItem");
-        postDetailGridListSold.initialize({
-            columns: [
-                {
-                    "header": "Item",
-                    "binding": "InquiredItem",
-                    "allowSorting": true,
-                    "width": "2*",
-                    "allowResizing": true,
-                    "allowSorting": false,
-                    "isContentHtml": true
-                },
-                {
-                    "header": "Inquirer",
-                    "binding": "Inquirer",
-                    "allowSorting": true,
-                    "width": "4*",
-                    "allowResizing": true,
-                    "allowSorting": false,
-                    "isContentHtml": true
-                },
-                {
-                    "header": "Item Quantity",
-                    "binding": "Quantity",
-                    "allowSorting": true,
-                    "width": "2*",
-                    "allowResizing": true,
-                    "allowSorting": false,
-                    "isContentHtml": true
-                },
-
-            ],
-            autoGenerateColumns: false,
-            itemsSource: postDetailListCollectionSold,
-            isReadOnly: true,
-            autoSizeMode: wijmo.grid.AutoSizeMode.Both,
-            allowDragging: wijmo.grid.AllowDragging.None,
-            selectionMode: wijmo.grid.SelectionMode.Row,
-            headersVisibility: wijmo.grid.HeadersVisibility.Column
-        });
-        postDetailGridListSold.trackChanges = true;
-        //postDetailGridList.rows.defaultSize = 200;
-    }
 
 
-
-    //List of Unapproved Items
-    function listofUnapprovedItems() {
-       var unapprovedItem = new wijmo.collections.ObservableArray;
-        $.ajax({
-            type: "GET",
-            url: '/api/list/unapproved/sold/false',
-            contentType: "application/json;charset=utf-8",
-            success: function (listofUnapprovedItem) {
-                for (i = 0; i < listofUnapprovedItem.length; i++) {
-                    //var imageElement = document.createElement("images");
-                    //var imageData = new Image();
-                    //imageData.src = "data:image/jpeg;base64," + postDetailList[i]["PhotoValue"];
-                    //imageElement.appendChild(imageData);
-                    //var photoDivElement = document.createElement("DIV").appendChild(imageElement);
-                    //var imageSRCData = "data:image/jpeg;base64," + postDetailList[i]["PhotoValue"];
-
-                    unapprovedItem.push({
-                        Id: listofUnapprovedItem[i]["Id"],
-                        PostId: listofUnapprovedItem["PostId"],
-                        Quantity: listofUnapprovedItem[i]["Quantity"],
-                        PartialAmount: listofUnapprovedItem[i]["PartialAmount"],
-                        BoughtByUser: listofUnapprovedItem[i]["BoughtByUser"],
-                        BoughtDate: listofUnapprovedItem[i]["BoughtDate"],
-                        Inquirer: listofUnapprovedItem[i]["Inquirer"],
-                        InquirerUserId: listofUnapprovedItem[i]["InquirerUserId"],
-                        InquiredItem: listofUnapprovedItem[i]["InquiredItem"],
-                        IsAccepted: listofUnapprovedItem[i]["IsAccepted"],
-                        btnApproved: "<button onclick='approvePostModal()' class='btn btn-info btn-block btn-xs'>Approved</button>",
-                    });
-                }
-            }
-        });
-        return unapprovedItem;
-    }
-
-    function createFlexGridUnapprovedItem() {
-        postDetailListCollectionUnapproved = new wijmo.collections.CollectionView(listofUnapprovedItems());
-
-        //Flex Grid
-        postDetailGridListUnapproved = new wijmo.grid.FlexGrid("#listofUnapprovedItems");
-        postDetailGridListUnapproved.initialize({
-            columns: [
-                {
-                    "header": "Item",
-                    "binding": "InquiredItem",
-                    "allowSorting": true,
-                    "width": "2*",
-                    "allowResizing": true,
-                    "allowSorting": false,
-                    "isContentHtml": true
-                },
-                {
-                    "header": "Inquirer",
-                    "binding": "Inquirer",
-                    "allowSorting": true,
-                    "width": "4*",
-                    "allowResizing": true,
-                    "allowSorting": false,
-                    "isContentHtml": true
-                },
-                {
-                    "header": "Item Quantity",
-                    "binding": "Quantity",
-                    "allowSorting": true,
-                    "width": "2*",
-                    "allowResizing": true,
-                    "allowSorting": false,
-                    "isContentHtml": true
-                },
-                {
-                    "header": "Approved",
-                    "binding": "btnApproved",
-                    "allowSorting": true,
-                    "width": "2*",
-                    "allowResizing": true,
-                    "allowSorting": false,
-                    "isContentHtml": true
-                },
-             ],
-            autoGenerateColumns: false,
-            itemsSource: postDetailListCollectionUnapproved,
-            isReadOnly: true,
-            autoSizeMode: wijmo.grid.AutoSizeMode.Both,
-            allowDragging: wijmo.grid.AllowDragging.None,
-            selectionMode: wijmo.grid.SelectionMode.Row,
-            headersVisibility: wijmo.grid.HeadersVisibility.Column
-        });
-        postDetailGridListUnapproved.trackChanges = true;
-        //postDetailGridList.rows.defaultSize = 200;
-    }
 
 
     function listOfItem() {
@@ -625,7 +384,7 @@
     }
 
 
-    function createFlexGridPostItem() {
+    function createFlexGrid() {
         postDetailListCollection = new wijmo.collections.CollectionView(listOfItem());
 
         //Flex Grid
@@ -756,9 +515,7 @@
 
 
     window.onload = function () {
-        createFlexGridPostItem();
-        createFlexGridUnapprovedItem();
-        createFlexGridSold();
+        createFlexGrid();
         getUserDetail();
         $("#profiles").change(function () {
             readURL(this);
@@ -766,3 +523,4 @@
         });
     }
 </script>
+

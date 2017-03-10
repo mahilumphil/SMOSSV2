@@ -96,7 +96,9 @@ namespace SmartShopWebApp.Models
         [Display(Name = "Site")]
         public string Site { get; set; }
 
-        public byte[] ProfilePhoto { get; set; }
+        public string Type { get; set; }
+
+        
     }
 
     public class ResetPasswordViewModel

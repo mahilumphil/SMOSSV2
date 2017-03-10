@@ -155,10 +155,10 @@
     var payTypeCategory;
     var cboStartDate;
     var cboEndDate;
-    
+
 
     function getPostDetail() {
-        
+
     }
 
 
@@ -302,6 +302,7 @@
         var startDateValue = [cboStartDate.value.getMonth() + 1, cboStartDate.value.getDate(), cboStartDate.value.getFullYear()].join('-');
         var endDateValue = [cboEndDate.value.getMonth() + 1, cboEndDate.value.getDate(), cboEndDate.value.getFullYear()].join('-');
 
+
         postDetail = new wijmo.collections.ObservableArray;
         $.ajax({
             type: "GET",
@@ -335,7 +336,7 @@
                         PostDate: postDateValue,
                     });
                 }
-            }   
+            }
         });
         console.log(postDetail);
         return postDetail;
@@ -404,7 +405,8 @@
         postDetailListCollection.filter = function (item) {
             return !filterText || (item.ItemName.toLowerCase().indexOf(filterText) > -1)
                                || (item.PostedByUser.toLowerCase().indexOf(filterText) > -1)
-                               || (item.Status.toLowerCase().indexOf(filterText) > -1);
+                               || (item.Status.toLowerCase().indexOf(filterText) > -1)
+                               ||  (item.Price.toLowerCase().indexOf(filterText) > -1);
         }
 
         //Flex Grid
@@ -511,6 +513,8 @@
     var isCboEndDateClicked = false;
 
     window.onload = function () {
+        console.log(cboStartDate);
+
         document.getElementById("itemCategoryTitle").innerHTML = decodeURIComponent(getUrlParameter("label").replace(/\+/g, '%20'));
 
         cboStartDate = new wijmo.input.InputDate('#cboStartDate', {

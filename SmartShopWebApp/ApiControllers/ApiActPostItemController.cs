@@ -104,6 +104,35 @@ namespace SmartShopWebApp.ApiControllers
             return post.ToList();
         }
 
+        [HttpGet, Route("api/list/allitem")]
+        public List<Entities.ActPostItem> listActPostItemAll()
+        {
+            var post = from d in db.ActPostItems
+                       select new Entities.ActPostItem
+                       {
+                           Id = d.Id,
+                           ItemId = d.ItemId,
+                           ItemName = d.StpItem.ItemName,
+                           Remarks = d.Remarks,
+                           Price = d.StpItem.Price,
+                           Specification = d.StpItem.Specification,
+                           PostDate = d.PostDate.ToShortDateString(),
+                           ExpiredDate = d.ExpiredDate.ToShortDateString(),
+                           UpdatedDate = d.UpdatedDate.ToShortDateString(),
+                           Quantity = d.Quantity,
+                           PostedByUserId = d.AspNetUser.FullName,
+                           PayType = d.SysPayType.PayType,
+                           Status = d.SysPostItemStatus.Status,
+                           PayTypeId = d.PayTypeId,
+                           StatusId = d.StatusId,
+                           IsApproved = d.IsApproved,
+                           PhotoValue = d.StpItem.Photo.ToArray()
+                       };
+
+            return post.ToList();
+        }
+
+
         [HttpGet, Route("api/list/postdetail/{id}")]
         public Entities.ActPostItem postDetailById(String id)
         {
@@ -154,6 +183,36 @@ namespace SmartShopWebApp.ApiControllers
                            UpdatedDate = d.UpdatedDate.ToShortDateString(),
                            Quantity = d.Quantity,
                            PostedByUserId = userId,
+                           PayType = d.SysPayType.PayType,
+                           Status = d.SysPostItemStatus.Status,
+                           PayTypeId = d.PayTypeId,
+                           StatusId = d.StatusId,
+                           IsApproved = d.IsApproved,
+                           PhotoValue = d.StpItem.Photo.ToArray()
+                       };
+
+            return post.ToList();
+        }
+
+        [HttpGet, Route("api/list/postlist/index")]
+        public List<Entities.ActPostItem> postItemListIndex()
+        {
+            var post = from d in db.ActPostItems.OrderByDescending(d => d.Id)
+                       where d.Quantity > 0
+                       select new Entities.ActPostItem
+                       {
+                           Id = d.Id,
+                           ItemId = d.ItemId,
+                           ItemName = d.StpItem.ItemName,
+                           Remarks = d.Remarks,
+                           Price = d.StpItem.Price,
+                           Specification = d.StpItem.Specification,
+                           PostDate = d.PostDate.ToShortDateString(),
+                           ExpiredDate = d.ExpiredDate.ToShortDateString(),
+                           UpdatedDate = d.UpdatedDate.ToShortDateString(),
+                           Quantity = d.Quantity,
+                           PostedByUserId = d.PostedByUserId,
+                           PostedByUser = d.AspNetUser.FullName,
                            PayType = d.SysPayType.PayType,
                            Status = d.SysPostItemStatus.Status,
                            PayTypeId = d.PayTypeId,

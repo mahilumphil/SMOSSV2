@@ -2,13 +2,25 @@
     ViewBag.Title = "PostDetail";
 }
 <div class="container">
+    @*<div id="overlay">
+            <div class="panel panel-default">
+
+            </div>
+        </div>*@
     <div class="row">
         <div class="col-md-9">
             <div class="panel panel-default">
                 <div class="panel-heading">
+                    <table id="userDetail"></table>
                     <h4>Item Detail</h4>
                 </div>
                 <div class="panel-body">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <label>Posted By:</label>
+                            <input id="PostedBy" class="form-control" style="color:forestgreen; font-weight:bolder; border:0px; font-size:20px;height:30px; background-color:white;" disabled>  
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-5">
                             <label>Item</label>
@@ -151,15 +163,77 @@
     </div>
 </div>
 
+<!--  Edit Comment -->
+<div class="modal fade" id="editCommentModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <label>Edit Comment</label>
+                    <input type="text" name="name" value=" " id="getComment" class="form-control" />
 
+                    <div class="modal-footer">
+                        <button class="btn btn-primary btn-sm" id="" onclick="saveItemOnclick()"><i class="fa fa-check-square-o"></i> Save</button>
+                        <button class="btn btn-danger btn-sm" id="" data-dismiss="modal"><i class="fa fa-close"></i> Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <script type="text/javascript">
+    var currentUserCommentId;
+    var userId;
     var cboItemList;
-    var postDetailCollections;
+    var postDetailListCollection;
     var postDetail;
     var cboPayType;
     var cboStatus;
     var cboQuantity;
     var postId = getUrlParameter("postid");
+
+    function overlay() {
+        el = document.getElementById("overlay");
+        el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+    }
+
+    //function getUserDetail() {
+    //    var user = new Array();
+    //    $.ajax({
+    //        type: "GET",
+    //        url: '/api/list/user',
+    //        contentType: "application/json;charset=utf-8",
+    //        success: function (userList) {
+    //            for (i = 0; i < userList.length; i++) {
+    //                user.push({
+    //                    Email: userList[i]["Email"],
+    //                    FullName: userList[i]["FullName"],
+    //                    ContactNumber: userList[i]["ContactNumber"],
+    //                    CommentByUserId: userList[i]["CommentByUserId"],
+    //                    Address: userList[i]["Address"],
+    //                    Type: userList[i]["Type"],
+    //                });
+    //                console.log(user);
+    //            };
+    //            $(function () {
+    //                $.each(user, function (i, users) {
+    //                    var $tr = $('<tr>').append(
+    //                        $('<td style="width: auto; height:auto;">').text(users.Email),
+    //                        $('<td style="width: auto; height:auto;">').text(users.FullName),
+    //                        $('<td style="width: auto; height:auto;">').text(users.ContactNumber),
+    //                        $('<td style="width: auto; height:auto;">').text(users.Address),
+    //                        $('<td style="width: auto; height:auto;">').text(users.Type)
+    //                    ).appendTo('#userDetail');
+    //                })
+    //            })
+    //            return user;
+    //        }
+    //    });
+
+    //}
+
+
 
     function getPostDetail() {
         $.ajax({
@@ -167,6 +241,7 @@
             url: '/api/list/postdetail/' + postId,
             contentType: "application/json;charset=utf-8",
             success: function (postDetailResult) {
+                document.getElementById("PostedBy").value = postDetailResult.PostedByUser;
                 document.getElementById("ItemName").value = postDetailResult.ItemName;
                 document.getElementById("Specification").value = postDetailResult.Specification;
                 document.getElementById("Remarks").value = postDetailResult.Remarks;
@@ -187,7 +262,8 @@
             PartialAmount: document.getElementById("PartialAmount").value,
             Message: document.getElementById("Message").value,
 
-            }
+
+        }
 
         itemData = JSON.stringify(itemObject);
         $.ajax({
@@ -197,7 +273,7 @@
             dataType: "json",
             data: itemData,
             statusCode: {
-                200: function () {
+                200: function (quantity, result) {
                     alert("Success");
                     $("#buyItemModal").modal('hide');
                     document.getElementById("PartialAmount").value = " ";
@@ -258,13 +334,18 @@
                     buttonEdit.appendChild(buttonTextNode);
                     buttonEdit.setAttribute('class', 'btn btn-info form-control');
                     buttonEdit.setAttribute('onclick', 'btnEditComment(' + commentList[i]["Id"] + ')');
-                    //DELETE
+                    //DELETE'
+
+                    var id = commentList[i]["Id"];
+                    var commentByUserId = commentList[i]["CommentByUserId"]
+
                     var buttonDelete = document.createElement("BUTTON")
                     var buttonTextNode = document.createTextNode("Delete");
                     buttonDelete.appendChild(buttonTextNode);
                     buttonDelete.setAttribute('class', 'btn btn-danger form-control');
-                    buttonDelete.setAttribute('onclick', 'btnEditComment(' + commentList[i]["Id"] + ')');
-
+                    buttonDelete.onclick = function () {
+                        btnDeleteComment(id, commentByUserId)
+                    };
 
                     comments.push({
                         Id: commentList[i]["Id"],
@@ -279,7 +360,7 @@
                     });
                 }
 
-                
+
 
                 $(function () {
                     $.each(comments, function (i, item) {
@@ -291,6 +372,11 @@
 
                         ).appendTo('#commentTableId');
                     });
+                    $.each(comments, function (i, item) {
+                        var $tr = $('<tr>').append(
+                            $('<td style="width: 100%; height:auto;">').text(item.Comment)
+                        ).appendTo('#getComment');
+                    });
                 });
 
             }
@@ -298,9 +384,26 @@
 
     }
 
-    function btnEditComment(commendId) {
-        console.log(commendId);
+    function btnDeleteComment(id, commentByUserId) {
+        $.ajax({
+            type: "DELETE",
+            url: '/api/delete/postitemcomment/' + id + "/" + commentByUserId,
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            statusCode: {
+                200: function () {
+                    location.reload(1500)
+                },
+                400: function (message) {
+                    toastr.error(message.responseText.replace(/"/g, ""), "Bad Request");
+                }
+            }
+        });
+
     }
+
+
+
 
     function getUrlParameter(name) {
         name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
@@ -315,6 +418,7 @@
     }
 
     //Buy Modal
+
     function buyItemModal() {
         $("#buyItemModal").modal({
             "backDrop": "static",
@@ -322,6 +426,13 @@
         });
     }
 
+    function btnEditComment() {
+        $("#editCommentModal").modal({
+            "backDrop": "static",
+            "show": true
+        });
+        
+    }
 
 
     function getItem() {
@@ -381,7 +492,6 @@
             }
         });
     }
-
     function getPayType() {
         var pay = new wijmo.collections.ObservableArray;
         $.ajax({

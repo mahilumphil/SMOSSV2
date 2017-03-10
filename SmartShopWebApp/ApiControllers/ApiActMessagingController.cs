@@ -21,27 +21,25 @@ namespace SmartShopWebApp.ApiControllers
                 var userId = User.Identity.GetUserId();
 
                 // sender data message
-                Data.ActMessaging newActMessaging = new Data.ActMessaging();
-                newActMessaging.SenderUserId = userId;
-                newActMessaging.RecipientUserId = add.SenderUserId;
-                newActMessaging.IsOpen = true;
-                newActMessaging.MessageBody = add.MessageBody;
-                newActMessaging.MessageDate = DateTime.Today;
-                newActMessaging.MessageForFirstUserId = userId;
-                newActMessaging.MessageForSecondUserId = add.SenderUserId;
-                db.ActMessagings.InsertOnSubmit(newActMessaging);
+                Data.ActMessaging newSenderActMessaging = new Data.ActMessaging();
+                newSenderActMessaging.SenderUserId = userId;
+                newSenderActMessaging.SenderMessageBody = add.MessageBody;
+                newSenderActMessaging.SenderMessageDate = DateTime.Today;
+                newSenderActMessaging.RecipientUserId = add.SenderUserId;
+                newSenderActMessaging.RecipientMessageBody = "";
+                newSenderActMessaging.RecipientMessageDate = DateTime.Today;
+                db.ActMessagings.InsertOnSubmit(newSenderActMessaging);
                 db.SubmitChanges();
 
-                // receiver data message
-                Data.ActMessaging newActMessaging2 = new Data.ActMessaging();
-                newActMessaging2.SenderUserId = add.SenderUserId;
-                newActMessaging2.RecipientUserId = userId;
-                newActMessaging2.IsOpen = true;
-                newActMessaging2.MessageBody = add.MessageBody;
-                newActMessaging2.MessageDate = DateTime.Today;
-                newActMessaging2.MessageForFirstUserId = userId;
-                newActMessaging2.MessageForSecondUserId = add.SenderUserId;
-                db.ActMessagings.InsertOnSubmit(newActMessaging2);
+                // recipient data message
+                Data.ActMessaging newRecipientActMessaging = new Data.ActMessaging();
+                newRecipientActMessaging.SenderUserId = add.SenderUserId;
+                newRecipientActMessaging.SenderMessageBody = "";
+                newRecipientActMessaging.SenderMessageDate = DateTime.Today;
+                newRecipientActMessaging.RecipientUserId = userId;
+                newRecipientActMessaging.RecipientMessageBody = add.MessageBody;
+                newRecipientActMessaging.RecipientMessageDate = DateTime.Today;
+                db.ActMessagings.InsertOnSubmit(newRecipientActMessaging);
                 db.SubmitChanges();
 
                 return Request.CreateResponse(HttpStatusCode.OK);
@@ -59,7 +57,7 @@ namespace SmartShopWebApp.ApiControllers
         public List<Entities.ActMessaging> listActMessaging()
         {
             var userId = User.Identity.GetUserId();
-            var message = from d in db.ActMessagings.OrderByDescending(d => d.IsOpen)
+            var message = from d in db.ActMessagings
                           where d.SenderUserId != userId
                           group d by new
                           {
@@ -79,15 +77,18 @@ namespace SmartShopWebApp.ApiControllers
         {
             var userId = User.Identity.GetUserId();
             var message = from d in db.ActMessagings
-                          where d.MessageForFirstUserId == userId
-                          && d.MessageForSecondUserId == senderUserId
+                          where d.SenderUserId == userId
+                          && d.RecipientUserId == senderUserId
                           select new Entities.ActMessaging
                           {
                                 SenderUserId = d.SenderUserId,
                                 SenderUser = d.AspNetUser.FullName,
+                                SenderMessageBody = d.SenderMessageBody,
+                                SenderMessageDate = d.SenderMessageDate.ToShortDateString(),
+                                RecipientUserId = d.RecipientUserId,
                                 RecipientUser = d.AspNetUser1.FullName,
-                                MessageBody = d.MessageBody,
-                                MessageDate = d.MessageDate.ToShortDateString()
+                                RecipientMessageBody = d.RecipientMessageBody,
+                                RecipientMessageDate = d.RecipientMessageDate.ToShortDateString()
                           };
             return message.ToList();
         }
@@ -137,8 +138,6 @@ namespace SmartShopWebApp.ApiControllers
                     updateActMessaging.Id = messaging.Id;
                     updateActMessaging.SenderUserId = messaging.SenderUserId;
                     updateActMessaging.RecipientUserId = messaging.RecipientUserId;
-                    updateActMessaging.MessageBody = messaging.MessageBody;
-                    updateActMessaging.MessageDate = Convert.ToDateTime(messaging.MessageDate);
                     db.SubmitChanges();
 
                     return Request.CreateResponse(HttpStatusCode.OK);

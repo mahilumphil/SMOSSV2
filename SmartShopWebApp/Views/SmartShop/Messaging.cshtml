@@ -8,25 +8,21 @@
             <table id="userContainer"></table>
         </div>
         <div class="col-md-7">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <table id="currentUserContainer"></table>
-                </div>
+            <div class="panel panel-default" id="containerM">
                 <div class="panel-body" id="colMessage">
                     <table id="messageContainer"></table>
                 </div>
             </div>
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <textarea rows="7" class="form-control" id="inboxMessaging"></textarea>
+                        <textarea rows="7" class="form-control" id="inboxMessaging"></textarea>
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-md-4">
-                            <button class="btn btn-success" onclick="saveMessageOnClick()">Send</button>
-                            @*<input type="submit" class="btn btn-success form-control" value="Send" />*@
+                        <div class="col-md-6">
+                            @*<button class="btn btn-success form-control" type="submit" value="Submit">Send</button>*@
+                            <input type="submit" class="btn btn-success form-control" value="Submit" onclick="saveMessageOnClick()" id=""/>
                         </div>
-                        <div class="col-md-10"></div>
                     </div>
                 </div>
             </div>
@@ -48,16 +44,27 @@
     var chatUser = getUrlParameter("senderUserId");
     var userMessage;
     var userMessageResult;
+    var send = document.getElementById("sendMsg");
     //
     //
     //Add Message
     //
     //
+
+
+    function refreshPage() {
+        location.reload('/SmartShop/Messaging', 1000);
+    }
+
+
+
     function saveMessageOnClick() {
         var itemObject = {
             MessageBody: document.getElementById("inboxMessaging").value,
             SenderUserId: getUrlParameter("senderUserId")
         }
+
+
 
         itemData = JSON.stringify(itemObject);
         if (message == 0) {
@@ -70,7 +77,7 @@
                 data: itemData,
                 statusCode: {
                     200: function () {
-                        location.reload();
+                        refreshPage();
                     },
                     404: function () {
                     },
@@ -153,33 +160,55 @@
                         messages.push({
                             SenderUserId: messageBox[i]["SenderUserId"],
                             SenderUser: messageBox[i]["SenderUser"],
+                            SenderMessageBody: messageBox[i]["SenderMessageBody"],
+                            RecipientUserId: messageBox[i]["RecipientUserId"],
                             RecipientUser: messageBox[i]["RecipientUser"],
-                            MessageBody: messageBox[i]["MessageBody"],
-                            MessageDate: messageBox[i]["MessageDate"],
+                            RecipientMessageBody: messageBox[i]["RecipientMessageBody"],
                         });
-                        console.log(messageBox[i]["SenderUser"]);
                     }
                 }
 
                 $(function () {
-                    $.each(messageBox, function (i, user) {
-                        var classActive = "Receiver";
-                        var textalign = "right";
-                        if (getUrlParameter("senderUserId") == user.SenderUserId) {
-                            classActive = "Sender";
-                            textalign = "left";
-                        }
 
-                        var $tr = $('<tr class="messagetr' + classActive + '">').append(
-                            $('<td class="messagetd" align="' + textalign + '">').text(user.SenderUser).css({ "background-color": "transparent" })
-                            .append($('<td class="" align="' + textalign + '">').text(user.MessageBody).css({
-                                "background-color": "lightgray", "color": "white", "border-radius": "1px"
-                            , "font-size": "20px", "padding": "10px", "margin-bottom": "5px"
-                            }))
+                    $.each(messageBox, function (i, item) {
+
+                        var $tr = $('<tr>').append(
+                            $('<td style="width: 50%; height:auto; font-size:15px;color:lightblue;text-align:left; left:0;right:0;bottom:0;top:0;">').text(item.RecipientMessageBody),
+                            $('<td style="width: 50%; height:auto; font-size:15px;color:#0d1e2b; text-align:right;">').text(item.SenderMessageBody)
+
+
                         ).appendTo('#messageContainer');
 
                     });
                 });
+
+                //$(function () {
+                //    $.each(messageBox, function (i, user) {
+                //        var classActive = "Receiver";
+                //        var textalign = "right";
+                //        if (getUrlParameter("senderUserId") == user.SenderUserId) {
+                //            classActive = "Sender";
+                //            textalign = "left";
+                //        }
+
+                //        //var $tr = $('<tr class="messagetr' + classActive + '">').append(
+                //        //        $('<td class="messagetd" align="' + textalign + '">').text(user.SenderUser).append(
+                //        //        $('<td class="" align="' + textalign + '">').text(user.RecipientMessageBody))).appendTo('#messageContainer');
+
+                //        //var $tr = $('<tr class="messagetr' + classActive + '">').append(
+                //        //    $('<td class="messagetd" align="' + textalign + '">').text(user.SenderUser).css({
+                //        //        "background-color": "transparent"
+                //        //    }).append($('<td class="" align="' + textalign + '">').text(user.SenderMessageBody).css({
+                //        //        "background-color": "lightgray",
+                //        //        "color": "white",
+                //        //        "border-radius": "1px",
+                //        //        "font-size": "20px",
+                //        //        "padding": "10px",
+                //        //        "margin-bottom": "5px"
+                //        //    }))).appendTo('#messageContainer');
+
+                //    });
+                //});
 
 
             }
@@ -200,6 +229,23 @@
         } else {
             return results[1];
         }
+    }
+
+    function deleteMsg() {
+        $.ajax({
+            type: "DELETE",
+            url: '/api/delete/stpitem/' + getUrlParameter("senderUserId"),
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            statusCode: {
+                200: function () {
+
+                },
+                400: function () {
+                }
+            }
+        });
+
     }
 
     window.onload = function () {

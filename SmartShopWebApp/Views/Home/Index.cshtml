@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "SmartShop";
 }
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -12,13 +12,24 @@
             <div class="col-md-12">
                 <div class="panel panel-default" id="indexItem">
                     <div class="panel-heading">
-                        <h4>List of All Item</h4>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h4>List of All Item</h4>
+
+                            </div>
+                            <div class="col-md-4">
+
+                                <div align="right">
+                                    <input type="search" name="name" value="" id="filterSearch" class="form-control" placeholder="Looking for Item?" />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="panel-body">
-                        <p>Item body</p>
+                        <div id="listOfAllItem"></div>
                     </div>
                 </div>
-                
+
             </div>
         </div>
         <div class="row">
@@ -66,21 +77,21 @@
                             </div>
 
                             <div class="item">
-                                <img src="~/img/img/dell2in1laptop.png" alt="Dell2in1" id="imgC"  style="width:100%; height:100%;" class="img-responsive">
+                                <img src="~/img/img/dell2in1laptop.png" alt="Dell2in1" id="imgC" style="width:100%; height:100%;" class="img-responsive">
                                 <div class="carousel-caption">Dell 2 in 1 Laptop</div>
                             </div>
 
                             <div class="item">
-                                <img src="~/img/img/Intel_Credit_card_sized_computer.png" id="imgC"  alt="Intel" style="width:100%; height:100%;" class="img-responsive">
+                                <img src="~/img/img/Intel_Credit_card_sized_computer.png" id="imgC" alt="Intel" style="width:100%; height:100%;" class="img-responsive">
                                 <div class="carousel-caption">Intel Credit Card Sized Computer</div>
                             </div>
 
                             <div class="item">
-                                <img src="~/img/img/Lenovo_smart_assistant.png" alt="Lenovo" id="imgC"  style="width:100%; height:100%;" class="img-responsive">
+                                <img src="~/img/img/Lenovo_smart_assistant.png" alt="Lenovo" id="imgC" style="width:100%; height:100%;" class="img-responsive">
                                 <div class="caption">Lenovo Smart Assistant</div>
                             </div>
                             <div class="item">
-                                <img src="~/img/img/LG_w-series_tv.jpg" alt="LG" id="imgC"  style="width:100%; height:100%;" class="img-responsive">
+                                <img src="~/img/img/LG_w-series_tv.jpg" alt="LG" id="imgC" style="width:100%; height:100%;" class="img-responsive">
                                 <div class="carousel-caption">LG W-series TV</div>
                             </div>
 
@@ -95,7 +106,7 @@
                             </div>
 
                             <div class="item">
-                                <img src="~/img/img/noka2017.jpg" alt="Nokia2017" id="imgC"  style="width:100%; height:100%;" class="img-responsive">
+                                <img src="~/img/img/noka2017.jpg" alt="Nokia2017" id="imgC" style="width:100%; height:100%;" class="img-responsive">
                                 <div class="carousel-caption">3310 Nokia New Released</div>
                             </div>
 
@@ -110,7 +121,7 @@
                             </div>
 
                             <div class="item">
-                                <img src="~/img/img/toyota_concept_i.jpg" alt="toyotaConceptI" id="imgC"  style="width:100%; height:100%;" class="img-responsive">
+                                <img src="~/img/img/toyota_concept_i.jpg" alt="toyotaConceptI" id="imgC" style="width:100%; height:100%;" class="img-responsive">
                                 <div class="carousel-caption">Toyota Concept I</div>
                             </div>
                         </div>
@@ -129,10 +140,493 @@
             </div>
         </div>
     </div>
+        <!--Logged In -->
+        <div class="modal fade" id="buyItemModal" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Purchase</h4>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="modal-body">
+                                <div class="panel-default">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Quantity</label>
+                                                <input type="number" name="name" value=" " id="Quantity" class="form-control" />
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>Partial Payment</label>
+                                                <input type="number" name="name" value=" " id="PartialAmount" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel-heading">
+                                        <h4>Message</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <textarea rows="10" class="form-control" id="Message"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary btn-sm" onclick="requestPurchase()"><i class="fa fa-shopping-cart"></i> Request To Purchase</button>
+                            <button class="btn btn-warning btn-sm" id="" data-dismiss="modal"><i class="fa fa-close"></i> Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!--Not Logged In-->
+        <div class="modal fade" id="viewItemDetail" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Item Detail<i class="fa fa-shopping-cart"></i></h4>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="modal-body">
+                                <div class="col-md-5">
+                                    <label>Item</label>
+                                    <input type="text" name="name" value=" " id="ItemName" class="form-control" disabled />
+                                    @*<div id="cboItemList" style="width:100%;">
+                                        </div>*@
+                                    <div id="divSeparator"></div>
+                                    <img src="#" class="img-responsive" id="imageDisplay" />
+                                </div>
+                                <div class="col-md-7">
+                                    <label>Specification</label>
+                                    <textarea rows="7" class="form-control" id="Specification" disabled></textarea>
+                                    <label>Remarks</label>
+                                    <textarea rows="7" class="form-control" id="Remarks" disabled></textarea>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Price</label>
+                                            <input type="text" name="name" value=" " id="Price" class="form-control" disabled />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>Quantity</label>
+                                            <input type="text" name="name" value=" " id="Quantity" class="form-control" disabled />
+                                            @*<div id="cboQuantity" style="width:100%;">
+                                                </div>*@
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Payment Type</label>
+                                            <input type="text" name="name" value=" " id="PayType" class="form-control" disabled />
+                                            @*<div id="cboPayType" style="width:100%;" disabled>
+                                                </div>*@
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>Status</label>
+                                            <input type="text" name="name" value=" " id="Status" class="form-control" disabled />
+                                            @*<div id="cboStatus" style="width:100%;" disabled>
+
+                                                </div>*@
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <a class="btn btn-success btn-sm" onclick="buyItem()" href="../Account/Register"><i class="fa fa-check-square-o"></i> Buy</a>
+                            <button class="btn btn-warning btn-sm" id="" data-dismiss="modal"><i class="fa fa-close"></i> Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    
 </body>
 </html>
 <script type="text/javascript">
+    var postDetailListCollection;
+    var postDetailGridList;
+    var itemDetailCollections;
+    var currentItem;
+    var postDetail;
+    var itemId;
+    var cboStatus;
+    var cboQuantity;
+    var cboPayType;
+    var payTypeCategory;
+    var cboStartDate;
+    var cboEndDate;
+    //View Item Detail Modal For Logged In
+    function buyItemModal() {
+        $("#buyItemModal").modal({
+            "backDrop": "static",
+            "show": true
+        });
+    }
+
+    //View Item Detail Modal For Not Logged In
+    function viewItemDetail() {
+        $("#viewItemDetail").modal({
+            "backDrop": "static",
+            "show": true
+        });
+        postDetailListCollection.editItem(postDetailListCollection.currentItem);
+        currentItem = postDetailListCollection.currentEditItem;
+        itemId = currentItem.Id;
+
+        document.getElementById("ItemName").value = currentItem.ItemName;
+        document.getElementById("Specification").value = currentItem.Specification;
+        document.getElementById("Remarks").value = currentItem.Remarks;
+        document.getElementById("Price").value = currentItem.Price;
+        document.getElementById("Quantity").value = currentItem.Quantity;
+        document.getElementById("PayType").value = currentItem.PayType;
+        document.getElementById("Status").value = currentItem.Status;
+        document.getElementById("imageDisplay").src = "data:image/jpeg;base64," + currentItem.PhotoValue;
+    }
+
+    function requestPurchase() {
+        var itemObject = {
+            PostId: postId,
+            Quantity: document.getElementById("Quantity").value,
+            PartialAmount: document.getElementById("PartialAmount").value,
+            Message: document.getElementById("Message").value,
+
+        }
+
+        itemData = JSON.stringify(itemObject);
+        $.ajax({
+            type: "POST",
+            url: '/api/add/buy',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: itemData,
+            statusCode: {
+                200: function () {
+                    alert("Success");
+                    $("#buyItemModal").modal('hide');
+                    document.getElementById("PartialAmount").value = " ";
+                    document.getElementById("Message").value = " ";
+                },
+                404: function () {
+                    toastr.error("Bad Request");
+                },
+                400: function () {
+                    toastr.error("Something Went Wrong");
+                }
+            }
+        });
+    }
 
 
 
+    function getPostDetail() {
+
+        //var startDateValue = [cboStartDate.value.getMonth() + 1, cboStartDate.value.getDate(), cboStartDate.value.getFullYear()].join('-');
+        //var endDateValue = [cboEndDate.value.getMonth() + 1, cboEndDate.value.getDate(), cboEndDate.value.getFullYear()].join('-');
+
+
+        postDetail = new wijmo.collections.ObservableArray;
+        $.ajax({
+            type: "GET",
+            url: '/api/list/postlist/index',
+            contentType: "application/json;charset=utf-8",
+            success: function (postDetailList) {
+                for (i = 0; i < postDetailList.length; i++) {
+                    var imageElement = document.createElement("images");
+                    var imageData = new Image();
+                    imageData.src = "data:image/jpeg;base64," + postDetailList[i]["PhotoValue"];
+                    imageElement.appendChild(imageData);
+                    var photoDivElement = document.createElement("DIV").appendChild(imageElement);
+                    var imageSRCData = "data:image/jpeg;base64," + postDetailList[i]["PhotoValue"];
+
+                    var postNewDate = new Date(postDetailList[i]["PostDate"]);
+                    var postDateValue = [postNewDate.getMonth() + 1, postNewDate.getDate(), postNewDate.getFullYear()].join('-');
+
+
+                    postDetail.push({
+                        Id: postDetailList[i]["Id"],
+                        PostedByUser: postDetailList[i]["PostedByUserId"],
+                        ItemName: postDetailList[i]["ItemName"],
+                        Price: postDetailList[i]["Price"],
+                        Specification: postDetailList[i]["Specification"],
+                        Remarks: postDetailList[i]["Remarks"],
+                        PayType: postDetailList[i]["PayType"],
+                        Status: postDetailList[i]["Status"],
+                        IsApproved: postDetailList[i]["IsApproved"],
+                        Quantity: postDetailList[i]["Quantity"],
+                        btnView: "<button onclick='viewItemDetail()' class='btn btn-primary btn-block-xs form-control'><i class='fa fa-eye'></i> View</button>",
+                        btnRequest: "<button onclick='requestPurchase()' class='btn btn-success btn-block-xs form-control'><i class='fa fa-shopping-cart'></i> Buy</button>",
+                        PhotoValue: postDetailList[i]["PhotoValue"],
+                        PostDate: postDateValue,
+                    });
+                }
+            }
+        });
+        console.log(postDetail);
+        return postDetail;
+    }
+
+    function requestPurchase() {
+        postDetailListCollection.editItem(postDetailListCollection.currentItem);
+        currentItem = postDetailListCollection.currentEditItem;
+        window.location = "/SmartShop/PostDetail?postid=" + currentItem.Id;
+    }
+
+    //get PayType ComboBox
+    function getPayType() {
+        payTypeCategory = new wijmo.collections.ObservableArray;
+        $.ajax({
+            type: "GET",
+            url: '/api/list/syspaytype',
+            contentType: "application/json;charset=utf-8",
+            success: function (payTypeCategoryList) {
+                for (i = 0; i < payTypeCategoryList.length; i++) {
+                    payTypeCategory.push({
+                        Id: payTypeCategoryList[i]["Id"],
+                        PayType: payTypeCategoryList[i]["PayType"],
+                    });
+                }
+                cboPayType.dispose();
+                cboPayType = new wijmo.input.ComboBox("#cboPayType", {
+                    itemsSource: payTypeCategory,
+                    selectedValuePath: "PayType",
+                    displayMemberPath: "PayType"
+                });
+            }
+        });
+    }
+
+    //Get Status Category
+    function getStatusCategory() {
+        statusCategory = new wijmo.collections.ObservableArray;
+        $.ajax({
+            type: "GET",
+            url: '/api/list/syspostitemstatus',
+            contentType: "application/json;charset=utf-8",
+            success: function (statusCategoryList) {
+                for (i = 0; i < statusCategoryList.length; i++) {
+                    statusCategory.push({
+                        Id: statusCategoryList[i]["Id"],
+                        Status: statusCategoryList[i]["Status"],
+                        IsReserved: statusCategoryList[i]["IsReserved"],
+                        IsBought: statusCategoryList[i]["IsBought"],
+                        IsAvailable: statusCategoryList[i]["IsAvailable"],
+                    });
+                }
+                cboStatus.dispose();
+                cboStatus = new wijmo.input.ComboBox("#cboStatus", {
+                    itemsSource: statusCategory,
+                    selectedValuePath: "Status",
+                    displayMemberPath: "Status"
+                });
+            }
+        });
+    }
+
+    function createFlexGrid() {
+        postDetailListCollection = new wijmo.collections.CollectionView(getPostDetail());
+
+        var filterText = '';
+        $('#filterSearch').keyup(function () {
+            filterText = this.value.toLowerCase();
+            postDetailListCollection.refresh();
+        });
+
+        postDetailListCollection.filter = function (item) {
+            return !filterText || (item.ItemName.toLowerCase().indexOf(filterText) > -1)
+                               || (item.PostedByUser.toLowerCase().indexOf(filterText) > -1)
+                               || (item.Status.toLowerCase().indexOf(filterText) > -1)
+                               || (item.Price.toLowerCase().indexOf(filterText) > -1);
+        }
+
+        //Flex Grid
+        postDetailGridList = new wijmo.grid.FlexGrid("#listOfAllItem");
+        postDetailGridList.initialize({
+            columns: [
+                {
+                    "header": "Detail",
+                    "binding": "btnRequest",
+                    "allowSorting": true,
+                    "width": "0.7*",
+                    "allowResizing": true,
+                    "allowSorting": false,
+                    "isContentHtml": true
+                },
+                {
+                    "header": "Detail",
+                    "binding": "btnView",
+                    "allowSorting": true,
+                    "width": "0.7*",
+                    "allowResizing": true,
+                    "allowSorting": false,
+                    "isContentHtml": true
+                },
+                {
+                    "header": "Item Name",
+                    "binding": "ItemName",
+                    "allowSorting": true,
+                    "width": "3*",
+                    "allowResizing": true,
+                    "allowSorting": false,
+                    "isContentHtml": true
+                },
+                {
+
+                    "header": "Posted By:",
+                    "binding": "PostedByUser",
+                    "allowSorting": true,
+                    "width": "2*",
+                    "allowResizing": true,
+                    "allowSorting": false,
+                    "isContentHtml": true
+                },
+                {
+
+                    "header": "Status",
+                    "binding": "Status",
+                    "allowSorting": true,
+                    "width": "2*",
+                    "allowResizing": true,
+                    "allowSorting": false,
+                    "isContentHtml": true
+                },
+                {
+
+                    "header": "Price",
+                    "binding": "Price",
+                    "allowSorting": true,
+                    "width": "1*",
+                    "allowResizing": true,
+                    "allowSorting": false,
+                    "isContentHtml": true
+                },
+                {
+
+                    "header": "Posted Date",
+                    "binding": "PostDate",
+                    "allowSorting": true,
+                    "width": "1.5*",
+                    "align": "right",
+                    "allowResizing": true,
+                    "allowSorting": false,
+                    "isContentHtml": true
+                },
+            ],
+            autoGenerateColumns: false,
+            itemsSource: postDetailListCollection,
+            isReadOnly: true,
+            autoSizeMode: wijmo.grid.AutoSizeMode.Both,
+            allowDragging: wijmo.grid.AllowDragging.None,
+            selectionMode: wijmo.grid.SelectionMode.Row,
+            headersVisibility: wijmo.grid.HeadersVisibility.Column
+        });
+        postDetailGridList.trackChanges = true;
+        //postDetailGridList.rows.defaultSize = 150;
+    }
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $("#divImage").show();
+                $('#imageDisplay').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    // get parameters in url
+    function getUrlParameter(name) {
+        name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+        var regexS = "[\\?&]" + name + "=([^&#]*)";
+        var regex = new RegExp(regexS);
+        var results = regex.exec(window.location.href);
+        if (results == null) {
+            return "";
+        } else {
+            return results[1];
+        }
+    }
+
+    var isCboStartDateClicked = false;
+    var isCboEndDateClicked = false;
+
+    window.onload = function () {
+
+        //document.getElementById("itemCategoryTitle").innerHTML = decodeURIComponent(getUrlParameter("label").replace(/\+/g, '%20'));
+
+        //cboStartDate = new wijmo.input.InputDate('#cboStartDate', {
+        //    format: 'MM-dd-yyyy',
+        //    value: new Date(),
+        //    mask: '99-99-9999',
+        //    onValueChanged: function () {
+        //        if (isCboStartDateClicked == true) {
+        //            postDetailListCollection = new wijmo.collections.CollectionView(getPostDetail());
+        //            var filterText = '';
+        //            $('#filterSearch').keyup(function () {
+        //                filterText = this.value.toLowerCase();
+        //                postDetailListCollection.refresh();
+        //            });
+
+        //            postDetailListCollection.filter = function (item) {
+        //                return !filterText || (item.ItemName.toLowerCase().indexOf(filterText) > -1)
+        //                                   || (item.PostedByUser.toLowerCase().indexOf(filterText) > -1)
+        //                                   || (item.Status.toLowerCase().indexOf(filterText) > -1);
+        //            }
+        //            postDetailGridList.itemsSource = postDetailListCollection;
+        //            postDetailGridList.trackChanges = true;
+        //        } else {
+        //            isCboStartDateClicked = true;
+        //        }
+        //    }
+        //});
+
+        //cboEndDate = new wijmo.input.InputDate('#cboEndDate', {
+        //    format: 'MM-dd-yyyy',
+        //    value: new Date(),
+        //    mask: '99-99-9999',
+        //    onValueChanged: function () {
+        //        if (isCboEndDateClicked == true) {
+        //            postDetailListCollection = new wijmo.collections.CollectionView(getPostDetail());
+        //            var filterText = '';
+        //            $('#filterSearch').keyup(function () {
+        //                filterText = this.value.toLowerCase();
+        //                postDetailListCollection.refresh();
+        //            });
+
+        //            postDetailListCollection.filter = function (item) {
+        //                return !filterText || (item.ItemName.toLowerCase().indexOf(filterText) > -1)
+        //                                   || (item.PostedByUser.toLowerCase().indexOf(filterText) > -1)
+        //                                   || (item.Status.toLowerCase().indexOf(filterText) > -1);
+        //            }
+        //            postDetailGridList.itemsSource = postDetailListCollection;
+        //            postDetailGridList.trackChanges = true;
+        //        } else {
+        //            isCboEndDateClicked = true;
+        //        }
+        //    }
+        //});
+
+        createFlexGrid();
+        cboStatus = new wijmo.input.ComboBox("#cboStatus");
+        cboPayType = new wijmo.input.ComboBox("#cboPayType");
+        cboQuantity = new wijmo.input.ComboBox("#cboQuantity");
+        cboItemList = new wijmo.input.ComboBox("#cboItemList");
+        getItem();
+        getPayType();
+        getStatusCategory();
+        createCBOQuantity();
+
+    }
 </script>

@@ -43,6 +43,7 @@ namespace SmartShopWebApp.ApiControllers
         [HttpGet, Route("api/list/postitemcomment/{postId}")]
         public List<Entities.ActPostItemComment> listActPostItemComment(String postId)
         {
+
             var postComment = from d in db.ActPostItemComments
                               where d.PostId == Convert.ToInt32(postId)
                               select new Entities.ActPostItemComment
@@ -60,21 +61,29 @@ namespace SmartShopWebApp.ApiControllers
 
 
 
-        [HttpDelete, Route("api/delete/postitemcomment/{id}")]
-        public HttpResponseMessage deleteActPostItemComment(String id)
+        [HttpDelete, Route("api/delete/postitemcomment/{id}/{commentByUserId}")]
+        public HttpResponseMessage deleteActPostItemComment(String id, String commentByUserId)
         {
             try
             {
+                var userId = User.Identity.GetUserId();
                 var delActPostItemComment = from d in db.ActPostItemComments
                                             where d.Id == Convert.ToInt32(id)
                                             select d;
 
                 if (delActPostItemComment.Any())
                 {
-                    db.ActPostItemComments.DeleteOnSubmit(delActPostItemComment.First());
-                    db.SubmitChanges();
+                    if (delActPostItemComment.FirstOrDefault().CommentByUserId.Equals(userId))
+                    {
+                        db.ActPostItemComments.DeleteOnSubmit(delActPostItemComment.First());
+                        db.SubmitChanges();
 
-                    return Request.CreateResponse(HttpStatusCode.OK);
+                        return Request.CreateResponse(HttpStatusCode.OK);
+                    }
+                    else {
+                        return Request.CreateResponse(HttpStatusCode.BadRequest);
+                    }
+
                 }
                 else
                 {
@@ -106,8 +115,8 @@ namespace SmartShopWebApp.ApiControllers
                     updateActPostItemComment.PostId = postitemcomment.PostId;
                     updateActPostItemComment.Comment = postitemcomment.Comment;
                     updateActPostItemComment.CommentByUserId = postitemcomment.CommentByUserId;
-                    updateActPostItemComment.CommentDate = Convert.ToDateTime(postitemcomment.CommentDate);
-                    updateActPostItemComment.UpdatedDate = Convert.ToDateTime(postitemcomment.UpdatedDate);
+                    updateActPostItemComment.CommentDate = DateTime.Today;
+                    updateActPostItemComment.UpdatedDate = DateTime.Today;
                     db.SubmitChanges();
 
                     return Request.CreateResponse(HttpStatusCode.OK);

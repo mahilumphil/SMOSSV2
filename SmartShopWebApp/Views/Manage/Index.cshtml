@@ -18,14 +18,23 @@
             </div>
         </div>
     </div>
+    <div id="overlayBRequest">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h1 align="center" style="color:red; font-weight:bolder">ERROR:404</h1>
+            </div>
+            <div class="panel-body">
+                <h4>Request Failed</h4>
+            </div>
+        </div>
+    </div>
     <div class="row">
 
         <div class="col-md-3">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <a href="~/Manage/Profile" class="form-control btn-primary" id="backtoProfile"><span class="fa fa-user-secret" id="profile"></span></a>
+                    <a href="~/Manage/Profile" class="form-control btn-primary" id="backtoProfile"><span class="fa fa-user" title="Back To Profile" id="profile"></span></a>
                     <br />
-                    <h4>@User.Identity.GetUserName()</h4>
                     <div class="panel-footer">
                         <ul class="nav navbar-left">
                             <li><a href="~/Manage/Index">My Item</a></li>
@@ -177,6 +186,11 @@
         el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
     }
 
+    function overlayBRequest() {
+        el = document.getElementById("overlayBRequest");
+        el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+    }
+
     function getCategory() {
         var itemCategory = new wijmo.collections.ObservableArray;
         $.ajax({
@@ -268,15 +282,15 @@
             dataType: "json",
             statusCode: {
                 200: function () {
-                    toastr.success("Successfully Deleted");
-
                     $("#deleteItemModal").modal('hide');
                     itemDetailCollections = new wijmo.collections.CollectionView(getItem());
                     itemDetailGrid.itemsSource = itemDetailCollections;
                     itemDetailGrid.trackChanges = true;
                 },
                 400: function (message) {
-                    toastr.error(message.responseText.replace(/"/g, ""), "Bad Request");
+                    overlayBRequest();
+                    $("#overlayBRequest").fadeOut(4000);
+                    $("#deleteItemModal").modal('hide');
                 }
             }
         });
@@ -334,8 +348,8 @@
                     var imageSRCData = "data:image/jpeg;base64," + itemDetailList[i]["Photo"];
 
                     itemDetail.push({
-                        btnEdit: "<button class='btn btn-primary btn-block' style='margin-top:50px;' onclick='editItemModal()'><span class='fa fa-edit'>&nbsp;</span>Edit</button>",
-                        btnDelete: "<button class='btn btn-danger btn-block' style='margin-top:50px;' onclick='deleteItemModal()'><span class='fa fa-remove'>&nbsp;</span>Delete</button>",
+                        btnEdit: "<button class='btn btn-primary btn-block' style='margin-top:50px; width:100%;' onclick='editItemModal()'><span class='fa fa-edit'>&nbsp;</span>Edit</button>",
+                        btnDelete: "<button class='btn btn-danger btn-block' style='margin-top:50px; width:100%;' onclick='deleteItemModal()'><span class='fa fa-remove'>&nbsp;</span>Delete</button>",
                         Photo: "<img class='img-responsive' style='margin:auto;' src='" + imageSRCData + "' />",
                         PhotoValue: imageSRCData,
                         Id: itemDetailList[i]["Id"],
@@ -480,13 +494,13 @@
                         
                         $("#itemDetailModal").modal('hide');
                         overlay();
-                        $("#overlay").hide(2000);
+                        $("#overlay").fadeOut(1500);
                         itemDetailCollections = new wijmo.collections.CollectionView(getItem());
                         itemDetailGrid.itemsSource = itemDetailCollections;
                         itemDetailGrid.trackChanges = true;
                     },
                     404: function () {
-                        toastr.error("Bad Request");
+                        
                     },
                     400: function () {
                         toastr.error("Something Went Wrong");

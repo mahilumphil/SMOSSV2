@@ -15,11 +15,11 @@ namespace SmartShopWebApp.ApiControllers
         private Data.smartshopdbDataContext db = new Data.smartshopdbDataContext();
 
         [HttpPost, Route("api/add/userprofile")]
-        public HttpResponseMessage newUserProfile(Models.RegisterViewModel add)
+        public HttpResponseMessage newUserProfile(Entities.UserProfile add)
         {
             try
             {
-                byte[] imageArray = add.ProfilePhoto;
+                byte[] imageArray = add.ProfilePicture;
 
                 Data.AspNetUser newUserProfile = new Data.AspNetUser();
                 newUserProfile.ProfilePhoto = new Binary(imageArray);
@@ -37,17 +37,19 @@ namespace SmartShopWebApp.ApiControllers
         }
 
 
-        [HttpGet, Route("api/list/userdetail")]
+        [HttpGet, Route("api/list/user")]
         public List<Entities.UserProfile> listUser()
         {
-            var userName = User.Identity.GetUserId();
+            var userId = User.Identity.GetUserId();
             var user = from d in db.AspNetUsers
+                       where d.Id == userId
                        select new Entities.UserProfile                       
                        {
                            Email = d.Email,
                            FullName = d.FullName,
                            ContactNumber = d.ContactNumber,
-                           Address = d.Address
+                           Address = d.Address,
+                           Type = d.Type
                        };
             return user.ToList();
         }

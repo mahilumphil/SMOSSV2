@@ -8,9 +8,8 @@
         <div class="col-md-3">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <a href="~/Manage/Profile" class="form-control btn-primary" id="backtoProfile"><span class="fa fa-user-secret" id="profile"></span></a>
+                    <a href="~/Manage/Profile" class="form-control btn-primary" id="backtoProfile"><span class="fa fa-user" title="Back To Profile" id="profile"></span></a>
                     <br />
-                    <h4>@User.Identity.GetUserName()</h4>
                     <div class="panel-footer">
                         <ul class="nav navbar-left">
                             <li><a href="~/Manage/Index">My Item</a></li>
@@ -405,7 +404,7 @@
                     postDetailGridList.trackChanges = true;
                 },
                 400: function (message) {
-                    toastr.error(message.responseText.replace(/"/g, ""), "Bad Request");
+                    alert("Cant delete item someone inquired this.")
                 }
             }
         });
@@ -503,16 +502,16 @@
                     "allowSorting": false,
                     "isContentHtml": true
                 },
-                {
+                //{
 
-                    "header": "Approved",
-                    "binding": "IsApproved",
-                    "allowSorting": true,
-                    "width": "2*",
-                    "allowResizing": true,
-                    "allowSorting": false,
-                    "isContentHtml": true
-                },
+                //    "header": "Approved",
+                //    "binding": "IsApproved",
+                //    "allowSorting": true,
+                //    "width": "2*",
+                //    "allowResizing": true,
+                //    "allowSorting": false,
+                //    "isContentHtml": true
+                //},
             ],
             autoGenerateColumns: false,
             itemsSource: postDetailListCollection,
