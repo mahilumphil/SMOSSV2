@@ -50,6 +50,13 @@
       <Column Name="PayTypeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="StatusId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Remarks" Type="System.String" DbType="NVarChar(1000) NOT NULL" CanBeNull="false" />
+      <Column Name="StatusRate1" Type="System.Decimal" DbType="Decimal(18,5)" CanBeNull="true" />
+      <Column Name="StatusRate2" Type="System.Decimal" DbType="Decimal(18,5)" CanBeNull="true" />
+      <Column Name="StatusRate3" Type="System.Decimal" DbType="Decimal(18,5)" CanBeNull="true" />
+      <Column Name="StatusRate4" Type="System.Decimal" DbType="Decimal(18,5)" CanBeNull="true" />
+      <Column Name="StatusRate5" Type="System.Decimal" DbType="Decimal(18,5)" CanBeNull="true" />
+      <Column Name="Discount" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ItemView" Type="System.Decimal" DbType="Decimal(18,5)" CanBeNull="true" />
       <Association Name="ActPostItem_ActBuy" Member="ActBuys" ThisKey="Id" OtherKey="PostId" Type="ActBuy" />
       <Association Name="ActPostItem_ActPostItemComment" Member="ActPostItemComments" ThisKey="Id" OtherKey="PostId" Type="ActPostItemComment" />
       <Association Name="SysPostItemStatus_ActPostItem" Member="SysPostItemStatus" ThisKey="StatusId" OtherKey="Id" Type="SysPostItemStatus" IsForeignKey="true" />

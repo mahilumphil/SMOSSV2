@@ -23,7 +23,15 @@ namespace SmartShopWebApp.Entities
         public String PayType { get; set; }
         public Int32 StatusId { get; set; }
         public String Status { get; set; }
+        public String Discount { get; set; }
         public Decimal Price { get; set; }
+        public Decimal? ItemView { get; set; }
+        public Decimal? StatusRate1 { get; set; }
+        public Decimal? StatusRate2 { get; set; }
+        public Decimal? StatusRate3 { get; set; }
+        public Decimal? StatusRate4 { get; set; }
+        public Decimal? StatusRate5 { get; set; }
+        public Decimal? StatusRateOverAll { get; set; }
         public byte[] PhotoValue { get; set; }
     }
 }

@@ -18,7 +18,7 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <label>Posted By:</label>
-                            <input id="PostedBy" class="form-control" style="color:forestgreen; font-weight:bolder; border:0px; font-size:20px;height:30px; background-color:white;" disabled>  
+                            <input id="PostedBy" class="form-control" style="color:forestgreen; font-weight:bolder; border:0px; font-size:20px;height:30px; background-color:white;" disabled>
                         </div>
                     </div>
                     <div class="row">
@@ -67,9 +67,21 @@
                     </div>
                 </div>
                 <div class="panel-footer">
-                    <div align="right">
-                        <button onclick="buyItemModal()" class="btn btn-success">Purchase</button>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <button style="background-color:transparent; box-shadow:none; border:0px;" onclick="rateStatus(1)"><i class="fa fa-star-o" style="font-weight:bold;color:#d9fa86"></i><br /><span class="text-center" id="numberOfRates1"></span> </button>
+                            <button style="background-color:transparent; box-shadow:none; border:0px;" onclick="rateStatus(2)"><i class="fa fa-star-o" style="font-weight:bold;color:#cbfb54"></i><br /><span class="text-center" id="numberOfRates2"></span> </button>
+                            <button style="background-color:transparent; box-shadow:none; border:0px;" onclick="rateStatus(3)"><i class="fa fa-star-o" style="font-weight:bold;color:#c6fe3a"></i><br /><span class="text-center" id="numberOfRates3"></span> </button>
+                            <button style="background-color:transparent; box-shadow:none; border:0px;" onclick="rateStatus(4)"><i class="fa fa-star-o" style="font-weight:bold;color:#befc21"></i><br /><span class="text-center" id="numberOfRates4"></span> </button>
+                            <button style="background-color:transparent; box-shadow:none; border:0px;" onclick="rateStatus(5)"><i class="fa fa-star-o" style="font-weight:bold;color:#b7ff00"></i><br /><span class="text-center" id="numberOfRates5"></span> </button>
+                        </div>
+                        <div class="col-md-4" align="right">
+                            <div align="right">
+                                <button onclick="buyItemModal()" class="btn btn-success">Purchase</button>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
             </div>
             <div class="panel panel-default">
@@ -93,7 +105,6 @@
                                 <tr>
                                     <th>Inquirer</th>
                                     <th>Comment</th>
-                                    <th>Edit</th>
                                     <th>Delete</th>
                                 </tr>
                             </table>
@@ -235,6 +246,27 @@
 
 
 
+    function rateStatus(number) {
+        $.ajax({
+            type: "PUT",
+            url: '/api/update/updateRate/' + postId + '/' + number,
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            statusCode: {
+                200: function () {
+                    location.reload();
+                },
+                400: function (message) {
+                    toastr.error(message.responseText.replace(/"/g, ""), "Bad Request");
+                }
+            }
+        });
+
+
+    }
+
+
+
     function getPostDetail() {
         $.ajax({
             type: "GET",
@@ -250,9 +282,63 @@
                 document.getElementById("PayType").value = postDetailResult.PayType;
                 document.getElementById("Status").value = postDetailResult.Status;
                 document.getElementById("imageDisplay").src = "data:image/jpeg;base64," + postDetailResult.PhotoValue;
+
+                //var numberRates = {
+                //    StatusRate1: postDetailResult.StatusRate1,
+                //    StatusRate2: postDetailResult.StatusRate2,
+                //    StatusRate3: postDetailResult.StatusRate3,
+                //    StatusRate4: postDetailResult.StatusRate4,
+                //    StatusRate5: postDetailResult.StatusRate5,
+
+                //};
+                //console.log(numberRates);
+                var StatusRate1 = 0;
+                var StatusRate2 = 0;
+                var StatusRate3 = 0;
+                var StatusRate4 = 0;
+                var StatusRate5 = 0;
+
+                if (postDetailResult.StatusRate1 != null) {
+                    StatusRate1 = postDetailResult.StatusRate1;
+                    document.getElementById("numberOfRates1").innerHTML = StatusRate1;
+                }
+                if (postDetailResult.StatusRate2 != null) {
+                    StatusRate2 = postDetailResult.StatusRate2;
+                    document.getElementById("numberOfRates2").innerHTML = StatusRate2;
+                }
+                if (postDetailResult.StatusRate3 != null) {
+                    StatusRate3 = postDetailResult.StatusRate3;
+                    document.getElementById("numberOfRates3").innerHTML = StatusRate3;
+                }
+                if (postDetailResult.StatusRate4 != null) {
+                    StatusRate4 = postDetailResult.StatusRate4;
+                    document.getElementById("numberOfRates4").innerHTML = StatusRate4;
+                }
+                if (postDetailResult.StatusRate5 != null) {
+                    StatusRate5 = postDetailResult.StatusRate5;
+                    document.getElementById("numberOfRates5").innerHTML = StatusRate5;
+                }
+                else {
+                }
                 getComment();
+
             }
         });
+    }
+
+    function bubbleSort(a) {
+        var swapped;
+        do {
+            swapped = false;
+            for (var i = 0; i < a.length - 1; i++) {
+                if (a[i] > a[i + 1]) {
+                    var temp = a[i];
+                    a[i] = a[i + 1];
+                    a[i + 1] = temp;
+                    swapped = true;
+                }
+            }
+        } while (swapped);
     }
 
     function requestPurchase() {
@@ -367,7 +453,6 @@
                         var $tr = $('<tr>').append(
                             $('<td style="width: 30%; height:auto;">').text(item.CommentByUser),
                             $('<td style="width: 50%; height:auto;">').text(item.Comment),
-                            $('<td style="width: 10%; height:auto;">').append(item.btnEdit),
                             $('<td style="width: 10%; height:auto;">').append(item.btnDelete)
 
                         ).appendTo('#commentTableId');
@@ -431,7 +516,7 @@
             "backDrop": "static",
             "show": true
         });
-        
+
     }
 
 

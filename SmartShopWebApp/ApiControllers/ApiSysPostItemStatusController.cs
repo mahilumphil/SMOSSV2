@@ -14,7 +14,6 @@ namespace SmartShopWebApp.ApiControllers
 
     
 
-
         [HttpGet, Route("api/list/syspostitemstatus")]
         public List<Entities.SysPostItemStatus> listSysPostItemStatus()
         {

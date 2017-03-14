@@ -195,7 +195,7 @@ hr {
 
 #filterSearch{
     height:1px;
-    width: 130px;
+    width: 100%;
     box-sizing: content-box;
     border: 2px solid #ccc;
     border-radius: 4px;
@@ -214,6 +214,26 @@ hr {
     width: 80%;
 }
 
+#filterSearchs {
+    height:1px;
+    width: 50%;
+    box-sizing: content-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: whitesmoke;
+    background-image: url('/img/searchicon.png');
+    background-size:25px;
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 20px 20px 20px 40px;
+    -webkit-transition: width 0.5s ease-in-out;
+    transition: width 0.5s ease-in-out;
+}
+
+#filterSearchs:focus {
+    width: 80%;
+}
 
 .icon-bar {
     background-color:white;
@@ -256,7 +276,7 @@ hr {
 /*CAROUSEL*/
   .carousel-inner , .item ,#imgC{
       width: 100%;
-      height: 520px;
+      height: 400px;
       border-radius:0px;
       border:0px;
       left:0;
@@ -267,7 +287,7 @@ hr {
   #carouselContainer{
       border-radius:0px;
       width:100%;
-      height:530px;
+      height:410px;
   }
 
 
@@ -298,6 +318,11 @@ hr {
     width:100%;
     height:250px;
     
+}
+
+#HotDeals {
+    height:520px;
+    width:100%:
 }
 
 #indexDiscounted {
@@ -377,23 +402,44 @@ i:hover {
 }
 
 .btn-default {
-    font-size:12px;
+    left:0;
+    top:0;
+    bottom:0;
+    right:0;
+    margin:0;
+    border-radius:0px;
 }
 .btn-danger {
-    font-size:12px;
+    left:0;
+    top:0;
+    bottom:0;
+    right:0;
+    margin:0;
     border-radius:0px;
 }
 .btn-info {
-    font-size:12px;
+    left:0;
+    top:0;
+    bottom:0;
+    right:0;
+    margin:0;
     border-radius:0px;
 }
 .btn-primary{
+    left:0;
+    top:0;
+    bottom:0;
+    right:0;
+    margin:0;
     border-radius:0px;
-    font-size:12px;
 }
 
 .btn-success {
-    font-size:12px;
+    left:0;
+    top:0;
+    bottom:0;
+    right:0;
+    margin:0;
     width:auto;
     border-radius:0px;
 }
@@ -436,10 +482,25 @@ i:hover {
      color:white;
 }
 
-#listOfItem {
+
+#listOfAllItem {
     width:100%;
-    height:400px;
-    overflow:auto;
+    max-height:400px;
+}
+
+#hotDeals {
+    width:100%;
+    max-height:420px;
+}
+
+#mostViewItem {
+    width:100%;
+    max-height:150px;
+}
+
+#discountedItem {
+    width:100%;
+    max-height:150px;
 }
 
 .btn-lg {

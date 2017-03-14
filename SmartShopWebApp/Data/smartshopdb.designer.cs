@@ -1042,6 +1042,20 @@ namespace SmartShopWebApp.Data
 		
 		private string _Remarks;
 		
+		private System.Nullable<decimal> _StatusRate1;
+		
+		private System.Nullable<decimal> _StatusRate2;
+		
+		private System.Nullable<decimal> _StatusRate3;
+		
+		private System.Nullable<decimal> _StatusRate4;
+		
+		private System.Nullable<decimal> _StatusRate5;
+		
+		private string _Discount;
+		
+		private System.Nullable<decimal> _ItemView;
+		
 		private EntitySet<ActBuy> _ActBuys;
 		
 		private EntitySet<ActPostItemComment> _ActPostItemComments;
@@ -1080,6 +1094,20 @@ namespace SmartShopWebApp.Data
     partial void OnStatusIdChanged();
     partial void OnRemarksChanging(string value);
     partial void OnRemarksChanged();
+    partial void OnStatusRate1Changing(System.Nullable<decimal> value);
+    partial void OnStatusRate1Changed();
+    partial void OnStatusRate2Changing(System.Nullable<decimal> value);
+    partial void OnStatusRate2Changed();
+    partial void OnStatusRate3Changing(System.Nullable<decimal> value);
+    partial void OnStatusRate3Changed();
+    partial void OnStatusRate4Changing(System.Nullable<decimal> value);
+    partial void OnStatusRate4Changed();
+    partial void OnStatusRate5Changing(System.Nullable<decimal> value);
+    partial void OnStatusRate5Changed();
+    partial void OnDiscountChanging(string value);
+    partial void OnDiscountChanged();
+    partial void OnItemViewChanging(System.Nullable<decimal> value);
+    partial void OnItemViewChanged();
     #endregion
 		
 		public ActPostItem()
@@ -1325,6 +1353,146 @@ namespace SmartShopWebApp.Data
 					this._Remarks = value;
 					this.SendPropertyChanged("Remarks");
 					this.OnRemarksChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StatusRate1", DbType="Decimal(18,5)")]
+		public System.Nullable<decimal> StatusRate1
+		{
+			get
+			{
+				return this._StatusRate1;
+			}
+			set
+			{
+				if ((this._StatusRate1 != value))
+				{
+					this.OnStatusRate1Changing(value);
+					this.SendPropertyChanging();
+					this._StatusRate1 = value;
+					this.SendPropertyChanged("StatusRate1");
+					this.OnStatusRate1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StatusRate2", DbType="Decimal(18,5)")]
+		public System.Nullable<decimal> StatusRate2
+		{
+			get
+			{
+				return this._StatusRate2;
+			}
+			set
+			{
+				if ((this._StatusRate2 != value))
+				{
+					this.OnStatusRate2Changing(value);
+					this.SendPropertyChanging();
+					this._StatusRate2 = value;
+					this.SendPropertyChanged("StatusRate2");
+					this.OnStatusRate2Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StatusRate3", DbType="Decimal(18,5)")]
+		public System.Nullable<decimal> StatusRate3
+		{
+			get
+			{
+				return this._StatusRate3;
+			}
+			set
+			{
+				if ((this._StatusRate3 != value))
+				{
+					this.OnStatusRate3Changing(value);
+					this.SendPropertyChanging();
+					this._StatusRate3 = value;
+					this.SendPropertyChanged("StatusRate3");
+					this.OnStatusRate3Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StatusRate4", DbType="Decimal(18,5)")]
+		public System.Nullable<decimal> StatusRate4
+		{
+			get
+			{
+				return this._StatusRate4;
+			}
+			set
+			{
+				if ((this._StatusRate4 != value))
+				{
+					this.OnStatusRate4Changing(value);
+					this.SendPropertyChanging();
+					this._StatusRate4 = value;
+					this.SendPropertyChanged("StatusRate4");
+					this.OnStatusRate4Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StatusRate5", DbType="Decimal(18,5)")]
+		public System.Nullable<decimal> StatusRate5
+		{
+			get
+			{
+				return this._StatusRate5;
+			}
+			set
+			{
+				if ((this._StatusRate5 != value))
+				{
+					this.OnStatusRate5Changing(value);
+					this.SendPropertyChanging();
+					this._StatusRate5 = value;
+					this.SendPropertyChanged("StatusRate5");
+					this.OnStatusRate5Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Discount", DbType="NVarChar(255)")]
+		public string Discount
+		{
+			get
+			{
+				return this._Discount;
+			}
+			set
+			{
+				if ((this._Discount != value))
+				{
+					this.OnDiscountChanging(value);
+					this.SendPropertyChanging();
+					this._Discount = value;
+					this.SendPropertyChanged("Discount");
+					this.OnDiscountChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ItemView", DbType="Decimal(18,5)")]
+		public System.Nullable<decimal> ItemView
+		{
+			get
+			{
+				return this._ItemView;
+			}
+			set
+			{
+				if ((this._ItemView != value))
+				{
+					this.OnItemViewChanging(value);
+					this.SendPropertyChanging();
+					this._ItemView = value;
+					this.SendPropertyChanged("ItemView");
+					this.OnItemViewChanged();
 				}
 			}
 		}

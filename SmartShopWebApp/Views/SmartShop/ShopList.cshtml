@@ -30,7 +30,7 @@
         </div>
         <div class="col-md-6">
             <div align="right">
-                <input type="search" name="name" value="" id="filterSearch" class="form-control" placeholder="Looking for Item?" />
+                <input type="search" name="name" value="" id="filterSearchs" class="form-control" placeholder="Looking for Item?" />
             </div>
         </div>
     </div>
@@ -406,7 +406,6 @@
             return !filterText || (item.ItemName.toLowerCase().indexOf(filterText) > -1)
                                || (item.PostedByUser.toLowerCase().indexOf(filterText) > -1)
                                || (item.Status.toLowerCase().indexOf(filterText) > -1)
-                               ||  (item.Price.toLowerCase().indexOf(filterText) > -1);
         }
 
         //Flex Grid

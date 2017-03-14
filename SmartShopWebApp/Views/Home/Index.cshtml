@@ -9,7 +9,7 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-7">
                 <div class="panel panel-default" id="indexItem">
                     <div class="panel-heading">
                         <div class="row">
@@ -29,7 +29,100 @@
                         <div id="listOfAllItem"></div>
                     </div>
                 </div>
+            </div>
+            <div class="col-md-5">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4>Lates Gadget Released</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="container" id="carouselContainer">
+                            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                                <!-- Indicators -->
+                                <ol class="carousel-indicators">
+                                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                                    <li data-target="#myCarousel" data-slide-to="3"></li>
+                                    <li data-target="#myCarousel" data-slide-to="4"></li>
+                                    <li data-target="#myCarousel" data-slide-to="5"></li>
+                                    <li data-target="#myCarousel" data-slide-to="6"></li>
+                                    <li data-target="#myCarousel" data-slide-to="7"></li>
+                                    <li data-target="#myCarousel" data-slide-to="8"></li>
+                                    <li data-target="#myCarousel" data-slide-to="9"></li>
+                                    <li data-target="#myCarousel" data-slide-to="10"></li>
+                                </ol>
 
+                                <!-- Wrapper for slides -->
+                                <div class="carousel-inner" role="listbox">
+                                    <div class="item active">
+                                        <img src="~/img/img/asus_zenfone_AR.jpg" alt="Asus_Zenfone" id="imgC" style="width:100%; height:100%;" class="img-responsive">
+                                        <div class="carousel-caption">Asus Zenfone AR</div>
+                                    </div>
+
+                                    <div class="item">
+                                        <img src="~/img/img/dell2in1laptop.png" alt="Dell2in1" id="imgC" style="width:100%; height:100%;" class="img-responsive">
+                                        <div class="carousel-caption">Dell 2 in 1 Laptop</div>
+                                    </div>
+
+                                    <div class="item">
+                                        <img src="~/img/img/Intel_Credit_card_sized_computer.png" id="imgC" alt="Intel" style="width:100%; height:100%;" class="img-responsive">
+                                        <div class="carousel-caption">Intel Credit Card Sized Computer</div>
+                                    </div>
+
+                                    <div class="item">
+                                        <img src="~/img/img/Lenovo_smart_assistant.png" alt="Lenovo" id="imgC" style="width:100%; height:100%;" class="img-responsive">
+                                        <div class="caption">Lenovo Smart Assistant</div>
+                                    </div>
+                                    <div class="item">
+                                        <img src="~/img/img/LG_w-series_tv.jpg" alt="LG" id="imgC" style="width:100%; height:100%;" class="img-responsive">
+                                        <div class="carousel-caption">LG W-series TV</div>
+                                    </div>
+
+                                    <div class="item">
+                                        <img src="~/img/img/mattel_aristotle.jpeg" alt="Mattel" id="imgC" style="width:100%; height:100%;" class="img-responsive">
+                                        <div class="carousel-caption">Mattel Aristotle</div>
+                                    </div>
+
+                                    <div class="item">
+                                        <img src="~/img/img/mohu_airwave.jpg" alt="Mohu" id="imgC" style="width:100%; height:100%;" class="img-responsive">
+                                        <div class="carousel-caption">Mohu Airwave</div>
+                                    </div>
+
+                                    <div class="item">
+                                        <img src="~/img/img/noka2017.jpg" alt="Nokia2017" id="imgC" style="width:100%; height:100%;" class="img-responsive">
+                                        <div class="carousel-caption">3310 Nokia New Released</div>
+                                    </div>
+
+                                    <div class="item">
+                                        <img src="~/img/img/powerRay_aquatic_drone.png" alt="powerRay" id="imgC" style="width:100%; height:100%;" class="img-responsive">
+                                        <div class="carousel-caption">Power Ray Aquatic Drone</div>
+                                    </div>
+
+                                    <div class="item">
+                                        <img src="~/img/img/razer_project_valerie.png" alt="razerValerie" id="imgC" style="width:100%; height:100%;" class="img-responsive">
+                                        <div class="carousel-caption">Razer Project Valerie</div>
+                                    </div>
+
+                                    <div class="item">
+                                        <img src="~/img/img/toyota_concept_i.jpg" alt="toyotaConceptI" id="imgC" style="width:100%; height:100%;" class="img-responsive">
+                                        <div class="carousel-caption">Toyota Concept I</div>
+                                    </div>
+                                </div>
+
+                                <!-- Left and right controls -->
+                                <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev" id="a">
+                                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next" id="a">
+                                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row">
@@ -39,7 +132,7 @@
                         <h4>Most Viewed Items</h4>
                     </div>
                     <div class="panel-body">
-                        <p>Most item Viewed</p>
+                        <div id="mostViewItem"></div>
                     </div>
                 </div>
                 <div class="panel panel-default" id="indexDiscounted">
@@ -47,226 +140,163 @@
                         <h4>Discounted Items</h4>
                     </div>
                     <div class="panel-body">
-                        <p>Most item Viewed</p>
+                        <div id="discountedItem"></div>
                     </div>
                 </div>
             </div>
             <div class="col-md-7">
-                <div class="container" id="carouselContainer">
-                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                        <!-- Indicators -->
-                        <ol class="carousel-indicators">
-                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                            <li data-target="#myCarousel" data-slide-to="1"></li>
-                            <li data-target="#myCarousel" data-slide-to="2"></li>
-                            <li data-target="#myCarousel" data-slide-to="3"></li>
-                            <li data-target="#myCarousel" data-slide-to="4"></li>
-                            <li data-target="#myCarousel" data-slide-to="5"></li>
-                            <li data-target="#myCarousel" data-slide-to="6"></li>
-                            <li data-target="#myCarousel" data-slide-to="7"></li>
-                            <li data-target="#myCarousel" data-slide-to="8"></li>
-                            <li data-target="#myCarousel" data-slide-to="9"></li>
-                            <li data-target="#myCarousel" data-slide-to="10"></li>
-                        </ol>
+                <div class="panel panel-default" id="HotDeals">
+                    <div class="panel-heading">
+                        <h4>Hot Deals</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div id="hotDeals"></div>
+                    </div>
+                </div>
 
-                        <!-- Wrapper for slides -->
-                        <div class="carousel-inner" role="listbox">
-                            <div class="item active">
-                                <img src="~/img/img/asus_zenfone_AR.jpg" alt="Asus_Zenfone" id="imgC" style="width:100%; height:100%;" class="img-responsive">
-                                <div class="carousel-caption">Asus Zenfone AR</div>
-                            </div>
+            </div>
 
-                            <div class="item">
-                                <img src="~/img/img/dell2in1laptop.png" alt="Dell2in1" id="imgC" style="width:100%; height:100%;" class="img-responsive">
-                                <div class="carousel-caption">Dell 2 in 1 Laptop</div>
-                            </div>
-
-                            <div class="item">
-                                <img src="~/img/img/Intel_Credit_card_sized_computer.png" id="imgC" alt="Intel" style="width:100%; height:100%;" class="img-responsive">
-                                <div class="carousel-caption">Intel Credit Card Sized Computer</div>
-                            </div>
-
-                            <div class="item">
-                                <img src="~/img/img/Lenovo_smart_assistant.png" alt="Lenovo" id="imgC" style="width:100%; height:100%;" class="img-responsive">
-                                <div class="caption">Lenovo Smart Assistant</div>
-                            </div>
-                            <div class="item">
-                                <img src="~/img/img/LG_w-series_tv.jpg" alt="LG" id="imgC" style="width:100%; height:100%;" class="img-responsive">
-                                <div class="carousel-caption">LG W-series TV</div>
-                            </div>
-
-                            <div class="item">
-                                <img src="~/img/img/mattel_aristotle.jpeg" alt="Mattel" id="imgC" style="width:100%; height:100%;" class="img-responsive">
-                                <div class="carousel-caption">Mattel Aristotle</div>
-                            </div>
-
-                            <div class="item">
-                                <img src="~/img/img/mohu_airwave.jpg" alt="Mohu" id="imgC" style="width:100%; height:100%;" class="img-responsive">
-                                <div class="carousel-caption">Mohu Airwave</div>
-                            </div>
-
-                            <div class="item">
-                                <img src="~/img/img/noka2017.jpg" alt="Nokia2017" id="imgC" style="width:100%; height:100%;" class="img-responsive">
-                                <div class="carousel-caption">3310 Nokia New Released</div>
-                            </div>
-
-                            <div class="item">
-                                <img src="~/img/img/powerRay_aquatic_drone.png" alt="powerRay" id="imgC" style="width:100%; height:100%;" class="img-responsive">
-                                <div class="carousel-caption">Power Ray Aquatic Drone</div>
-                            </div>
-
-                            <div class="item">
-                                <img src="~/img/img/razer_project_valerie.png" alt="razerValerie" id="imgC" style="width:100%; height:100%;" class="img-responsive">
-                                <div class="carousel-caption">Razer Project Valerie</div>
-                            </div>
-
-                            <div class="item">
-                                <img src="~/img/img/toyota_concept_i.jpg" alt="toyotaConceptI" id="imgC" style="width:100%; height:100%;" class="img-responsive">
-                                <div class="carousel-caption">Toyota Concept I</div>
+        </div>
+    </div>
+    <!--Logged In -->
+    <div class="modal fade" id="buyItemModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Purchase</h4>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="modal-body">
+                            <div class="panel-default">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Quantity</label>
+                                            <input type="number" name="name" value=" " id="Quantity" class="form-control" />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>Partial Payment</label>
+                                            <input type="number" name="name" value=" " id="PartialAmount" class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel-heading">
+                                    <h4>Message</h4>
+                                </div>
+                                <div class="panel-body">
+                                    <textarea rows="10" class="form-control" id="Message"></textarea>
+                                </div>
                             </div>
                         </div>
-
-                        <!-- Left and right controls -->
-                        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev" id="a">
-                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next" id="a">
-                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary btn-sm" onclick="requestPurchase()"><i class="fa fa-shopping-cart"></i> Request To Purchase</button>
+                        <button class="btn btn-warning btn-sm" id="" data-dismiss="modal"><i class="fa fa-close"></i> Cancel</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-        <!--Logged In -->
-        <div class="modal fade" id="buyItemModal" role="dialog">
-            <div class="modal-dialog modal-lg">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="panel panel-info">
-                        <div class="panel-heading">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">Purchase</h4>
-                            </div>
-                        </div>
-                        <div class="panel-body">
-                            <div class="modal-body">
-                                <div class="panel-default">
-                                    <div class="panel-body">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Quantity</label>
-                                                <input type="number" name="name" value=" " id="Quantity" class="form-control" />
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label>Partial Payment</label>
-                                                <input type="number" name="name" value=" " id="PartialAmount" class="form-control" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="panel-heading">
-                                        <h4>Message</h4>
-                                    </div>
-                                    <div class="panel-body">
-                                        <textarea rows="10" class="form-control" id="Message"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-primary btn-sm" onclick="requestPurchase()"><i class="fa fa-shopping-cart"></i> Request To Purchase</button>
-                            <button class="btn btn-warning btn-sm" id="" data-dismiss="modal"><i class="fa fa-close"></i> Cancel</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    
-        <!--Not Logged In-->
-        <div class="modal fade" id="viewItemDetail" role="dialog">
-            <div class="modal-dialog modal-lg">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="panel panel-info">
-                        <div class="panel-heading">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">Item Detail<i class="fa fa-shopping-cart"></i></h4>
-                            </div>
-                        </div>
-                        <div class="panel-body">
-                            <div class="modal-body">
-                                <div class="col-md-5">
-                                    <label>Item</label>
-                                    <input type="text" name="name" value=" " id="ItemName" class="form-control" disabled />
-                                    @*<div id="cboItemList" style="width:100%;">
-                                        </div>*@
-                                    <div id="divSeparator"></div>
-                                    <img src="#" class="img-responsive" id="imageDisplay" />
-                                </div>
-                                <div class="col-md-7">
-                                    <label>Specification</label>
-                                    <textarea rows="7" class="form-control" id="Specification" disabled></textarea>
-                                    <label>Remarks</label>
-                                    <textarea rows="7" class="form-control" id="Remarks" disabled></textarea>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>Price</label>
-                                            <input type="text" name="name" value=" " id="Price" class="form-control" disabled />
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label>Quantity</label>
-                                            <input type="text" name="name" value=" " id="Quantity" class="form-control" disabled />
-                                            @*<div id="cboQuantity" style="width:100%;">
-                                                </div>*@
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>Payment Type</label>
-                                            <input type="text" name="name" value=" " id="PayType" class="form-control" disabled />
-                                            @*<div id="cboPayType" style="width:100%;" disabled>
-                                                </div>*@
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label>Status</label>
-                                            <input type="text" name="name" value=" " id="Status" class="form-control" disabled />
-                                            @*<div id="cboStatus" style="width:100%;" disabled>
 
-                                                </div>*@
-                                        </div>
+    <!--Not Logged In-->
+    <div class="modal fade" id="viewItemDetail" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Item Detail<i class="fa fa-shopping-cart"></i></h4>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="modal-body">
+                            <div class="col-md-5">
+                                <label>Item</label>
+                                <input type="text" name="name" value=" " id="ItemName" class="form-control" disabled />
+                                @*<div id="cboItemList" style="width:100%;">
+                                    </div>*@
+                                <div id="divSeparator"></div>
+                                <img src="#" class="img-responsive" id="imageDisplay" />
+                            </div>
+                            <div class="col-md-7">
+                                <label>Specification</label>
+                                <textarea rows="7" class="form-control" id="Specification" disabled></textarea>
+                                <label>Remarks</label>
+                                <textarea rows="7" class="form-control" id="Remarks" disabled></textarea>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Price</label>
+                                        <input type="text" name="name" value=" " id="Price" class="form-control" disabled />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Quantity</label>
+                                        <input type="text" name="name" value=" " id="Quantity" class="form-control" disabled />
+                                        @*<div id="cboQuantity" style="width:100%;">
+                                            </div>*@
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>Payment Type</label>
+                                        <input type="text" name="name" value=" " id="PayType" class="form-control" disabled />
+                                        @*<div id="cboPayType" style="width:100%;" disabled>
+                                            </div>*@
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Status</label>
+                                        <input type="text" name="name" value=" " id="Status" class="form-control" disabled />
+                                        @*<div id="cboStatus" style="width:100%;" disabled>
+
+                                            </div>*@
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Discount</label>
+                                        <input type="text" name="name" value=" " id="Discount" class="form-control" disabled />
+                                        @*<div id="cboStatus" style="width:100%;" disabled>
+
+                                            </div>*@
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="modal-footer">
-                            <a class="btn btn-success btn-sm" onclick="buyItem()" href="../Account/Register"><i class="fa fa-check-square-o"></i> Buy</a>
-                            <button class="btn btn-warning btn-sm" id="" data-dismiss="modal"><i class="fa fa-close"></i> Cancel</button>
-                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn btn-success btn-sm" onclick="buyItem()" href="../Account/Register"><i class="fa fa-check-square-o"></i> Buy</a>
+                        <button class="btn btn-warning btn-sm" id="" data-dismiss="modal"><i class="fa fa-close"></i> Cancel</button>
                     </div>
                 </div>
             </div>
         </div>
-    
-    
+    </div>
+
+
 </body>
 </html>
 <script type="text/javascript">
-    var postDetailListCollection;
-    var postDetailGridList;
-    var itemDetailCollections;
+    var postDetailListCollectionAllItem;
+    var postDetailGridListAllItem;
+    var postDetailListCollectionMostViewItem;
+    var postDetailGridListMostViewItem;
+    var postDetailListCollectionDiscountedItem;
+    var postDetailGridListDiscountedItem;
+    var postDetailListCollectionHotDeals;
+    var postDetailGridListHotDeals;
     var currentItem;
     var postDetail;
     var itemId;
-    var cboStatus;
-    var cboQuantity;
-    var cboPayType;
-    var payTypeCategory;
-    var cboStartDate;
-    var cboEndDate;
+    //var cboStatus;
+    //var cboQuantity;
+    //var cboPayType;
+    //var payTypeCategory;
+    //var cboStartDate;
+    //var cboEndDate;
     //View Item Detail Modal For Logged In
     function buyItemModal() {
         $("#buyItemModal").modal({
@@ -275,15 +305,39 @@
         });
     }
 
+    //Increment Item View
+    function itemViewUp(number) {
+        $.ajax({
+            type: "PUT",
+            url: '/api/update/postitem/' + itemId + '/' + number,
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            statusCode: {
+                200: function () {
+                    location.reload();
+                },
+                400: function (message) {
+                    toastr.error(message.responseText.replace(/"/g, ""), "Bad Request");
+                }
+            }
+        });
+
+
+    }
+
+
     //View Item Detail Modal For Not Logged In
     function viewItemDetail() {
         $("#viewItemDetail").modal({
             "backDrop": "static",
             "show": true
         });
-        postDetailListCollection.editItem(postDetailListCollection.currentItem);
-        currentItem = postDetailListCollection.currentEditItem;
+        postDetailListCollectionAllItem.editItem(postDetailListCollectionAllItem.currentItem);
+        currentItem = postDetailListCollectionAllItem.currentEditItem;
         itemId = currentItem.Id;
+        //postDetailListCollection.editItem(postDetailListCollection.currentItem);
+        //currentItem = postDetailListCollection.currentEditItem;
+        //itemId = currentItem.Id;
 
         document.getElementById("ItemName").value = currentItem.ItemName;
         document.getElementById("Specification").value = currentItem.Specification;
@@ -292,6 +346,7 @@
         document.getElementById("Quantity").value = currentItem.Quantity;
         document.getElementById("PayType").value = currentItem.PayType;
         document.getElementById("Status").value = currentItem.Status;
+        document.getElementById("Discount").value = currentItem.Discount;
         document.getElementById("imageDisplay").src = "data:image/jpeg;base64," + currentItem.PhotoValue;
     }
 
@@ -327,138 +382,490 @@
             }
         });
     }
-
-
-
-    function getPostDetail() {
+    //Hot Deals Item
+    function getPostDetailHotDeals() {
 
         //var startDateValue = [cboStartDate.value.getMonth() + 1, cboStartDate.value.getDate(), cboStartDate.value.getFullYear()].join('-');
         //var endDateValue = [cboEndDate.value.getMonth() + 1, cboEndDate.value.getDate(), cboEndDate.value.getFullYear()].join('-');
 
 
-        postDetail = new wijmo.collections.ObservableArray;
+        postDetailHotDeals = new wijmo.collections.ObservableArray;
         $.ajax({
             type: "GET",
             url: '/api/list/postlist/index',
             contentType: "application/json;charset=utf-8",
-            success: function (postDetailList) {
-                for (i = 0; i < postDetailList.length; i++) {
+            success: function (postDetailListHotDeals) {
+                for (i = 0; i < postDetailListHotDeals.length; i++) {
                     var imageElement = document.createElement("images");
                     var imageData = new Image();
-                    imageData.src = "data:image/jpeg;base64," + postDetailList[i]["PhotoValue"];
+                    imageData.src = "data:image/jpeg;base64," + postDetailListHotDeals[i]["PhotoValue"];
                     imageElement.appendChild(imageData);
                     var photoDivElement = document.createElement("DIV").appendChild(imageElement);
-                    var imageSRCData = "data:image/jpeg;base64," + postDetailList[i]["PhotoValue"];
+                    var imageSRCData = "data:image/jpeg;base64," + postDetailListHotDeals[i]["PhotoValue"];
 
-                    var postNewDate = new Date(postDetailList[i]["PostDate"]);
-                    var postDateValue = [postNewDate.getMonth() + 1, postNewDate.getDate(), postNewDate.getFullYear()].join('-');
+                    //var postNewDate = new Date(postDetailList[i]["PostDate"]);
+                    //var postDateValue = [postNewDate.getMonth() + 1, postNewDate.getDate(), postNewDate.getFullYear()].join('-');
 
 
-                    postDetail.push({
-                        Id: postDetailList[i]["Id"],
-                        PostedByUser: postDetailList[i]["PostedByUserId"],
-                        ItemName: postDetailList[i]["ItemName"],
-                        Price: postDetailList[i]["Price"],
-                        Specification: postDetailList[i]["Specification"],
-                        Remarks: postDetailList[i]["Remarks"],
-                        PayType: postDetailList[i]["PayType"],
-                        Status: postDetailList[i]["Status"],
-                        IsApproved: postDetailList[i]["IsApproved"],
-                        Quantity: postDetailList[i]["Quantity"],
-                        btnView: "<button onclick='viewItemDetail()' class='btn btn-primary btn-block-xs form-control'><i class='fa fa-eye'></i> View</button>",
-                        btnRequest: "<button onclick='requestPurchase()' class='btn btn-success btn-block-xs form-control'><i class='fa fa-shopping-cart'></i> Buy</button>",
-                        PhotoValue: postDetailList[i]["PhotoValue"],
-                        PostDate: postDateValue,
+                    postDetailHotDeals.push({
+                        Id: postDetailListHotDeals[i]["Id"],
+                        PostedByUser: postDetailListHotDeals[i]["PostedByUser"],
+                        ItemName: postDetailListHotDeals[i]["ItemName"],
+                        Price: postDetailListHotDeals[i]["Price"],
+                        Specification: postDetailListHotDeals[i]["Specification"],
+                        Remarks: postDetailListHotDeals[i]["Remarks"],
+                        PayType: postDetailListHotDeals[i]["PayType"],
+                        Status: postDetailListHotDeals[i]["Status"],
+                        Discount: postDetailListHotDeals[i]["Discount"],
+                        IsApproved: postDetailListHotDeals[i]["IsApproved"],
+                        Quantity: postDetailListHotDeals[i]["Quantity"],
+                        btnView: "<button onclick='viewItemDetail()' class='btn btn-primary btn-block-xs form-control'><i class='fa fa-eye'></i>View</button>",
+                        btnRequest: "<button onclick='requestPurchase()' class='btn btn-success btn-block-xs form-control'><i class='fa fa-shopping-cart'></i>Buy</button>",
+                        PhotoValue: "<img class='img-responsive' style='height:100px; width:120px;margin:auto;' src='" + imageSRCData + "' />",
+                        //PostDate: postDateValue,
                     });
                 }
             }
         });
-        console.log(postDetail);
-        return postDetail;
+        return postDetailHotDeals;
+    }
+
+
+    //Discounted Item
+    function getPostDetailDiscountedItem() {
+
+        //var startDateValue = [cboStartDate.value.getMonth() + 1, cboStartDate.value.getDate(), cboStartDate.value.getFullYear()].join('-');
+        //var endDateValue = [cboEndDate.value.getMonth() + 1, cboEndDate.value.getDate(), cboEndDate.value.getFullYear()].join('-');
+
+
+        postDetailDiscountedItem = new wijmo.collections.ObservableArray;
+        $.ajax({
+            type: "GET",
+            url: '/api/list/postlist/index',
+            contentType: "application/json;charset=utf-8",
+            success: function (postDetailListDiscountedItem) {
+                for (i = 0; i < postDetailListDiscountedItem.length; i++) {
+                    var imageElement = document.createElement("images");
+                    var imageData = new Image();
+                    imageData.src = "data:image/jpeg;base64," + postDetailListDiscountedItem[i]["PhotoValue"];
+                    imageElement.appendChild(imageData);
+                    var photoDivElement = document.createElement("DIV").appendChild(imageElement);
+                    var imageSRCData = "data:image/jpeg;base64," + postDetailListDiscountedItem[i]["PhotoValue"];
+
+                    //var postNewDate = new Date(postDetailList[i]["PostDate"]);
+                    //var postDateValue = [postNewDate.getMonth() + 1, postNewDate.getDate(), postNewDate.getFullYear()].join('-');
+
+
+                    postDetailDiscountedItem.push({
+                        Id: postDetailListDiscountedItem[i]["Id"],
+                        PostedByUser: postDetailListDiscountedItem[i]["PostedByUser"],
+                        ItemName: postDetailListDiscountedItem[i]["ItemName"],
+                        Price: postDetailListDiscountedItem[i]["Price"],
+                        Specification: postDetailListDiscountedItem[i]["Specification"],
+                        Remarks: postDetailListDiscountedItem[i]["Remarks"],
+                        PayType: postDetailListDiscountedItem[i]["PayType"],
+                        Status: postDetailListDiscountedItem[i]["Status"],
+                        Discount: postDetailListDiscountedItem[i]["Discount"],
+                        IsApproved: postDetailListDiscountedItem[i]["IsApproved"],
+                        Quantity: postDetailListDiscountedItem[i]["Quantity"],
+                        btnView: "<button onclick='viewItemDetail()' class='btn btn-primary btn-block-xs form-control'><i class='fa fa-eye'></i>View</button>",
+                        btnRequest: "<button onclick='requestPurchase()' class='btn btn-success btn-block-xs form-control'><i class='fa fa-shopping-cart'></i>Buy</button>",
+                        PhotoValue: "<img class='img-responsive' style='height:100px; width:120px;margin:auto;' src='" + imageSRCData + "' />",
+                        //PostDate: postDateValue,
+                    });
+                }
+            }
+        });
+        return postDetailDiscountedItem;
+    }
+
+
+    //Most View Item
+    function getPostDetailMostViewItem() {
+
+        //var startDateValue = [cboStartDate.value.getMonth() + 1, cboStartDate.value.getDate(), cboStartDate.value.getFullYear()].join('-');
+        //var endDateValue = [cboEndDate.value.getMonth() + 1, cboEndDate.value.getDate(), cboEndDate.value.getFullYear()].join('-');
+
+
+        postDetailMostViewItem = new wijmo.collections.ObservableArray;
+        $.ajax({
+            type: "GET",
+            url: '/api/list/postlist/index',
+            contentType: "application/json;charset=utf-8",
+            success: function (postDetailListMostViewItem) {
+                for (i = 0; i < postDetailListMostViewItem.length; i++) {
+                    var imageElement = document.createElement("images");
+                    var imageData = new Image();
+                    imageData.src = "data:image/jpeg;base64," + postDetailListMostViewItem[i]["PhotoValue"];
+                    imageElement.appendChild(imageData);
+                    var photoDivElement = document.createElement("DIV").appendChild(imageElement);
+                    var imageSRCData = "data:image/jpeg;base64," + postDetailListMostViewItem[i]["PhotoValue"];
+
+                    //var postNewDate = new Date(postDetailList[i]["PostDate"]);
+                    //var postDateValue = [postNewDate.getMonth() + 1, postNewDate.getDate(), postNewDate.getFullYear()].join('-');
+
+
+                    postDetailMostViewItem.push({
+                        Id: postDetailListMostViewItem[i]["Id"],
+                        PostedByUser: postDetailListMostViewItem[i]["PostedByUser"],
+                        ItemName: postDetailListMostViewItem[i]["ItemName"],
+                        Price: postDetailListMostViewItem[i]["Price"],
+                        Specification: postDetailListMostViewItem[i]["Specification"],
+                        Remarks: postDetailListMostViewItem[i]["Remarks"],
+                        PayType: postDetailListMostViewItem[i]["PayType"],
+                        Status: postDetailListMostViewItem[i]["Status"],
+                        Discount: postDetailListMostViewItem[i]["Discount"],
+                        IsApproved: postDetailListMostViewItem[i]["IsApproved"],
+                        Quantity: postDetailListMostViewItem[i]["Quantity"],
+                        btnView: "<button onclick='viewItemDetail()' class='btn btn-primary btn-block-xs form-control'><i class='fa fa-eye'></i>View</button>",
+                        btnRequest: "<button onclick='requestPurchase()' class='btn btn-success btn-block-xs form-control'><i class='fa fa-shopping-cart'></i>Buy</button>",
+                        PhotoValue: "<img class='img-responsive' style='height:100px; width:120px;margin:auto;' src='" + imageSRCData + "' />",
+                        //PostDate: postDateValue,
+                    });
+                }
+            }
+        });
+        return postDetailMostViewItem;
+    }
+
+
+
+    //All Item
+    function getPostDetailAllItem() {
+
+        //var startDateValue = [cboStartDate.value.getMonth() + 1, cboStartDate.value.getDate(), cboStartDate.value.getFullYear()].join('-');
+        //var endDateValue = [cboEndDate.value.getMonth() + 1, cboEndDate.value.getDate(), cboEndDate.value.getFullYear()].join('-');
+
+
+        postDetailAllItem = new wijmo.collections.ObservableArray;
+        $.ajax({
+            type: "GET",
+            url: '/api/list/postlist/index',
+            contentType: "application/json;charset=utf-8",
+            success: function (postDetailListAllItem) {
+                for (i = 0; i < postDetailListAllItem.length; i++) {
+                    var imageElement = document.createElement("images");
+                    var imageData = new Image();
+                    imageData.src = "data:image/jpeg;base64," + postDetailListAllItem[i]["PhotoValue"];
+                    imageElement.appendChild(imageData);
+                    var photoDivElement = document.createElement("DIV").appendChild(imageElement);
+                    var imageSRCData = "data:image/jpeg;base64," + postDetailListAllItem[i]["PhotoValue"];
+
+                    //var postNewDate = new Date(postDetailList[i]["PostDate"]);
+                    //var postDateValue = [postNewDate.getMonth() + 1, postNewDate.getDate(), postNewDate.getFullYear()].join('-');
+
+
+                    postDetailAllItem.push({
+                        Id: postDetailListAllItem[i]["Id"],
+                        PostedByUser: postDetailListAllItem[i]["PostedByUser"],
+                        ItemName: postDetailListAllItem[i]["ItemName"],
+                        Price: postDetailListAllItem[i]["Price"],
+                        Specification: postDetailListAllItem[i]["Specification"],
+                        Remarks: postDetailListAllItem[i]["Remarks"],
+                        PayType: postDetailListAllItem[i]["PayType"],
+                        Status: postDetailListAllItem[i]["Status"],
+                        Discount: postDetailListAllItem[i]["Discount"],
+                        IsApproved: postDetailListAllItem[i]["IsApproved"],
+                        Quantity: postDetailListAllItem[i]["Quantity"],
+                        btnView: "<button onclick='viewItemDetail()' class='btn btn-primary btn-block-xs form-control'><i class='fa fa-eye'></i>View</button>",
+                        btnRequest: "<button onclick='requestPurchase()' class='btn btn-success btn-block-xs form-control'><i class='fa fa-shopping-cart'></i>Buy</button>",
+                        PhotoValue: "<img class='img-responsive' style='height:100px; width:120px;margin:auto;' src='" + imageSRCData + "' />",
+                        //PostDate: postDateValue,
+                    });
+                }
+            }
+        });
+        return postDetailAllItem;
     }
 
     function requestPurchase() {
-        postDetailListCollection.editItem(postDetailListCollection.currentItem);
-        currentItem = postDetailListCollection.currentEditItem;
+        postDetailListCollectionAllItem.editItem(postDetailListCollectionAllItem.currentItem);
+        currentItem = postDetailListCollectionAllItem.currentEditItem;
         window.location = "/SmartShop/PostDetail?postid=" + currentItem.Id;
     }
 
-    //get PayType ComboBox
-    function getPayType() {
-        payTypeCategory = new wijmo.collections.ObservableArray;
-        $.ajax({
-            type: "GET",
-            url: '/api/list/syspaytype',
-            contentType: "application/json;charset=utf-8",
-            success: function (payTypeCategoryList) {
-                for (i = 0; i < payTypeCategoryList.length; i++) {
-                    payTypeCategory.push({
-                        Id: payTypeCategoryList[i]["Id"],
-                        PayType: payTypeCategoryList[i]["PayType"],
-                    });
-                }
-                cboPayType.dispose();
-                cboPayType = new wijmo.input.ComboBox("#cboPayType", {
-                    itemsSource: payTypeCategory,
-                    selectedValuePath: "PayType",
-                    displayMemberPath: "PayType"
-                });
-            }
-        });
-    }
+    ////get PayType ComboBox
+    //function getPayType() {
+    //    payTypeCategory = new wijmo.collections.ObservableArray;
+    //    $.ajax({
+    //        type: "GET",
+    //        url: '/api/list/syspaytype',
+    //        contentType: "application/json;charset=utf-8",
+    //        success: function (payTypeCategoryList) {
+    //            for (i = 0; i < payTypeCategoryList.length; i++) {
+    //                payTypeCategory.push({
+    //                    Id: payTypeCategoryList[i]["Id"],
+    //                    PayType: payTypeCategoryList[i]["PayType"],
+    //                });
+    //            }
+    //            cboPayType.dispose();
+    //            cboPayType = new wijmo.input.ComboBox("#cboPayType", {
+    //                itemsSource: payTypeCategory,
+    //                selectedValuePath: "PayType",
+    //                displayMemberPath: "PayType"
+    //            });
+    //        }
+    //    });
+    //}
 
-    //Get Status Category
-    function getStatusCategory() {
-        statusCategory = new wijmo.collections.ObservableArray;
-        $.ajax({
-            type: "GET",
-            url: '/api/list/syspostitemstatus',
-            contentType: "application/json;charset=utf-8",
-            success: function (statusCategoryList) {
-                for (i = 0; i < statusCategoryList.length; i++) {
-                    statusCategory.push({
-                        Id: statusCategoryList[i]["Id"],
-                        Status: statusCategoryList[i]["Status"],
-                        IsReserved: statusCategoryList[i]["IsReserved"],
-                        IsBought: statusCategoryList[i]["IsBought"],
-                        IsAvailable: statusCategoryList[i]["IsAvailable"],
-                    });
-                }
-                cboStatus.dispose();
-                cboStatus = new wijmo.input.ComboBox("#cboStatus", {
-                    itemsSource: statusCategory,
-                    selectedValuePath: "Status",
-                    displayMemberPath: "Status"
-                });
-            }
-        });
-    }
-
-    function createFlexGrid() {
-        postDetailListCollection = new wijmo.collections.CollectionView(getPostDetail());
+    ////Get Status Category
+    //function getStatusCategory() {
+    //    statusCategory = new wijmo.collections.ObservableArray;
+    //    $.ajax({
+    //        type: "GET",
+    //        url: '/api/list/syspostitemstatus',
+    //        contentType: "application/json;charset=utf-8",
+    //        success: function (statusCategoryList) {
+    //            for (i = 0; i < statusCategoryList.length; i++) {
+    //                statusCategory.push({
+    //                    Id: statusCategoryList[i]["Id"],
+    //                    Status: statusCategoryList[i]["Status"],
+    //                    IsReserved: statusCategoryList[i]["IsReserved"],
+    //                    IsBought: statusCategoryList[i]["IsBought"],
+    //                    IsAvailable: statusCategoryList[i]["IsAvailable"],
+    //                });
+    //            }
+    //            cboStatus.dispose();
+    //            cboStatus = new wijmo.input.ComboBox("#cboStatus", {
+    //                itemsSource: statusCategory,
+    //                selectedValuePath: "Status",
+    //                displayMemberPath: "Status"
+    //            });
+    //        }
+    //    });
+    //}
+    function createFlexGridHotDeals() {
+        postDetailListCollectionHotDeals = new wijmo.collections.CollectionView(getPostDetailHotDeals());
 
         var filterText = '';
         $('#filterSearch').keyup(function () {
             filterText = this.value.toLowerCase();
-            postDetailListCollection.refresh();
+            postDetailListCollectionHotDeals.refresh();
         });
 
-        postDetailListCollection.filter = function (item) {
+
+        postDetailListCollectionHotDeals.filter = function (item) {
             return !filterText || (item.ItemName.toLowerCase().indexOf(filterText) > -1)
                                || (item.PostedByUser.toLowerCase().indexOf(filterText) > -1)
                                || (item.Status.toLowerCase().indexOf(filterText) > -1)
-                               || (item.Price.toLowerCase().indexOf(filterText) > -1);
+                               || (toString(item.Price).toLowerCase().indexOf(filterText) > -1);
         }
 
         //Flex Grid
-        postDetailGridList = new wijmo.grid.FlexGrid("#listOfAllItem");
-        postDetailGridList.initialize({
+        postDetailGridListHotDeals = new wijmo.grid.FlexGrid("#hotDeals");
+        postDetailGridListHotDeals.initialize({
             columns: [
                 {
-                    "header": "Detail",
+                    "header": "Item Name",
+                    "binding": "ItemName",
+                    "allowSorting": true,
+                    "width": "3*",
+                    "allowResizing": true,
+                    "allowSorting": false,
+                    "isContentHtml": true
+                },
+                {
+
+                    "header": "Posted By:",
+                    "binding": "PostedByUser",
+                    "allowSorting": true,
+                    "width": "2*",
+                    "allowResizing": true,
+                    "allowSorting": false,
+                    "isContentHtml": true
+                },
+                {
+
+                    "header": "Price",
+                    "binding": "Price",
+                    "allowSorting": true,
+                    "width": "2*",
+                    "allowResizing": true,
+                    "allowSorting": false,
+                    "isContentHtml": true
+                },
+                {
+
+                    "header": "Image",
+                    "binding": "PhotoValue",
+                    "allowSorting": true,
+                    "width": "2*",
+                    "allowResizing": true,
+                    "allowSorting": false,
+                    "isContentHtml": true
+                },
+            ],
+            autoGenerateColumns: false,
+            itemsSource: postDetailListCollectionHotDeals,
+            isReadOnly: true,
+            autoSizeMode: wijmo.grid.AutoSizeMode.Both,
+            allowDragging: wijmo.grid.AllowDragging.None,
+            selectionMode: wijmo.grid.SelectionMode.Row,
+            headersVisibility: wijmo.grid.HeadersVisibility.Column
+        });
+        postDetailGridListHotDeals.trackChanges = true;
+        postDetailGridListHotDeals.rows.defaultSize = 100;
+    }
+
+
+
+    function createFlexGridDiscountedItem() {
+        postDetailListCollectionDiscountedItem = new wijmo.collections.CollectionView(getPostDetailDiscountedItem());
+
+        var filterText = '';
+        $('#filterSearch').keyup(function () {
+            filterText = this.value.toLowerCase();
+            postDetailListCollectionDiscountedItem.refresh();
+        });
+
+
+        postDetailListCollectionDiscountedItem.filter = function (item) {
+            return !filterText || (item.ItemName.toLowerCase().indexOf(filterText) > -1)
+                               || (item.PostedByUser.toLowerCase().indexOf(filterText) > -1)
+                               || (item.Status.toLowerCase().indexOf(filterText) > -1)
+                               || (toString(item.Price).toLowerCase().indexOf(filterText) > -1);
+        }
+
+        //Flex Grid
+        postDetailGridListDiscountedItem = new wijmo.grid.FlexGrid("#discountedItem");
+        postDetailGridListDiscountedItem.initialize({
+            columns: [
+               {
+
+                   "header": "Posted By:",
+                   "binding": "PostedByUser",
+                   "allowSorting": true,
+                   "width": "2*",
+                   "allowResizing": true,
+                   "allowSorting": false,
+                   "isContentHtml": true
+               },
+                {
+
+                    "header": "Price",
+                    "binding": "Price",
+                    "allowSorting": true,
+                    "width": "2*",
+                    "allowResizing": true,
+                    "allowSorting": false,
+                    "isContentHtml": true
+                },
+                {
+
+                    "header": "Image",
+                    "binding": "PhotoValue",
+                    "allowSorting": true,
+                    "width": "2*",
+                    "allowResizing": true,
+                    "allowSorting": false,
+                    "isContentHtml": true
+                },
+            ],
+            autoGenerateColumns: false,
+            itemsSource: postDetailListCollectionDiscountedItem,
+            isReadOnly: true,
+            autoSizeMode: wijmo.grid.AutoSizeMode.Both,
+            allowDragging: wijmo.grid.AllowDragging.None,
+            selectionMode: wijmo.grid.SelectionMode.Row,
+            headersVisibility: wijmo.grid.HeadersVisibility.Column
+        });
+        postDetailGridListDiscountedItem.trackChanges = true;
+        postDetailGridListDiscountedItem.rows.defaultSize = 100;
+    }
+
+
+    function createFlexGridMostViewItem() {
+        postDetailListCollectionMostViewItem = new wijmo.collections.CollectionView(getPostDetailMostViewItem());
+
+        var filterText = '';
+        $('#filterSearch').keyup(function () {
+            filterText = this.value.toLowerCase();
+            postDetailListCollectionMostViewItem.refresh();
+        });
+
+
+        postDetailListCollectionMostViewItem.filter = function (item) {
+            return !filterText || (item.ItemName.toLowerCase().indexOf(filterText) > -1)
+                               || (item.PostedByUser.toLowerCase().indexOf(filterText) > -1)
+                               || (item.Status.toLowerCase().indexOf(filterText) > -1)
+                               || (toString(item.Price).toLowerCase().indexOf(filterText) > -1);
+        }
+
+        //Flex Grid
+        postDetailGridListMostViewItem = new wijmo.grid.FlexGrid("#mostViewItem");
+        postDetailGridListMostViewItem.initialize({
+            columns: [
+               {
+
+                    "header": "Posted By:",
+                    "binding": "PostedByUser",
+                    "allowSorting": true,
+                    "width": "2*",
+                    "allowResizing": true,
+                    "allowSorting": false,
+                    "isContentHtml": true
+                },
+                {
+
+                    "header": "Price",
+                    "binding": "Price",
+                    "allowSorting": true,
+                    "width": "2*",
+                    "allowResizing": true,
+                    "allowSorting": false,
+                    "isContentHtml": true
+                },
+                {
+
+                    "header": "Image",
+                    "binding": "PhotoValue",
+                    "allowSorting": true,
+                    "width": "2*",
+                    "allowResizing": true,
+                    "allowSorting": false,
+                    "isContentHtml": true
+                },
+            ],
+            autoGenerateColumns: false,
+            itemsSource: postDetailListCollectionMostViewItem,
+            isReadOnly: true,
+            autoSizeMode: wijmo.grid.AutoSizeMode.Both,
+            allowDragging: wijmo.grid.AllowDragging.None,
+            selectionMode: wijmo.grid.SelectionMode.Row,
+            headersVisibility: wijmo.grid.HeadersVisibility.Column
+        });
+        postDetailGridListMostViewItem.trackChanges = true;
+        postDetailGridListMostViewItem.rows.defaultSize = 100;
+    }
+
+
+    //Flex Grid For All Item
+    function createFlexGridAllItem() {
+        postDetailListCollectionAllItem = new wijmo.collections.CollectionView(getPostDetailAllItem());
+
+        var filterText = '';
+        $('#filterSearch').keyup(function () {
+            filterText = this.value.toLowerCase();
+            postDetailListCollectionAllItem.refresh();
+        });
+
+
+        postDetailListCollectionAllItem.filter = function (item) {
+            return !filterText || (item.ItemName.toLowerCase().indexOf(filterText) > -1)
+                               || (item.PostedByUser.toLowerCase().indexOf(filterText) > -1)
+                               || (item.Status.toLowerCase().indexOf(filterText) > -1)
+                               || (toString(item.Price).toLowerCase().indexOf(filterText) > -1);
+        }
+
+        //Flex Grid
+        postDetailGridListAllItem = new wijmo.grid.FlexGrid("#listOfAllItem");
+        postDetailGridListAllItem.initialize({
+            columns: [
+                {
+                    "header": "Buy",
                     "binding": "btnRequest",
                     "allowSorting": true,
-                    "width": "0.7*",
+                    "width": "1.5*",
                     "allowResizing": true,
                     "allowSorting": false,
                     "isContentHtml": true
@@ -467,7 +874,7 @@
                     "header": "Detail",
                     "binding": "btnView",
                     "allowSorting": true,
-                    "width": "0.7*",
+                    "width": "1.5*",
                     "allowResizing": true,
                     "allowSorting": false,
                     "isContentHtml": true
@@ -493,8 +900,8 @@
                 },
                 {
 
-                    "header": "Status",
-                    "binding": "Status",
+                    "header": "Price",
+                    "binding": "Price",
                     "allowSorting": true,
                     "width": "2*",
                     "allowResizing": true,
@@ -503,36 +910,25 @@
                 },
                 {
 
-                    "header": "Price",
-                    "binding": "Price",
+                    "header": "Image",
+                    "binding": "PhotoValue",
                     "allowSorting": true,
-                    "width": "1*",
-                    "allowResizing": true,
-                    "allowSorting": false,
-                    "isContentHtml": true
-                },
-                {
-
-                    "header": "Posted Date",
-                    "binding": "PostDate",
-                    "allowSorting": true,
-                    "width": "1.5*",
-                    "align": "right",
+                    "width": "2*",
                     "allowResizing": true,
                     "allowSorting": false,
                     "isContentHtml": true
                 },
             ],
             autoGenerateColumns: false,
-            itemsSource: postDetailListCollection,
+            itemsSource: postDetailListCollectionAllItem,
             isReadOnly: true,
             autoSizeMode: wijmo.grid.AutoSizeMode.Both,
             allowDragging: wijmo.grid.AllowDragging.None,
             selectionMode: wijmo.grid.SelectionMode.Row,
             headersVisibility: wijmo.grid.HeadersVisibility.Column
         });
-        postDetailGridList.trackChanges = true;
-        //postDetailGridList.rows.defaultSize = 150;
+        postDetailGridListAllItem.trackChanges = true;
+        postDetailGridListAllItem.rows.defaultSize = 100;
     }
 
     function readURL(input) {
@@ -617,16 +1013,10 @@
         //        }
         //    }
         //});
-
-        createFlexGrid();
-        cboStatus = new wijmo.input.ComboBox("#cboStatus");
-        cboPayType = new wijmo.input.ComboBox("#cboPayType");
-        cboQuantity = new wijmo.input.ComboBox("#cboQuantity");
-        cboItemList = new wijmo.input.ComboBox("#cboItemList");
-        getItem();
-        getPayType();
-        getStatusCategory();
-        createCBOQuantity();
+        createFlexGridAllItem();
+        createFlexGridDiscountedItem();
+        createFlexGridMostViewItem();
+        createFlexGridHotDeals();
 
     }
 </script>

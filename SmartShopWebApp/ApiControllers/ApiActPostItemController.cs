@@ -30,8 +30,14 @@ namespace SmartShopWebApp.ApiControllers
                 newActPostItem.PostedByUserId = userId;
                 newActPostItem.PayTypeId = add.PayTypeId;
                 newActPostItem.StatusId = add.StatusId;
+                newActPostItem.Discount = add.Discount;
                 newActPostItem.IsApproved = false;
-
+                newActPostItem.ItemView = null; 
+                newActPostItem.StatusRate1 = null;
+                newActPostItem.StatusRate2 = null;
+                newActPostItem.StatusRate3 = null;
+                newActPostItem.StatusRate4 = null;
+                newActPostItem.StatusRate5 = null;
 
                 db.ActPostItems.InsertOnSubmit(newActPostItem);
                 db.SubmitChanges();
@@ -53,7 +59,7 @@ namespace SmartShopWebApp.ApiControllers
         public List<Entities.ActPostItem> listActPostItemByUser()
         {
             var userId = User.Identity.GetUserId();
-            var post = from d in db.ActPostItems    
+            var post = from d in db.ActPostItems
                        where d.PostedByUserId == userId
                        select new Entities.ActPostItem
                        {
@@ -67,7 +73,12 @@ namespace SmartShopWebApp.ApiControllers
                            Quantity = d.Quantity,
                            PostedByUserId = d.PostedByUserId,
                            PayTypeId = d.PayTypeId,
-                           StatusId = d.StatusId
+                           StatusId = d.StatusId,
+                           StatusRate1 = d.StatusRate1,
+                           StatusRate2 = d.StatusRate2,
+                           StatusRate3 = d.StatusRate3,
+                           StatusRate4 = d.StatusRate4,
+                           StatusRate5 = d.StatusRate5,
                        };
 
             return post.ToList();
@@ -75,7 +86,7 @@ namespace SmartShopWebApp.ApiControllers
 
 
         [HttpGet, Route("api/list/postitem/byitemcategory/{itemcategoryid}/{startDate}/{endDate}")]
-        public List<Entities.ActPostItem> listActPostItemAll(String itemcategoryid, String startDate,String endDate)
+        public List<Entities.ActPostItem> listActPostItemAll(String itemcategoryid, String startDate, String endDate)
         {
             var post = from d in db.ActPostItems
                        where d.StpItem.ItemCategoryId == Convert.ToInt32(itemcategoryid)
@@ -98,7 +109,12 @@ namespace SmartShopWebApp.ApiControllers
                            PayTypeId = d.PayTypeId,
                            StatusId = d.StatusId,
                            IsApproved = d.IsApproved,
-                           PhotoValue = d.StpItem.Photo.ToArray()
+                           PhotoValue = d.StpItem.Photo.ToArray(),
+                           StatusRate1 = d.StatusRate1,
+                           StatusRate2 = d.StatusRate2,
+                           StatusRate3 = d.StatusRate3,
+                           StatusRate4 = d.StatusRate4,
+                           StatusRate5 = d.StatusRate5,
                        };
 
             return post.ToList();
@@ -126,7 +142,12 @@ namespace SmartShopWebApp.ApiControllers
                            PayTypeId = d.PayTypeId,
                            StatusId = d.StatusId,
                            IsApproved = d.IsApproved,
-                           PhotoValue = d.StpItem.Photo.ToArray()
+                           PhotoValue = d.StpItem.Photo.ToArray(),
+                           StatusRate1 = d.StatusRate1,
+                           StatusRate2 = d.StatusRate2,
+                           StatusRate3 = d.StatusRate3,
+                           StatusRate4 = d.StatusRate4,
+                           StatusRate5 = d.StatusRate5,
                        };
 
             return post.ToList();
@@ -157,7 +178,12 @@ namespace SmartShopWebApp.ApiControllers
                            PayTypeId = d.PayTypeId,
                            StatusId = d.StatusId,
                            IsApproved = d.IsApproved,
-                           PhotoValue = d.StpItem.Photo.ToArray()
+                           PhotoValue = d.StpItem.Photo.ToArray(),
+                           StatusRate1 = d.StatusRate1,
+                           StatusRate2 = d.StatusRate2,
+                           StatusRate3 = d.StatusRate3,
+                           StatusRate4 = d.StatusRate4,
+                           StatusRate5 = d.StatusRate5,
                        };
 
             return (Entities.ActPostItem)post.FirstOrDefault();
@@ -188,7 +214,12 @@ namespace SmartShopWebApp.ApiControllers
                            PayTypeId = d.PayTypeId,
                            StatusId = d.StatusId,
                            IsApproved = d.IsApproved,
-                           PhotoValue = d.StpItem.Photo.ToArray()
+                           PhotoValue = d.StpItem.Photo.ToArray(),
+                           StatusRate1 = d.StatusRate1,
+                           StatusRate2 = d.StatusRate2,
+                           StatusRate3 = d.StatusRate3,
+                           StatusRate4 = d.StatusRate4,
+                           StatusRate5 = d.StatusRate5,
                        };
 
             return post.ToList();
@@ -215,10 +246,16 @@ namespace SmartShopWebApp.ApiControllers
                            PostedByUser = d.AspNetUser.FullName,
                            PayType = d.SysPayType.PayType,
                            Status = d.SysPostItemStatus.Status,
+                           Discount = d.Discount,
                            PayTypeId = d.PayTypeId,
                            StatusId = d.StatusId,
                            IsApproved = d.IsApproved,
-                           PhotoValue = d.StpItem.Photo.ToArray()
+                           PhotoValue = d.StpItem.Photo.ToArray(),
+                           StatusRate1 = d.StatusRate1,
+                           StatusRate2 = d.StatusRate2,
+                           StatusRate3 = d.StatusRate3,
+                           StatusRate4 = d.StatusRate4,
+                           StatusRate5 = d.StatusRate5,
                        };
 
             return post.ToList();
@@ -248,7 +285,12 @@ namespace SmartShopWebApp.ApiControllers
                            PayTypeId = d.PayTypeId,
                            StatusId = d.StatusId,
                            IsApproved = d.IsApproved,
-                           PhotoValue = d.StpItem.Photo.ToArray()
+                           PhotoValue = d.StpItem.Photo.ToArray(),
+                           StatusRate1 = d.StatusRate1,
+                           StatusRate2 = d.StatusRate2,
+                           StatusRate3 = d.StatusRate3,
+                           StatusRate4 = d.StatusRate4,
+                           StatusRate5 = d.StatusRate5,
                        };
 
             return post.ToList();
@@ -276,13 +318,13 @@ namespace SmartShopWebApp.ApiControllers
                 {
                     return Request.CreateResponse(HttpStatusCode.NotFound);
                 }
-        
+
             }
             catch (Exception e)
             {
                 return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
-            
+
         }
 
         [HttpPut, Route("api/update/postitem/{id}")]
@@ -291,13 +333,13 @@ namespace SmartShopWebApp.ApiControllers
             try
             {
                 var actPostItem = from d in db.ActPostItems
-                                         where d.Id == Convert.ToInt32(id)
-                                         select d;
+                                  where d.Id == Convert.ToInt32(id)
+                                  select d;
 
                 if (actPostItem.Any())
                 {
                     var updateActPostItem = actPostItem.FirstOrDefault();
-                    updateActPostItem.ItemId= postitem.ItemId;
+                    updateActPostItem.ItemId = postitem.ItemId;
                     updateActPostItem.Remarks = postitem.Remarks;
                     updateActPostItem.PostDate = DateTime.Today;
                     updateActPostItem.ExpiredDate = DateTime.Today;
@@ -309,6 +351,140 @@ namespace SmartShopWebApp.ApiControllers
                     db.SubmitChanges();
 
                     return Request.CreateResponse(HttpStatusCode.OK);
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotFound);
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+        }
+
+
+
+
+
+        [HttpPut, Route("api/update/postitem/{id}/{itemview}")]
+        public HttpResponseMessage itemView(String id, String itemview)
+        {
+            try
+            {
+                var actPostItem = from d in db.ActPostItems
+                                  where d.Id == Convert.ToInt32(id)
+                                  select d;
+
+                if (actPostItem.Any())
+                {
+                    var updateActPostItem = actPostItem.FirstOrDefault();
+
+                    if (Convert.ToInt32(itemview) == 1)
+                    {
+                        Decimal? itemView = 0;
+                        if (actPostItem.FirstOrDefault().ItemView != null) {
+                            itemView = actPostItem.FirstOrDefault().ItemView;
+                            return Request.CreateResponse(HttpStatusCode.OK);
+                        }
+                        updateActPostItem.ItemView = itemView + 1;
+                        db.SubmitChanges();
+                    }
+                    else
+                    {
+                        return Request.CreateResponse(HttpStatusCode.BadRequest);
+                    }
+
+                    return Request.CreateResponse(HttpStatusCode.BadRequest);
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotFound);
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+        }
+
+
+
+        [HttpPut, Route("api/update/updateRate/{id}/{ratenumber}")]
+        public HttpResponseMessage updateRate(String id, String ratenumber)
+        {
+            try
+            {
+                var actPostItem = from d in db.ActPostItems
+                                  where d.Id == Convert.ToInt32(id)
+                                  select d;
+
+                if (actPostItem.Any())
+                {
+                    var updateActPostItem = actPostItem.FirstOrDefault();
+                    
+
+                    if (Convert.ToInt32(ratenumber) == 1)
+                    {
+                        Decimal? getRate1 = 0;
+                        if (actPostItem.FirstOrDefault().StatusRate1 != null) {
+                            getRate1 = actPostItem.FirstOrDefault().StatusRate1;
+                        }
+                        updateActPostItem.StatusRate1 = getRate1 + 1;
+                        db.SubmitChanges();
+
+                        return Request.CreateResponse(HttpStatusCode.OK);
+                    }
+                    else if (Convert.ToInt32(ratenumber) == 2)
+                    {
+                        Decimal? getRate2 = 0;
+                        if (actPostItem.FirstOrDefault().StatusRate2 != null) {
+                            getRate2 = actPostItem.FirstOrDefault().StatusRate2;
+                        }
+                        updateActPostItem.StatusRate2 = getRate2 + 1;
+                        db.SubmitChanges();
+
+                        return Request.CreateResponse(HttpStatusCode.OK);
+                    }
+                    else if (Convert.ToInt32(ratenumber) == 3)
+                    {
+                        Decimal? getRate3 = 0;
+                        if (actPostItem.FirstOrDefault().StatusRate3 != null) {
+                            getRate3 = actPostItem.FirstOrDefault().StatusRate3;
+                        }
+                        updateActPostItem.StatusRate3 = getRate3 + 1;
+                        db.SubmitChanges();
+
+                        return Request.CreateResponse(HttpStatusCode.OK);
+                    }
+                    else if (Convert.ToInt32(ratenumber) == 4)
+                    {
+                        Decimal? getRate4 = 0;
+                        if(actPostItem.FirstOrDefault().StatusRate4 != null){
+                            getRate4 = actPostItem.FirstOrDefault().StatusRate4;
+                        }
+                        updateActPostItem.StatusRate4 = getRate4 + 1;
+                        db.SubmitChanges();
+
+                        return Request.CreateResponse(HttpStatusCode.OK);
+                    }
+                    else if (Convert.ToInt32(ratenumber) == 5)
+                    {
+                        Decimal? getRate5 = 0;
+                        if(actPostItem.FirstOrDefault().StatusRate5 != null) {
+                            getRate5 = actPostItem.FirstOrDefault().StatusRate5;
+                        }
+                        updateActPostItem.StatusRate5 = getRate5 + 1;
+                        db.SubmitChanges();
+
+                        return Request.CreateResponse(HttpStatusCode.OK);
+                    }
+                    else
+                    {
+                        return Request.CreateResponse(HttpStatusCode.BadRequest);
+                    }
                 }
                 else
                 {
