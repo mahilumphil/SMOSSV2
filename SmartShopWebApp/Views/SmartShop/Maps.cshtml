@@ -18,7 +18,9 @@
                         <br />
                     </div>
                     <div class="panel-body">
-                        <div id="map"></div>
+                        <div>
+                            <iframe id="map" style="width:100%; height:100%;"></iframe>
+                        </div>
                     </div>
                 </div>
 
@@ -26,8 +28,9 @@
         </div>
     </div>
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9TlXbaUPiCJk3QJC4efcxh3hyGimWakM&callback=initMap"
-            async defer></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBa6CXlQO_RAFHUUzUf1UQ6kNXOnEy-S7c&callback=initMap"
+             type="text/javascript"></script>
+
     <script type="text/javascript">
         function initMap() {
             // Create a map object and specify the DOM element for display.
@@ -38,7 +41,10 @@
             });
         }
 
+        window.onload = function () {
+            initMap();
 
+        }
 
     </script>
 </body>

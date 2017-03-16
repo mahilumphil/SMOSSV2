@@ -7,6 +7,8 @@ namespace SmartShopWebApp.Entities
 {
     public class UserProfile
     {
+        public Int32 Id { get; set; }
+        public String Site { get; set; }
         public Int32 PostId { get; set; }
         public String Email { get; set; }
         public String FullName { get; set; }

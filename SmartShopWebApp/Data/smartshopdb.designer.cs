@@ -2618,6 +2618,8 @@ namespace SmartShopWebApp.Data
 		
 		private string _Type;
 		
+		private System.Nullable<decimal> _RoleNumber;
+		
 		private EntitySet<ActBuy> _ActBuys;
 		
 		private EntitySet<ActMessaging> _ActMessagings;
@@ -2678,6 +2680,8 @@ namespace SmartShopWebApp.Data
     partial void OnProfilePhotoChanged();
     partial void OnTypeChanging(string value);
     partial void OnTypeChanged();
+    partial void OnRoleNumberChanging(System.Nullable<decimal> value);
+    partial void OnRoleNumberChanged();
     #endregion
 		
 		public AspNetUser()
@@ -3051,6 +3055,26 @@ namespace SmartShopWebApp.Data
 					this._Type = value;
 					this.SendPropertyChanged("Type");
 					this.OnTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleNumber", DbType="Decimal(18,5)")]
+		public System.Nullable<decimal> RoleNumber
+		{
+			get
+			{
+				return this._RoleNumber;
+			}
+			set
+			{
+				if ((this._RoleNumber != value))
+				{
+					this.OnRoleNumberChanging(value);
+					this.SendPropertyChanging();
+					this._RoleNumber = value;
+					this.SendPropertyChanged("RoleNumber");
+					this.OnRoleNumberChanged();
 				}
 			}
 		}

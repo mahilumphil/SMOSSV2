@@ -432,6 +432,8 @@
     <Content Include="Views\Manage\BuyerProfile.cshtml" />
     <Content Include="Views\Manage\SellerProfile.cshtml" />
     <Content Include="Views\Manage\BothProfile.cshtml" />
+    <Content Include="Views\SmartShop\AdminPanel.cshtml" />
+    <Content Include="Views\SmartShop\ForeBiddenPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

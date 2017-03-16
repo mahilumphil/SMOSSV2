@@ -40,16 +40,17 @@ namespace SmartShopWebApp.ApiControllers
         [HttpGet, Route("api/list/user")]
         public List<Entities.UserProfile> listUser()
         {
-            var userId = User.Identity.GetUserId();
             var user = from d in db.AspNetUsers
-                       where d.Id == userId
+                       where d.RoleNumber != 1
                        select new Entities.UserProfile                       
                        {
+                           Site = d.Site,
                            Email = d.Email,
                            FullName = d.FullName,
                            ContactNumber = d.ContactNumber,
                            Address = d.Address,
                            Type = d.Type
+                           
                        };
             return user.ToList();
         }

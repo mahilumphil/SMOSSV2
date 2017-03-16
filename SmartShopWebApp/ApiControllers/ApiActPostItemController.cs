@@ -91,6 +91,7 @@ namespace SmartShopWebApp.ApiControllers
             var post = from d in db.ActPostItems
                        where d.StpItem.ItemCategoryId == Convert.ToInt32(itemcategoryid)
                        && d.PostDate >= Convert.ToDateTime(startDate) && d.PostDate <= Convert.ToDateTime(endDate)
+                       && d.IsApproved == true
                        select new Entities.ActPostItem
                        {
                            Id = d.Id,
@@ -230,6 +231,45 @@ namespace SmartShopWebApp.ApiControllers
         {
             var post = from d in db.ActPostItems.OrderByDescending(d => d.Id)
                        where d.Quantity > 0
+                       && d.IsApproved == true
+                       select new Entities.ActPostItem
+                       {
+                           Id = d.Id,
+                           ItemId = d.ItemId,
+                           ItemName = d.StpItem.ItemName,
+                           Remarks = d.Remarks,
+                           Price = d.StpItem.Price,
+                           Specification = d.StpItem.Specification,
+                           PostDate = d.PostDate.ToShortDateString(),
+                           ExpiredDate = d.ExpiredDate.ToShortDateString(),
+                           UpdatedDate = d.UpdatedDate.ToShortDateString(),
+                           Quantity = d.Quantity,
+                           PostedByUserId = d.PostedByUserId,
+                           PostedByUser = d.AspNetUser.FullName,
+                           PayType = d.SysPayType.PayType,
+                           Status = d.SysPostItemStatus.Status,
+                           Discount = d.Discount,
+                           PayTypeId = d.PayTypeId,
+                           StatusId = d.StatusId,
+                           IsApproved = d.IsApproved,
+                           PhotoValue = d.StpItem.Photo.ToArray(),
+                           StatusRate1 = d.StatusRate1,
+                           StatusRate2 = d.StatusRate2,
+                           StatusRate3 = d.StatusRate3,
+                           StatusRate4 = d.StatusRate4,
+                           StatusRate5 = d.StatusRate5,
+                       };
+
+            return post.ToList();
+        }
+
+        [HttpGet, Route("api/list/postlist/index/discounteditems")]
+        public List<Entities.ActPostItem> postItemListIndexDiscountedItem()
+        {
+            var post = from d in db.ActPostItems.OrderByDescending(d => d.Id)
+                       where d.Quantity > 0
+                       && d.IsApproved == true
+                       && d.Discount != null
                        select new Entities.ActPostItem
                        {
                            Id = d.Id,
@@ -366,6 +406,68 @@ namespace SmartShopWebApp.ApiControllers
 
 
 
+
+        //For Admin Panel
+        [HttpPut, Route("api/update/adminpendingitem/{id}")]
+        public HttpResponseMessage updateAdminPendingItem(String id)
+        {
+            try
+            {
+                var actPostItem = from d in db.ActPostItems
+                                  where d.Id == Convert.ToInt32(id)
+                                  select d;
+
+                if (actPostItem.Any())
+                {
+                    var updateActPostItem = actPostItem.FirstOrDefault();
+                    updateActPostItem.IsApproved = true;
+                    db.SubmitChanges();
+                    return Request.CreateResponse(HttpStatusCode.OK);
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotFound);
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+        }
+        [HttpGet, Route("api/list/shoplist/unapprovedpost")]
+        public List<Entities.ActPostItem> shopItemList()
+        {
+            var post = from d in db.ActPostItems
+                       where d.IsApproved == false
+                       select new Entities.ActPostItem
+                       {
+                           Id = d.Id,
+                           ItemId = d.ItemId,
+                           ItemName = d.StpItem.ItemName,
+                           Remarks = d.Remarks,
+                           Price = d.StpItem.Price,
+                           Specification = d.StpItem.Specification,
+                           PostDate = d.PostDate.ToShortDateString(),
+                           ExpiredDate = d.ExpiredDate.ToShortDateString(),
+                           UpdatedDate = d.UpdatedDate.ToShortDateString(),
+                           Quantity = d.Quantity,
+                           PostedByUser = d.AspNetUser.FullName,
+                           PayType = d.SysPayType.PayType,
+                           Status = d.SysPostItemStatus.Status,
+                           PayTypeId = d.PayTypeId,
+                           StatusId = d.StatusId,
+                           IsApproved = d.IsApproved,
+                           PhotoValue = d.StpItem.Photo.ToArray(),
+                           StatusRate1 = d.StatusRate1,
+                           StatusRate2 = d.StatusRate2,
+                           StatusRate3 = d.StatusRate3,
+                           StatusRate4 = d.StatusRate4,
+                           StatusRate5 = d.StatusRate5,
+                       };
+
+            return post.ToList();
+        }
 
 
         [HttpPut, Route("api/update/postitem/{id}/{itemview}")]

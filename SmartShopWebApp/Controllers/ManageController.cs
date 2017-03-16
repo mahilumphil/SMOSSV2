@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using SmartShopWebApp.Models;
 
+
 namespace SmartShopWebApp.Controllers
 {
     [Authorize]
@@ -76,9 +77,27 @@ namespace SmartShopWebApp.Controllers
         }
 
         //User View Profile
-
+        private Data.smartshopdbDataContext db = new Data.smartshopdbDataContext();
         public ActionResult Profile() {
-            return View();
+            var currentUser = User.Identity.GetUserId();
+            var aspNetUser = from d in db.AspNetUsers
+                             where d.Id == currentUser
+                             select d;
+            if (aspNetUser.Any())
+            {
+                if (aspNetUser.FirstOrDefault().RoleNumber == 1)
+                {
+                    return RedirectToAction("AdminPanel", "SmartShop");
+                }
+                else
+                {
+                    return View();
+                }
+            }
+            else
+            {
+                return View();
+            }
         }
 
         public ActionResult BuyerProfile()

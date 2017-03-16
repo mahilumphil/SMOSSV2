@@ -1,0 +1,355 @@
+﻿@{
+    ViewBag.Title = "AdminPanel";
+}
+
+<div class="container">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2>Administrator Panel</h2>
+            </div>
+            <div class="panel-body">
+                <div class="panel-heading">
+                    <h3 style="color:red;">List of User Registered</h3>
+                    <div id="adminUserList"></div>
+                </div>
+                <br /><br />
+                <div class="panel-heading">
+                    <h3 style="color:red;">List of Pending Items</h3>
+                    <div id="adminItemPanel"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Approved Item Modal-->
+<div class="modal fade" id="approvedItem" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="modal-body">
+                        <div class="panel-default">
+                            <div class="panel-body">
+                                <h4>Approved Items?</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary btn-sm" onclick="approvedPendingItem()"><i class="fa fa-check"></i>Approve</button>
+                    <button class="btn btn-warning btn-sm" id="" data-dismiss="modal"><i class="fa fa-close"></i> Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    var userDetailCollections;
+    var userDetailGrid;
+    var itemDetailCollections;
+    var itemDetailGrid;
+    var currentItem;
+    var itemId;
+    var cboItemList;
+
+    function viewItem() {
+        itemDetailCollections.editItem(itemDetailCollections.currentItem);
+        currentItem = itemDetailCollections.currentEditItem;
+        window.location = "/SmartShop/PostDetail?postid=" + currentItem.Id;
+    }
+
+
+
+
+    function approvedItem() {
+        $("#approvedItem").modal({
+            "backDrop": "static",
+            "show": true
+        });
+    }
+
+    
+
+
+
+    function approvedPendingItem() {
+        itemDetailCollections.editItem(itemDetailCollections.currentItem);
+        currentItem = itemDetailCollections.currentEditItem;
+        itemId = currentItem.Id;
+        $.ajax({
+            type: "PUT",
+            url: '/api/update/adminpendingitem/' + itemId,
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            statusCode: {
+                200: function () {
+                    toastr.success("Successfully Update");
+                    $("#approvedItem").modal('hide');
+
+                    itemDetailCollections = new wijmo.collections.CollectionView(getItemAdmin());
+                    itemDetailGrid.itemsSource = itemDetailCollections;
+                    itemDetailGrid.trackChanges = true;
+                },
+                400: function (message) {
+                    toastr.error(message.responseText.replace(/"/g, ""), "Bad Request");
+                }
+            }
+        });
+
+    }
+
+    //Users List
+
+    function getUserInAdmin() {
+        var userList = new wijmo.collections.ObservableArray;
+        $.ajax({
+            type: "GET",
+            url: '/api/list/user',
+            contentType: "application/json;charset=utf-8",
+            success: function (adminUsersList) {
+                for (i = 0; i < adminUsersList.length; i++) {
+
+                    userList.push({
+                        Id: adminUsersList[i]["Id"],
+                        Email: adminUsersList[i]["Email"],
+                        FullName: adminUsersList[i]["FullName"],
+                        Address: adminUsersList[i]["Address"],
+                        Type: adminUsersList[i]["Type"],
+                        Site: adminUsersList[i]["Site"],
+                        ContactNumber: adminUsersList[i]["ContactNumber"],
+                        btnWarning: "<button class='btn btn-warning form-control' onclick='btnWarning()'>Send Warning</button>",
+                        btnDanger: "<button class='btn btn-danger form-control' onclick='btnWarning()'>Banned</button>"
+                    });
+                }
+            }
+        });
+        return userList;
+    }
+
+
+    function createFlexGridUser() {
+        userDetailCollections = new wijmo.collections.CollectionView(getUserInAdmin());
+
+        //Flex Grid
+        userDetailGrid = new wijmo.grid.FlexGrid("#adminUserList");
+        userDetailGrid.initialize({
+            columns: [
+                {
+                    "header": "Email",
+                    "binding": "Email",
+                    "allowSorting": true,
+                    "width": "2*",
+                    "allowResizing": true,
+                    "allowSorting": false,
+                    "isContentHtml": true
+                },
+                {
+
+                    "header": "Fullname",
+                    "binding": "FullName",
+                    "allowSorting": true,
+                    "width": "2*",
+                    "allowResizing": true,
+                    "allowSorting": false,
+                    "isContentHtml": true
+                },
+                {
+
+                    "header": "Address",
+                    "binding": "Address",
+                    "allowSorting": true,
+                    "width": "2*",
+                    "allowResizing": true,
+                    "allowSorting": false,
+                    "isContentHtml": true
+                },
+                {
+
+                    "header": "Contact Number",
+                    "binding": "ContactNumber",
+                    "allowSorting": true,
+                    "width": "2*",
+                    "allowResizing": true,
+                    "allowSorting": false,
+                    "isContentHtml": true
+                },
+                {
+                    "header": "Type",
+                    "binding": "Type",
+                    "allowSorting": true,
+                    "width": "1.5*",
+                    "allowResizing": true,
+                    "allowSorting": false,
+                    "isContentHtml": true
+                },
+                {
+                    "header": "Site",
+                    "binding": "Site",
+                    "allowSorting": true,
+                    "width": "1.5*",
+                    "allowResizing": true,
+                    "allowSorting": false,
+                    "isContentHtml": true
+                },
+                {
+                    "header": "Warning",
+                    "binding": "btnWarning",
+                    "allowSorting": true,
+                    "width": "1.5*",
+                    "allowResizing": true,
+                    "allowSorting": false,
+                    "isContentHtml": true
+                },
+                {
+                    "header": "Banned",
+                    "binding": "btnDanger",
+                    "allowSorting": true,
+                    "width": "1.5*",
+                    "allowResizing": true,
+                    "allowSorting": false,
+                    "isContentHtml": true
+                },
+            ],
+            autoGenerateColumns: false,
+            itemsSource: userDetailCollections,
+            isReadOnly: true,
+            autoSizeMode: wijmo.grid.AutoSizeMode.Both,
+            allowDragging: wijmo.grid.AllowDragging.None,
+            selectionMode: wijmo.grid.SelectionMode.Row,
+            headersVisibility: wijmo.grid.HeadersVisibility.Column
+        });
+        userDetailGrid.trackChanges = true;
+        //itemDetailGrid.rows.defaultSize = 150;
+    }
+
+
+    function getItemAdmin() {
+        var adminItemList = new wijmo.collections.ObservableArray;
+        $.ajax({
+            type: "GET",
+            url: '/api/list/shoplist/unapprovedpost',
+            contentType: "application/json;charset=utf-8",
+            success: function (adminItemListPanel) {
+                for (i = 0; i < adminItemListPanel.length; i++) {
+                    var imageElement = document.createElement("images");
+                    var imageData = new Image();
+                    imageData.src = "data:image/jpeg;base64," + adminItemListPanel[i]["Photo"];
+                    imageElement.appendChild(imageData);
+                    var photoDivElement = document.createElement("DIV").appendChild(imageElement);
+                    var imageSRCData = "data:image/jpeg;base64," + adminItemListPanel[i]["Photo"];
+
+                    adminItemList.push({
+                        Id: adminItemListPanel[i]["Id"],
+                        ItemName: adminItemListPanel[i]["ItemName"],
+                        Price: adminItemListPanel[i]["Price"],
+                        Specification: adminItemListPanel[i]["Specification"],
+                        Quantity: adminItemListPanel[i]["Quantity"],
+                        Remarks: adminItemListPanel[i]["Remarks"],
+                        PayType: adminItemListPanel[i]["PayType"],
+                        Status: adminItemListPanel[i]["Status"],
+                        Photo: "<img class='img-responsive' style='margin:auto;' src='" + imageSRCData + "' />",
+                        btnApproved: "<button class='btn btn-primary form-control' onclick='approvedItem()'>Approved</button>",
+                        btnView: "<button class='btn btn-info form-control' onclick='viewItem()'>View</button>",
+                    });
+                }
+            }
+        });
+        return adminItemList;
+    }
+
+
+
+    function createFlexGrid() {
+        itemDetailCollections = new wijmo.collections.CollectionView(getItemAdmin());
+
+        //Flex Grid
+        itemDetailGrid = new wijmo.grid.FlexGrid("#adminItemPanel");
+        itemDetailGrid.initialize({
+            columns: [
+                {
+                    "header": "Item Name",
+                    "binding": "ItemName",
+                    "allowSorting": true,
+                    "width": "2*",
+                    "allowResizing": true,
+                    "allowSorting": false,
+                    "isContentHtml": true
+                },
+                {
+
+                    "header": "Item Category",
+                    "binding": "ItemCategory",
+                    "allowSorting": true,
+                    "width": "2*",
+                    "allowResizing": true,
+                    "allowSorting": false,
+                    "isContentHtml": true
+                },
+                {
+
+                    "header": "Specification",
+                    "binding": "Specification",
+                    "allowSorting": true,
+                    "width": "2*",
+                    "allowResizing": true,
+                    "allowSorting": false,
+                    "isContentHtml": true
+                },
+                {
+
+                    "header": "Remarks",
+                    "binding": "Remarks",
+                    "allowSorting": true,
+                    "width": "2*",
+                    "allowResizing": true,
+                    "allowSorting": false,
+                    "isContentHtml": true
+                },
+                {
+                    "header": "Approved",
+                    "binding": "btnApproved",
+                    "allowSorting": true,
+                    "width": "1.5*",
+                    "allowResizing": true,
+                    "allowSorting": false,
+                    "isContentHtml": true
+                },
+                {
+                    "header": "View Item",
+                    "binding": "btnView",
+                    "allowSorting": true,
+                    "width": "1.5*",
+                    "allowResizing": true,
+                    "allowSorting": false,
+                    "isContentHtml": true
+                },
+            ],
+            autoGenerateColumns: false,
+            itemsSource: itemDetailCollections,
+            isReadOnly: true,
+            autoSizeMode: wijmo.grid.AutoSizeMode.Both,
+            allowDragging: wijmo.grid.AllowDragging.None,
+            selectionMode: wijmo.grid.SelectionMode.Row,
+            headersVisibility: wijmo.grid.HeadersVisibility.Column
+        });
+        itemDetailGrid.trackChanges = true;
+        //itemDetailGrid.rows.defaultSize = 150;
+    }
+
+    window.onload = function () {
+        createFlexGridUser();
+        createFlexGrid();
+        cboItemCategory = new wijmo.input.ComboBox("#cboItemCategories");
+        getCategory();
+    }
+</script>

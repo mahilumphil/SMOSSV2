@@ -129,6 +129,7 @@
       <Column Name="Site" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
       <Column Name="ProfilePhoto" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="Type" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="RoleNumber" Type="System.Decimal" DbType="Decimal(18,5)" CanBeNull="true" />
       <Association Name="AspNetUser_ActBuy" Member="ActBuys" ThisKey="Id" OtherKey="BoughtByUserId" Type="ActBuy" />
       <Association Name="AspNetUser_ActMessaging" Member="ActMessagings" ThisKey="Id" OtherKey="SenderUserId" Type="ActMessaging" />
       <Association Name="AspNetUser_ActMessaging1" Member="ActMessagings1" ThisKey="Id" OtherKey="RecipientUserId" Type="ActMessaging" />

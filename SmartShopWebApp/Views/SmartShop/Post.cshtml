@@ -159,10 +159,17 @@
     }
 
     function savePostOnclick() {
+        var discountValue = null;
+
+        if (cboDiscount.selectedValue != "none")
+        {
+            discountValue = cboDiscount.selectedValue;
+        }
+
         var itemObject = {
             ItemId: cboItemList.selectedItem["Id"],
             Quantity: cboQuantity.selectedValue,
-            Discount: cboDiscount.selectedValue,
+            Discount: discountValue,
             Remarks: document.getElementById("Remarks").value,
             PayTypeId: cboPayType.selectedItem["Id"],
             StatusId: cboStatus.selectedItem["Id"]

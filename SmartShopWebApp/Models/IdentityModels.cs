@@ -23,6 +23,7 @@ namespace SmartShopWebApp.Models
         public String ContactNumber { get; set; }
         public String Site { get; set; }
         public String Type { get; set; }
+        public Decimal RoleNumber { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
